@@ -1,0 +1,5 @@
+qid	answer	pages	confidence
+Q01	High-water is the default and recommended allocation method for array user shares; it switches to the next drive at half the largest drive's capacity.	unraid-shares.md	high
+Q02	The Tunable (md_write_method) setting on Settings -> Disk Settings selects the array write mode, e.g. Read/Modify/Write or Turbo Write (Reconstruct).	unraid-array-parity.md	high
+Q03	not in vault		low
+Q04	Unraid limits the ZFS ARC (read cache) to usually about 1/8th of total RAM.	unraid-pools-zfs.md	high

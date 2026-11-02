@@ -34,7 +34,7 @@ Verdicts: **as is** means copied unchanged except frontmatter checks. **adapted*
 | 5 | `grounded-vault` | wshobson/agents @ 7e2fb55 | `plugins/documentation-standards/skills/grounded-vault/SKILL.md` | MIT | Grounding rule, git-fingerprint drift check for pages that describe server configs, archive-never-delete | adapted |
 | 6 | `living-docs-governance` | affaan-m/ECC @ b38be6a | `skills/living-docs-governance/SKILL.md` | MIT | Four doc roles (constitution, map, status, history), one owner per fact, dated corrections | adapted |
 | 7 | `change-impact` | affaan-m/ECC @ b38be6a | `skills/change-impact/SKILL.md` | MIT | Before and after a page edit, lists every page that `depends_on::` it and reconciles the plan with the diff | adapted |
-| 8 | rules merged into `lint` | TrueHOOHA/LLM-Wiki @ 0455b71 | `.agents/skills/llm-wiki-lint/SKILL.md` (L27–88) | Apache-2.0 | Severity-rated lint classes (contradictions, stale claims, orphans, missing pages, data gaps) and a Done Gate | adapted (merged into #3) |
+| 8 | rules merged into `lint` | TrueHOOHA/LLM-Wiki @ 0455b71 | `.agents/skills/llm-wiki-lint/SKILL.md` (L27–88) | Apache-2.0 | Severity-rated lint classes (contradictions, stale claims, orphans, missing pages, data gaps) and a Verification Checklist | adapted (merged into #3) |
 | 9 | `obsidian-markdown` | kepano/obsidian-skills @ 3ccff53 | `skills/obsidian-markdown/` (SKILL.md + 3 references) | MIT | Correct wikilinks, embeds, callouts and properties for pages the owner reads in Obsidian | as is |
 | 10 | `loop-design-check` | affaan-m/ECC @ b38be6a | `skills/loop-design-check/SKILL.md` | MIT | Reviews housekeeping and ratchet loops for spinning, Goodhart-gaming the oracle and runaway | as is |
 | 11 | `decision-ledger` | affaan-m/ECC @ b38be6a | `skills/recursive-decision-ledger/SKILL.md` | MIT | Append-only experiment ledger with marks and promotion gates; confidence never auto-approves | adapted |
@@ -73,6 +73,7 @@ MEGAMIND's own skills (`scout-5090`, `crystallize`, `housekeeping`, `megamind-sc
 - **Licence:** `LICENSE` L1 "MIT License", L3 "Copyright (c) 2026 Yuhan Lei". MIT requires the notice in all copies, so the notice **travels** in `NOTICES.md` and in the skill's `license:` field ("MIT; see NOTICES.md").
 - **Commit SHA:** eafcc77001e496cc43499e4923b663aec722c813 (2026-07-24).
 - **Safety verdict:**
+  - Five checks (auditor-verified at the pinned SHA): installer: none used (file copy); `settings.json`: no write; hooks: none; MCP: none; bypass flags (`--dangerously-skip-permissions`, `bypassPermissions`): none.
   - Installer: README `npx add-skill Astro-Han/karpathy-llm-wiki` is unpinned and **not used**; we copy files. No settings rewrite, no hooks, no MCP. No `dangerously-skip-permissions` or `bypassPermissions` (d-more-repos §7).
   - The upstream frontmatter has only `name` and `description` (SKILL.md L1–4).
   - Verdict: install file by file.
@@ -93,6 +94,7 @@ MEGAMIND's own skills (`scout-5090`, `crystallize`, `housekeeping`, `megamind-sc
 - **Licence:** as 2.1 (MIT, Yuhan Lei); the notice travels.
 - **Commit SHA:** eafcc77001e496cc43499e4923b663aec722c813.
 - **Safety verdict:** as 2.1. Read-only by design (L144). Install file by file.
+  - Five checks (auditor-verified at the pinned SHA): installer: none used (file copy); `settings.json`: no write; hooks: none; MCP: none; bypass flags (`--dangerously-skip-permissions`, `bypassPermissions`): none.
 - **What to adapt:**
   - Lookup order becomes `index.md` → qmd → pages. Dependency questions add `depends_on::` edges and `rg` backlinks.
   - Add "say what you could not see" (vault rule).
@@ -110,12 +112,13 @@ MEGAMIND's own skills (`scout-5090`, `crystallize`, `housekeeping`, `megamind-sc
 - **Licence:** MIT (Yuhan Lei). The merged TrueHOOHA rules are Apache-2.0 (see 2.8). Both notices travel.
 - **Commit SHA:** eafcc77001e496cc43499e4923b663aec722c813 (plus TrueHOOHA 0455b71e04bafa7a419b308fca254a56d599a585 for the merged rules).
 - **Safety verdict:** as 2.1. Install file by file.
+  - Five checks (auditor-verified at the pinned SHA): installer: none used (file copy); `settings.json`: no write; hooks: none; MCP: none; bypass flags (`--dangerously-skip-permissions`, `bypassPermissions`): none.
 - **What to adapt:**
   - **Turn every "Safe Fix" into a report** (L168–191). Upstream adds missing index entries and rewrites paths, but in MEGAMIND lint proposes and the owner merges. It must never write `index.md`.
   - Replace "Raw references" (L182–185) with checks on `derived_from::` targets.
   - Add these `depends_on::` checks: the target exists; a `(reason)` is present; no other edge field names appear anywhere.
   - Replace "Malformed Status blocks" (L211) with "`## Superseded` footer present and dated".
-  - Add from TrueHOOHA: severity labels and the Done Gate (see 2.8).
+  - Add from TrueHOOHA: severity labels and the Verification Checklist (see 2.8).
   - Add from vanillaflava (idea only, no text copied): em-dash in titles or filenames breaks wikilinks (d-more-repos §4).
   - Post-Lint log line (L217–223) stays.
   - Subagents: if split across topics, Haiku subagents (vault default).
@@ -123,10 +126,11 @@ MEGAMIND's own skills (`scout-5090`, `crystallize`, `housekeeping`, `megamind-sc
 - **Notes:** T0 runs lint as a report. Hooks are not used: hooks are root-owned and none come from upstream.
 
 ### 2.4 `check_evidence.py` (inside `skills/lint/scripts/`)
-- **What it does:** "Report-only; never modifies files" (L4). Three sweeps: Fidelity, Evidence errors, Inventory (L6–17). Imports only `re`, `sys`, `dataclasses`, `pathlib`. There are no write calls and no network use; a `git grep` for `write`/`open(` found none.
+- **What it does:** "Report-only; never modifies files" (L4). Three sweeps: Fidelity, Evidence errors, Inventory (L6–17). Imports only `re`, `sys`, `dataclasses`, `pathlib`. There are no write calls and no network use; no `open(` and no write calls; "write" appears only in the docstring at L25.
 - **Licence:** MIT, Yuhan Lei; the notice travels. The modified file keeps a header line "Modified for MEGAMIND from Astro-Han/karpathy-llm-wiki@eafcc77".
 - **Commit SHA:** eafcc77001e496cc43499e4923b663aec722c813.
 - **Safety verdict:** no installer, no hooks, no MCP. Runs as `python3 <skill-dir>/scripts/check_evidence.py <root>` (SKILL.md L195). Install as a pinned, reviewed script.
+  - Five checks (auditor-verified at the pinned SHA): installer: none used (file copy); `settings.json`: no write; hooks: none; MCP: none; bypass flags (`--dangerously-skip-permissions`, `bypassPermissions`): none.
 - **What to adapt:**
   - `METADATA_RE` (L48) and `raw_links_of()` (L260–267) currently read `> Raw:` lines with Markdown links. They must read `derived_from::` lines with `[[raw/…]]` wikilinks or relative paths.
   - The "evidence must live in raw/" rule (L14, L304) stays.
@@ -144,6 +148,7 @@ MEGAMIND's own skills (`scout-5090`, `crystallize`, `housekeeping`, `megamind-sc
 - **Licence:** `LICENSE` L1 "MIT License", L3 "Copyright (c) 2024 Seth Hobson". The plugin manifest names author Niksa Barlovic, licence MIT (`plugins/documentation-standards/.claude-plugin/plugin.json`). The notice travels and credits both.
 - **Commit SHA:** 7e2fb559cf4b824b27f1fec49fe88f7511066d26 (2026-10-30).
 - **Safety verdict:** this plugin has no hooks or MCP. Only `protect-mcp` and `review-agent-governance` in that repo add hooks (d-more-repos §3). No bypass flags. Frontmatter is `name` and `description` only. Install file by file.
+  - Five checks (auditor-verified at the pinned SHA): installer: none used (file copy); `settings.json`: no write; hooks: none; MCP: none; bypass flags (`--dangerously-skip-permissions`, `bypassPermissions`): none. Exception handled: the pre-commit "Commit gate" is deleted.
 - **What to adapt:**
   - `Raw:` → `derived_from::` lines.
   - `Monitored:` → keep it as a page property, but only for pages that describe files under version control (server configs in the owner's config repo). Otherwise drop it.
@@ -161,6 +166,7 @@ MEGAMIND's own skills (`scout-5090`, `crystallize`, `housekeeping`, `megamind-sc
 - **Licence:** ECC `LICENSE` L1 "MIT License", L3 "Copyright (c) 2026 Affaan Mustafa"; the notice travels.
 - **Commit SHA:** b38be6a7f6350964d59328b52f0624e1d1d552d1 (2026-10-29).
 - **Safety verdict:**
+  - Five checks (auditor-verified at the pinned SHA): installer: none used (file copy); `settings.json`: no write; hooks: none; MCP: none; bypass flags (`--dangerously-skip-permissions`, `bypassPermissions`): none.
   - The ECC plugin and installer are rejected (2.20). This file is prose with one outbound reference (b-ecc).
   - Frontmatter `name`, `description`, `metadata: {origin: ECC}`, all within the six fields.
   - No bypass. Install file by file.
@@ -176,6 +182,7 @@ MEGAMIND's own skills (`scout-5090`, `crystallize`, `housekeeping`, `megamind-sc
 - **Licence:** ECC MIT (Affaan Mustafa); the notice travels.
 - **Commit SHA:** b38be6a7f6350964d59328b52f0624e1d1d552d1.
 - **Safety verdict:** prose only. Frontmatter `name` and `description` (472 characters). Install file by file.
+  - Five checks (auditor-verified at the pinned SHA): installer: none used (file copy); `settings.json`: no write; hooks: none; MCP: none; bypass flags (`--dangerously-skip-permissions`, `bypassPermissions`): none.
 - **What to adapt:**
   - Rewrite the impact surface for a vault: inbound `depends_on::` edges (found with `rg "depends_on:: \[\[<page>\]\]"`), pages citing the same `derived_from::` raw file, and `index.md` rows to propose.
   - Remove the §"Related Skills" (L44–50) references to ECC skills that MEGAMIND does not package.
@@ -187,15 +194,16 @@ MEGAMIND's own skills (`scout-5090`, `crystallize`, `housekeeping`, `megamind-sc
 - **What it does:**
   - Nine check classes: OKF conformance, producer conventions, link health, reserved files, contradictions, stale claims, orphans, missing pages, data gaps (`SKILL.md` L27–88).
   - Output contract (L107–112), guardrails (L113–119), verification checklist (L120–128).
-- **Licence:** `LICENSE` L1 "Apache License, Version 2.0". The copyright line is the unfilled template "Copyright [yyyy] [name of copyright owner]" (L189), so the credit goes to the repository owner TrueHOOHA. Apache-2.0 §4(b) (L97) requires modified files to "carry prominent notices stating that You changed the files". Therefore:
+- **Licence:** `LICENSE` L1 "Apache License", L2 "Version 2.0, January 2004". The copyright line is the unfilled template "Copyright [yyyy] [name of copyright owner]" (L189), so the credit goes to the repository owner TrueHOOHA. Apache-2.0 §4(b) (L97) requires modified files to "carry prominent notices stating that You changed the files". Therefore:
   - the full Apache-2.0 text travels in `NOTICES.md`;
-  - `lint/SKILL.md` carries a line "Sections 'Severity' and 'Done Gate' adapted from TrueHOOHA/LLM-Wiki@0455b71 (Apache-2.0), modified".
+  - `lint/SKILL.md` carries a line "Sections 'Severity' and 'Verification Checklist' adapted from TrueHOOHA/LLM-Wiki@0455b71 `.agents/skills/llm-wiki-lint/SKILL.md` (Apache-2.0), modified".
 - **Commit SHA:** 0455b71e04bafa7a419b308fca254a56d599a585 (2026-07-16).
 - **Safety verdict:** no installer, scripts, hooks or MCP. The repo is a template (d-more-repos §5). Install file by file (text merged).
+  - Five checks (auditor-verified at the pinned SHA): installer: none used (file copy); `settings.json`: no write; hooks: none; MCP: none; bypass flags (`--dangerously-skip-permissions`, `bypassPermissions`): none.
 - **What to adapt:**
   - Drop the OKF conformance checks (L29–40); they apply to TrueHOOHA's SPEC.md, not MEGAMIND.
   - Keep contradictions, stale claims, orphans, missing pages and data gaps (L62–88), with severities.
-  - Keep "Done Gate" wording as the lint skill's exit criterion.
+  - Keep the Verification Checklist (`llm-wiki-lint/SKILL.md` L120–128) as the lint skill's exit criterion. (The "Done Gate" pattern lives in `llm-wiki-ingest/SKILL.md` L41, same SHA; not taken here — audit correction.)
 - **Install path:** as `lint`.
 - **Notes:** Do not copy `raw/sources/*karpathy-llm-wiki-gist.md`; it is third-party text of unknown licence (d-more-repos §5).
 
@@ -204,6 +212,7 @@ MEGAMIND's own skills (`scout-5090`, `crystallize`, `housekeeping`, `megamind-sc
 - **Licence:** `LICENSE` L1 "MIT License", L3 "Copyright (c) 2026 Steph Ango (@kepano)"; the notice travels.
 - **Commit SHA:** 3ccff5338ea700537839b21900aa5358a0402c98 (2026-09-15).
 - **Safety verdict:**
+  - Five checks (auditor-verified at the pinned SHA): installer: none used (file copy); `settings.json`: no write; hooks: none; MCP: none; bypass flags (`--dangerously-skip-permissions`, `bypassPermissions`): none.
   - The plugin has no hooks, MCP or settings writes. `defuddle` and `knap` (global npm installs, unpinned `npx knap`) are excluded (d-more-repos §1).
   - Frontmatter `name` and `description` only. Install file by file.
 - **What to adapt:** none to the text. Two packaging notes:
@@ -221,6 +230,7 @@ MEGAMIND's own skills (`scout-5090`, `crystallize`, `housekeeping`, `megamind-sc
 - **Licence:** ECC MIT (Affaan Mustafa); the notice travels.
 - **Commit SHA:** b38be6a7f6350964d59328b52f0624e1d1d552d1.
 - **Safety verdict:** prose only. Frontmatter `name`, `description`, `metadata`. Install as is.
+  - Five checks (auditor-verified at the pinned SHA): installer: none used (file copy); `settings.json`: no write; hooks: none; MCP: none; bypass flags (`--dangerously-skip-permissions`, `bypassPermissions`): none.
 - **What to adapt:**
   - Nothing in the text.
   - The description is 432 characters; shorten it to ≤200 if claude.ai enforces that limit.
@@ -232,6 +242,7 @@ MEGAMIND's own skills (`scout-5090`, `crystallize`, `housekeeping`, `megamind-sc
 - **Licence:** ECC MIT (Affaan Mustafa). Frontmatter also says `license: MIT`. The notice travels.
 - **Commit SHA:** b38be6a7f6350964d59328b52f0624e1d1d552d1.
 - **Safety verdict:** prose only; no installer, hooks or MCP. **Frontmatter carries `tools: Read, Write, Edit, Bash, Grep, Glob`**, which is not one of the six fields. claude.ai and the Skills API reject it with a hard error [e5].
+  - Five checks (auditor-verified at the pinned SHA): installer: none used (file copy); `settings.json`: no write; hooks: none; MCP: none; bypass flags (`--dangerously-skip-permissions`, `bypassPermissions`): none. Exception handled: the `tools:` key is deleted.
 - **What to adapt:**
   - **Delete the `tools:` key.**
   - Rename to `decision-ledger`, since the upstream name references "Prime Gauss" style prompting.
@@ -245,6 +256,7 @@ MEGAMIND's own skills (`scout-5090`, `crystallize`, `housekeeping`, `megamind-sc
 - **Licence:** OMC `LICENSE` L1 "MIT License", L3 "Copyright (c) 2025 Yeachan Heo"; the notice travels.
 - **Commit SHA:** 14cd0fe92fbe376fab6c89b333b7896811986d2d (2026-11-02).
 - **Safety verdict:**
+  - Five checks (auditor-verified at the pinned SHA): installer: none used (file copy); `settings.json`: no write; hooks: none; MCP: none; bypass flags (`--dangerously-skip-permissions`, `bypassPermissions`): none.
   - The OMC plugin, setup and team are rejected (2.20). This file is prose.
   - Frontmatter `name` and `description`. No references to `.omc` or MCP tools (`c-omc` table: omcrefs=0).
   - Install file by file.
@@ -259,6 +271,7 @@ MEGAMIND's own skills (`scout-5090`, `crystallize`, `housekeeping`, `megamind-sc
 - **Licence:** OMC MIT (Yeachan Heo); the notice travels.
 - **Commit SHA:** 14cd0fe92fbe376fab6c89b333b7896811986d2d.
 - **Safety verdict:** prose; no `.omc`/MCP references. Install file by file.
+  - Five checks (auditor-verified at the pinned SHA): installer: none used (file copy); `settings.json`: no write; hooks: none; MCP: none; bypass flags (`--dangerously-skip-permissions`, `bypassPermissions`): none.
 - **What to adapt:**
   - "Local" means `index.md`, qmd, then `wiki/`, then `raw/`.
   - Network use only where the environment allows it (the scout's environment; not the VM's unattended tiers).
@@ -272,6 +285,7 @@ MEGAMIND's own skills (`scout-5090`, `crystallize`, `housekeeping`, `megamind-sc
 - **Licence:** OMC MIT (Yeachan Heo); the notice travels.
 - **Commit SHA:** 14cd0fe92fbe376fab6c89b333b7896811986d2d.
 - **Safety verdict:** prose; no hooks or MCP. The upstream frontmatter has `model: opus` and `disallowedTools`, which are agent fields and not among the six skill fields [e5]. Install file by file after conversion.
+  - Five checks (auditor-verified at the pinned SHA): installer: none used (file copy); `settings.json`: no write; hooks: none; MCP: none; bypass flags (`--dangerously-skip-permissions`, `bypassPermissions`): none.
 - **What to adapt:**
   - **Convert the agent into a skill.** Frontmatter keeps only `name: critic-review` and `description`. Put "read-only: never edit files" in the body.
   - Remove the LSP tool lines (L168).
@@ -291,6 +305,7 @@ MEGAMIND's own skills (`scout-5090`, `crystallize`, `housekeeping`, `megamind-sc
   - **Both notices travel.** The folder's own `LICENSE` and `references/source.md` are copied unchanged.
 - **Commit SHA:** b38be6a7f6350964d59328b52f0624e1d1d552d1.
 - **Safety verdict:** prose plus a template; no scripts, hooks or MCP. Frontmatter `name` and `description`. Install file by file.
+  - Five checks (auditor-verified at the pinned SHA): installer: none used (file copy); `settings.json`: no write; hooks: none; MCP: none; bypass flags (`--dangerously-skip-permissions`, `bypassPermissions`): none.
 - **What to adapt:**
   - `CONTEXT.md` → a single `wiki/glossary.md` page that carries `derived_from::` lines.
   - The ADR handoff points at `decision-records` (2.16).
@@ -304,6 +319,7 @@ MEGAMIND's own skills (`scout-5090`, `crystallize`, `housekeeping`, `megamind-sc
 - **Licence:** ECC MIT (Affaan Mustafa); the notice travels.
 - **Commit SHA:** b38be6a7f6350964d59328b52f0624e1d1d552d1.
 - **Safety verdict:** prose only; frontmatter `name`, `description`, `metadata`. Install file by file.
+  - Five checks (auditor-verified at the pinned SHA): installer: none used (file copy); `settings.json`: no write; hooks: none; MCP: none; bypass flags (`--dangerously-skip-permissions`, `bypassPermissions`): none.
 - **What to adapt:**
   - Path `docs/adr/` (L95–105) → `wiki/decisions/NNNN-slug.md`.
   - Each ADR carries `derived_from::` lines and, where a decision rests on another page, `depends_on:: [[page]] (reason)`.
@@ -319,6 +335,7 @@ MEGAMIND's own skills (`scout-5090`, `crystallize`, `housekeeping`, `megamind-sc
 - **Licence:** `skills/skill-creator/LICENSE.txt` is Apache-2.0. The repo has **no root LICENSE**. Apache §4 requires the licence text to travel and modified files to carry change notices.
 - **Commit SHA:** ca45fc496a3436251f191354091d557da31c15b5 (2026-10-28).
 - **Safety verdict:**
+  - Five checks (auditor-verified at the pinned SHA): installer: none used (file copy); `settings.json`: no write; hooks: none; MCP: none; bypass flags (`--dangerously-skip-permissions`, `bypassPermissions`): none. Exception handled: the `claude -p` scripts are not copied.
   - No installer; the marketplace lists skills only. No hooks, MCP or bypass flags (d-more-repos §2).
   - `run_eval.py` (L70–76) and `improve_description.py` (L26) shell out to `claude -p` (no bypass flag). They are **not copied**.
   - `quick_validate.py` and `package_skill.py` use only the standard library plus `yaml` (PyYAML). No network.
@@ -335,6 +352,7 @@ MEGAMIND's own skills (`scout-5090`, `crystallize`, `housekeeping`, `megamind-sc
 - **Licence:** `skills/mcp-builder/LICENSE.txt` Apache-2.0. If any text is quoted into the connector design, the Apache notice travels with it.
 - **Commit SHA:** ca45fc496a3436251f191354091d557da31c15b5.
 - **Safety verdict:** reference only. `scripts/connections.py`, `evaluation.py` and `requirements.txt` need pip packages and network, and are not copied.
+  - Five checks (auditor-verified at the pinned SHA): installer: none used (file copy); `settings.json`: no write; hooks: none; MCP: none; bypass flags (`--dangerously-skip-permissions`, `bypassPermissions`): none.
 - **What to adapt:** nothing is packaged. The connector design (h-reachability.md) cites its best-practice sections.
 - **Install path:** none (not packaged).
 - **Notes:** The connector is an MCP server the owner builds and runs. Installing it is an owner action under the "no third-party MCP" rule; it is not part of this plan.
@@ -480,7 +498,7 @@ Rules for the file:
 ### 3.6 Validation checklist (run by the build and by the owner before merging a refresh)
 - [ ] Frontmatter keys ⊆ {`name`, `description`, `license`, `compatibility`, `metadata`, `allowed-tools`}. Fail on anything else (e.g. ECC `tools:`) [e5]; `quick_validate.py` L42–49.
 - [ ] `name` equals the folder name, matches `^[a-z0-9]+(-[a-z0-9]+)*$`, ≤64 characters, contains neither `claude` nor `anthropic` [e12][e13].
-- [ ] `description` is 1–200 characters (the stricter claude.ai figure [e2]) and has no `<`/`>` (`quick_validate.py`; [e12] "no XML tags"). `metadata` values are strings [e13]; `compatibility` ≤500 characters [e13].
+- [ ] `description` is 1–1,024 characters (hard fail above 1,024 [e13]); warn above 200 (the claude.ai Help Center figure [e2]); no `<`/`>` (`quick_validate.py`; [e12] "no XML tags"). `metadata` values are strings [e13]; `compatibility` ≤500 characters [e13].
 - [ ] SKILL.md under 500 lines [e5][e13]. References are one level deep [e13].
 - [ ] Skill folder <30 MB uncompressed [e12]. The plugin as a whole stays ≤5,000 files and ≤200 MB for claude.ai plugin upload [e9].
 - [ ] No dynamic context injection. Fail on `` !`<cmd>` `` where `!` follows whitespace or line start and the backtick span is a command; allow `` `!` `` inside inline code (obsidian-markdown L47). This feature does not work in claude.ai or the API anyway [e5].

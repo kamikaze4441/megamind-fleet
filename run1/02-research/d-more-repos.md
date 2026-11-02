@@ -68,7 +68,7 @@ Question: Verify at source eight named candidates plus up to three 2026 reposito
 
 † `discernment-nudge` and `academy-guide` do have `LICENSE.txt` (Apache-2.0). `doc-coauthoring` has none [2].
 ### Findings
-- **What it is:** 18 skill folders, the Agent Skills spec and a template. README:20 states that docx/pdf/pptx/xlsx are "source-available, not open source" [2].
+- **What it is:** 19 skill folders (14 Apache-2.0, 4 proprietary, 1 with no licence file), the Agent Skills spec and a template. (Count corrected by the auditor.) README:20 states that docx/pdf/pptx/xlsx are "source-available, not open source" [2].
 - **Proprietary licence:** `skills/pdf/LICENSE.txt` says users may not "Reproduce or copy these materials" or "Create derivative works" [2].
 - **Installer:** `/plugin marketplace add anthropics/skills`, then `/plugin install document-skills@anthropic-agent-skills` or `example-skills@…` (README:34–48). `.claude-plugin/marketplace.json` lists skills only. There is no hooks file and no `.mcp.json`, and `git grep` finds no `dangerously-skip-permissions` [2].
 - **Scripts:** `skills/skill-creator/scripts/run_eval.py:70–76` and `improve_description.py:26` shell out to `claude -p` with no bypass flags [2].
@@ -150,7 +150,7 @@ Question: Verify at source eight named candidates plus up to three 2026 reposito
 ### Files worth borrowing
 | path | purpose | self-contained? | adaptation needed |
 |---|---|---|---|
-| .agents/skills/llm-wiki-lint/SKILL.md | 9-class lint with severity output and "Done Gate" | yes | Replace OKF checks with MEGAMIND frontmatter; keep the Apache-2.0 notice |
+| .agents/skills/llm-wiki-lint/SKILL.md | 9-class lint with severity output and a Verification Checklist (L120–128); the "Done Gate" is in `.agents/skills/llm-wiki-ingest/SKILL.md:41` | yes | Replace OKF checks with MEGAMIND frontmatter; keep the Apache-2.0 notice |
 | .agents/skills/llm-wiki-ingest/SKILL.md | "Required Step Order (exact)" plus Done Gate | yes | Pattern for strict step ordering |
 | SPEC.md | OKF v0.1 bundle/frontmatter/citations spec | yes | Reference only; Astro-Han deliberately defers OKF |
 ### Safety verdict
@@ -257,7 +257,7 @@ Question: Verify at source eight named candidates plus up to three 2026 reposito
 |---|---|---|---|---|---|
 | nvk/llm-wiki | d60674ff785e5c6d35322657d7839a7c0bdd3ca7 | 2026-10-25 (8 days) | `LICENSE`: "MIT License" (© 2026 nvk) | 1.4k (2026-11-02) [10p] | no |
 ### Findings
-- **What it is:** a multi-runtime wiki protocol. `claude-plugin/` holds 28 commands, the `wiki-manager` skill with 24 reference files, and `bin/llm-wiki` (Python helper). Its Claude plugin.json declares no hooks or MCP, and `claude-plugin/` has no `hooks/` directory. Hooks ship only in the Codex plugin (`plugins/llm-wiki/hooks/`) [10].
+- **What it is:** a multi-runtime wiki protocol. `claude-plugin/` holds 28 commands, the `wiki-manager` skill with 23 reference files, and `bin/llm-wiki` (Python helper). Its Claude plugin.json declares no hooks or MCP, and `claude-plugin/` has no `hooks/` directory. Hooks ship only in the Codex plugin (`plugins/llm-wiki/hooks/`) [10].
 - **Installer:** `claude plugin marketplace add nvk/llm-wiki` + `claude plugin install wiki@llm-wiki` (README:65–71). The README also shows `curl -sL …raw…/AGENTS.md > ~/your-project/AGENTS.md`: an unpinned overwrite, not piped to a shell [10][10p].
 - **Lint catalogue** (`claude-plugin/skills/wiki-manager/references/linting.md`):
   - C4b Source Provenance (:120–137): dangling `sources:`, orphan raw files, retracted markers
