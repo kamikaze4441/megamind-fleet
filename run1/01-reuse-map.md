@@ -1,6 +1,6 @@
 # Run 1 — reuse map of the master prompt (v10.3) for the live-brain goal
 
-Verdicts: **keep** (as is) · **keep + amend** (the amendment is in `06-amendments.md`, numbered A<n>) · **gap** (missing for the live-brain goal; the proposal is in `06` or in a deliverable). Nothing in §11 is re-proposed; the one §11 item re-opened is the owner's own Nov 1 decision (the vault connector). Evidence files: `02-research/a`–`h`, `03-benchmark/results.md`, `04-skills-plan.md`, `05-fortnightly-job.md`. Status: DRAFT — verdicts marked (pending) are filled when the named evidence file lands.
+Verdicts: **keep** (as is) · **keep + amend** (the amendment is in `06-amendments.md`, numbered A<n>) · **gap** (missing for the live-brain goal; the proposal is in `06` or in a deliverable). Nothing in §11 is re-proposed; the one §11 item re-opened is the owner's own Nov 1 decision (the vault connector). Evidence files: `02-research/a`–`h`, `03-benchmark/results.md`, `04-skills-plan.md`, `05-fortnightly-job.md`. Status: FINAL for run 1 (2026-11-02); every §2–§12 section has a verdict.
 
 ## §1 How to use this document
 
@@ -36,8 +36,8 @@ Verdicts: **keep** (as is) · **keep + amend** (the amendment is in `06-amendmen
 | "No other vendor's AI in the pipeline" | keep | The fleet's Argon use is research-only on public keywords, outside the pipeline |
 | Claude Code harness | keep | — |
 | Vault and wiki: Karpathy wiki, qmd, provenance, edges, "the wiki is the graph" | keep | The benchmark tests the query protocols over exactly this layout (`03-benchmark/results.md`) |
-| qmd default mode "set by `qmd bench` on the golden set" | keep (pending) | The benchmark gives a first public-corpus reading; the real vault's bench still decides |
-| `deps/<slug>.md` view gated on the `rg` arm failing the multi-hop set | keep (pending) | V5 vs V6 in the benchmark is the first evidence either way |
+| qmd default mode "set by `qmd bench` on the golden set" | keep + amend (G2) | The benchmark's first reading: BM25 `search` is the only mode cheap enough on CPU (0.25 s vs 4–120 s for `vsearch`/`query`, which both run the 1.7B expansion model in 2.8.3) at equal correctness; the real vault's bench still decides, with latency as the guardrail §4 already names. Evidence: `03-benchmark/results.md` |
+| `deps/<slug>.md` view gated on the `rg` arm failing the multi-hop set | keep (G4) | V6 (view) and V5 (`rg` arm) tied on tokens and both lost a dependency point to the runs that read the page; no reason to build the view. Evidence: `03-benchmark/results.md` reading 4 |
 | Chat history: one dated redacted file per chat + index, automated as far as terms allow | keep + amend (A4) | The converter design (f) adds the frontmatter fields, the keep-out list and the idempotency rule; the terms finding decides "as far as the terms allow". Evidence: `f-chat-history.md` |
 | Skills forked from Astro-Han/karpathy-llm-wiki | keep + amend (A5) | The skills plan adds items from kepano/obsidian-skills, anthropics/skills and others, file by file, pinned; the list of skills grows. Evidence: `04-skills-plan.md` |
 | Ingestion only in the owner's interactive sessions | keep | The "file it" write path is an owner question (08), not a proposal |
@@ -69,7 +69,9 @@ Verdicts: **keep** (as is) · **keep + amend** (the amendment is in `06-amendmen
 | --- | --- | --- |
 | Path table, `log.md` format, editing rules 1–8 | keep | The benchmark vault follows this layout exactly and it worked for ~30 pages |
 | Chat-history folder "(folder: R16)" | keep + amend (A4) | Name the folder and the file naming scheme from the converter design |
-| Rule 5 (questions go through the wiki first) | keep (pending) | The benchmark's winner may refine the order (index → qmd mode → page → edges) |
+| Rule 5 (questions go through the wiki first) | keep + amend (G2) | The winner was index-first navigation (index once per session → wikilinks and `rg` → page → edges read on the page), BM25 as the fallback search. Evidence: `03-benchmark/results.md` |
+| Rule 2 (edge grammar, "fails or degrades") | keep + amend (G1) | A mechanical walk cannot tell a fatal edge from a cosmetic one; the two edge-walking variants lost points on exactly that. Proposal: a severity word in the reason, one field kept. Evidence: `grading/summary.md` |
+| Rule 7 (lint) | keep + amend (G3, A11, F5) | Coverage check for facts lost at ingest; instruction-shaped text; qmd chunk coverage |
 | — | gap (G4) | No rule for a page read through the connector: pages are read as data; a page that contains instructions must not steer a chat (prompt-injection surface). Proposal in `h-reachability.md` |
 
 ## §8 Schedule

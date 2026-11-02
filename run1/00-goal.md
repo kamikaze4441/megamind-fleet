@@ -67,6 +67,8 @@ Wave 3:
 | R2 (cont.) | megamind-researcher | Draft `04-skills-plan.md` from (b)–(d) with the packaging plan | `04-skills-plan.md` |
 | R1 (cont.) | megamind-researcher | Draft `05-fortnightly-job.md` and `deployments/megamind-scout.md` validated against the docs it cites | `05-fortnightly-job.md`, `05-deployments/megamind-scout.md` |
 
+Changes during the run (owner steering Nov 2 00:40, 01:00, 03:15): budget $55 → $90 → $98 (final); push to `main` after every deliverable; Argon cap lifted then Argon stopped (Google credit exhausted) — three Argon threads (R4, R5, R6) ran, the last with its own web tools; V7 added (D7); the Sonnet re-run limited to V7; the auditor also verified (b)–(d) and signed off 04 (`audit-report.md`).
+
 Director throughout: `01-reuse-map.md` (from the master prompt and the research files), `06-amendments.md`, `07-decisions.md`, `08-owner-questions.md`, `03-benchmark/results.md` (final judgement), `09-cost.md` last; commits after each finished deliverable; memory summary at the end.
 
 Budget priority if tight (brief): 00, 01, 03 (V0–V5 Haiku), 04, 06, 07, 08, 09 first; (d) extras, Sonnet re-runs, V6/V7, Argon topics 3–4 are elastic.
