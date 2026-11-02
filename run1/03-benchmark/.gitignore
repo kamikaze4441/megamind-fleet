@@ -1,0 +1,6 @@
+# Fetched third-party pages and the manufacturer's PDF are not redistributed in this repository
+# (mixed licences: CC BY-SA, MIT, "terms not stated", copyrighted manual). corpus.md records URL and
+# licence per file, raw.sha256 the checksums, harness/fetch-corpus.py re-creates raw/. The fleet-written
+# lab note is kept.
+raw/*
+!raw/lab/
