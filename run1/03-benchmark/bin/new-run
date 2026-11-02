@@ -2,11 +2,11 @@
 # Creates a fresh run directory $B/results/<variant>-<model>/ with an empty log.jsonl and the answers.tsv header (measures nothing itself).
 set -euo pipefail
 B=/workspace/megamind-fleet/run1/03-benchmark
-if [ $# -ne 2 ]; then echo "usage: new-run <variant V0..V7> <model, e.g. haiku|sonnet>" >&2; exit 2; fi
-variant=$1; model=$2
+if [ $# -lt 2 ] || [ $# -gt 3 ]; then echo "usage: new-run <variant V0..V7> <model, e.g. haiku|sonnet> [run-dir-name]" >&2; exit 2; fi
+variant=$1; model=$2; name=${3:-${variant}-${model}}
 case "$variant" in V[0-7]) ;; *) echo "variant must be V0..V7" >&2; exit 2;; esac
-case "$model" in *[!A-Za-z0-9_.-]*|"") echo "model name: letters, digits, . _ - only" >&2; exit 2;; esac
-run="$B/results/${variant}-${model}"
+case "$model$name" in *[!A-Za-z0-9_.-]*|"") echo "model / run-dir name: letters, digits, . _ - only" >&2; exit 2;; esac
+run="$B/results/$name"
 if [ -e "$run" ] && [ -s "$run/log.jsonl" ]; then
   echo "refusing: $run already has a non-empty log.jsonl (move it away first)" >&2; exit 1
 fi
@@ -14,4 +14,6 @@ mkdir -p "$run"
 : > "$run/log.jsonl"
 printf 'qid\tanswer\tpages\tconfidence\n' > "$run/answers.tsv"
 rm -f "$run/.active"
+# drop qmd's cached query expansions so a run does not inherit another run's cache (embeddings are kept)
+(cd /tmp && qmd cleanup > "$run/qmd-cleanup.log" 2>&1) || echo "warning: qmd cleanup failed, see $run/qmd-cleanup.log" >&2
 echo "export MM_RUN=$run MM_VARIANT=$variant PATH=$B/bin:\$PATH"
