@@ -114,3 +114,21 @@ Corrections for 04-skills-plan.md:
 
 ## Sign-off
 04-skills-plan.md: NOT SIGNED OFF: (1) the Done Gate is attributed to `llm-wiki-lint` but comes from `llm-wiki-ingest/SKILL.md:41` (provenance and notice text, §2.3/§2.8); (2) the §2.8 licence first-line quote is wrong; (3) the safety-verdict field lacks the explicit installer/settings/hooks/MCP/bypass checks in 15 of 18 blocks; (4) §3.6 (≤200) and §3.8 (≤1,024 hard, warn above 200) contradict each other. No safety or licence blocker was found: once corrections 1–4 are applied as quoted above, I will re-check and sign off.
+
+## Re-check after the director's corrections (2026-11-02)
+I re-checked only the corrected spots.
+- **04 §2.8 licence:** L197 now reads "`LICENSE` L1 "Apache License", L2 "Version 2.0, January 2004"". Holds.
+- **04 Done Gate:**
+  - §1 row 8 (L37), §2.3 (L121), the §2.8 notice line (L199) and the exit criterion (L206) now name the Verification Checklist (`llm-wiki-lint/SKILL.md` L120–128).
+  - The Done Gate is stated as living in `llm-wiki-ingest/SKILL.md` L41 and not taken.
+  - The only remaining "Done Gate" mention is that explanatory note. Holds.
+- **04 safety verdicts:** a "Five checks" line is present in every block 2.1–2.18 (18 of 18, one per block). The three handled exceptions are named: grounded-vault "Commit gate" (L151), `tools:` key (L245) and `claude -p` scripts (L338). Holds.
+- **04 §3.6:** L501 now reads "1–1,024 characters (hard fail above 1,024 [e13]); warn above 200". This is consistent with §3.8 (L532) and with the ≤200 writing policy (Summary 9, §3.5 L489, §4 L547). Holds.
+- **04 §2.4:** L129 states there is no `open(` and no write call, and that "write" appears only in the docstring at L25. Holds.
+  - Wording nit, not blocking: the sentence now says "no write calls" twice.
+- **d-more-repos.md:** all three corrections hold.
+  - L71: 19 skill folders (14/4/1).
+  - L153: the Verification Checklist, with the Done Gate in `llm-wiki-ingest/SKILL.md:41`.
+  - L260: 23 reference files.
+
+04-skills-plan.md: SIGNED OFF
