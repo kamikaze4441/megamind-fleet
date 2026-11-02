@@ -1,0 +1,42 @@
+qid	wall_s	calls	refused	bytes_out	chars_out	tokens_proxy	pages_read	raw_read	pages_cited	answer_chars	recall
+Q01	4.1	2	0	3192	3192	798		raw/unraid/shares.md	raw/unraid/shares.md	81	1.0
+Q02	3.2	2	0	2758	2754	688		raw/unraid/array-overview.md	raw/unraid/array-overview.md	141	1.0
+Q03	12.6	7	1	6175	6169	1542		raw/unraid/shares.md	raw/unraid/shares.md	83	1.0
+Q04	3.5	2	0	3692	3682	920		raw/unraid/zfs-storage.md	raw/unraid/zfs-storage.md	91	1.0
+Q05	3.1	2	0	2927	2927	732		raw/ollama/modelfile.md	raw/ollama/modelfile.md	82	1.0
+Q06	1.8	1	0	942	942	236			raw/ollama/faq.md	97	1.0
+Q07	3.1	2	0	1268	1268	317		raw/ollama/gpu.md	raw/ollama/gpu.md	149	1.0
+Q08	1.8	1	0	1222	1210	302			raw/syncthing/foldertypes.md	159	1.0
+Q09	3.0	2	0	1774	1758	440		raw/syncthing/versioning.md	raw/syncthing/versioning.md	78	1.0
+Q10	3.0	2	0	1703	1703	426		raw/tailscale/tailscale-ssh.md	raw/tailscale/tailscale-ssh.md	78	1.0
+Q11	1.8	1	0	500	500	125			raw/tailscale/magicdns.md	79	1.0
+Q12	1.8	1	0	1062	1062	266			raw/tailscale/exit-nodes.md	161	1.0
+Q13	1.8	1	0	2244	2244	561			raw/claude-code/mcp.md	122	1.0
+Q14	2.0	1	0	3700	3700	925			raw/claude-code/hooks.md	112	1.0
+Q15	1.7	1	0	6301	6301	1575			raw/claude-code/memory.md	82	1.0
+Q16	4.0	2	1	4938	4938	1234			raw/claude-code/skills.md	103	1.0
+Q17	2.1	1	0	1594	1592	398			raw/qmd/README.md	103	1.0
+Q18	17.1	7	0	4107	4067	1017		raw/manual/denon-avr-x1700h-owners-manual.txt		7	1.0
+Q19	3.7	1	0	858	852	213			raw/manual/denon-avr-x1700h-owners-manual.txt	66	1.0
+Q20	17.4	6	0	7616	7546	1886		raw/manual/denon-avr-x1700h-owners-manual.txt		7	1.0
+Q21	5.0	2	0	3779	3779	945		raw/lab/LAB-STATE.md	raw/lab/LAB-STATE.md	171	1.0
+Q22	2.1	1	0	3226	3226	806		raw/lab/LAB-STATE.md	raw/lab/LAB-STATE.md	219	1.0
+Q23	2.4	1	0	3226	3226	806		raw/lab/LAB-STATE.md	raw/lab/LAB-STATE.md	168	1.0
+Q24	2.2	1	0	3226	3226	806		raw/lab/LAB-STATE.md	raw/lab/LAB-STATE.md	124	1.0
+Q25	2.4	1	0	3226	3226	806		raw/lab/LAB-STATE.md	raw/lab/LAB-STATE.md	224	1.0
+Q26	2.6	1	0	3226	3226	806		raw/lab/LAB-STATE.md	raw/lab/LAB-STATE.md	297	1.0
+Q27	2.5	1	0	3226	3226	806		raw/lab/LAB-STATE.md	raw/lab/LAB-STATE.md	270	1.0
+Q28	2.7	1	0	3226	3226	806		raw/lab/LAB-STATE.md	raw/lab/LAB-STATE.md	258	1.0
+Q29	2.9	1	0	3226	3226	806		raw/lab/LAB-STATE.md	raw/lab/LAB-STATE.md	351	1.0
+Q30	2.4	1	0	3226	3226	806		raw/lab/LAB-STATE.md	raw/lab/LAB-STATE.md	246	1.0
+
+# questions	30
+# median_wall_s	2.65	# total_wall_s	119.8
+# median_calls	1.0	# total_calls	56
+# median_bytes_out	3226.0	# total_bytes_out	91386
+# median_chars_out	3226.0	# total_chars_out	91220
+# median_tokens_proxy	806.0	# total_tokens_proxy	22800
+# median_recall	1.0	# total_recall	30.0
+# median_pages_read	0.0
+# token proxy = chars printed by the harness / 4 (not Console usage)
+

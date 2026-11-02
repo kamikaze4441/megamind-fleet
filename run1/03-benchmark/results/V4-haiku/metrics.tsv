@@ -39,3 +39,4 @@ Q30	136.9	1	0	1397	1397	349			hermes.md,pebble.md,reverse-proxy.md,wiki-search.m
 # median_recall	1.0	# total_recall	26.58
 # median_pages_read	1.0
 # token proxy = chars printed by the harness / 4 (not Console usage)
+

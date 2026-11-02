@@ -39,3 +39,4 @@ Q30	4.2	3	0	6322	6236	1559	hermes.md		hermes.md,wiki-search.md	202	1.0
 # median_recall	1.0	# total_recall	25.42
 # median_pages_read	1.0
 # token proxy = chars printed by the harness / 4 (not Console usage)
+

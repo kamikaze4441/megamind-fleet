@@ -1,0 +1,285 @@
+{
+  "description": "MEGAMIND run1 benchmark questions over the 'wiki' collection",
+  "version": 1,
+  "collection": "wiki",
+  "queries": [
+    {
+      "id": "Q01",
+      "query": "For a new Unraid user share, which allocation method is the default (and recommended) one?",
+      "type": "exact",
+      "expected_files": [
+        "unraid-shares.md"
+      ],
+      "expected_in_top_k": 3
+    },
+    {
+      "id": "Q02",
+      "query": "In Unraid, which tunable on the Disk Settings page selects the array write mode (for example to switch to turbo/reconstruct write)?",
+      "type": "exact",
+      "expected_files": [
+        "unraid-array-parity.md"
+      ],
+      "expected_in_top_k": 3
+    },
+    {
+      "id": "Q04",
+      "query": "Out of the box, roughly how much of the machine's memory does Unraid let the ZFS read cache occupy?",
+      "type": "exact",
+      "expected_files": [
+        "unraid-pools-zfs.md"
+      ],
+      "expected_in_top_k": 3
+    },
+    {
+      "id": "Q05",
+      "query": "Which instruction is mandatory in an Ollama Modelfile?",
+      "type": "exact",
+      "expected_files": [
+        "ollama-modelfile.md"
+      ],
+      "expected_in_top_k": 3
+    },
+    {
+      "id": "Q06",
+      "query": "By default, how many requests will the Ollama server queue when busy before it rejects additional ones, and which environment variable changes that number?",
+      "type": "exact",
+      "expected_files": [
+        "ollama-server-gpu.md"
+      ],
+      "expected_in_top_k": 3
+    },
+    {
+      "id": "Q07",
+      "query": "Which Linux capability can be granted to the ollama binary with setcap so that Vulkan GPUs report available VRAM without running Ollama as root?",
+      "type": "exact",
+      "expected_files": [
+        "ollama-server-gpu.md"
+      ],
+      "expected_in_top_k": 3
+    },
+    {
+      "id": "Q08",
+      "query": "A Syncthing send-only folder has gone out of sync. What is the label of the button that enforces this device's state on the rest of the cluster?",
+      "type": "exact",
+      "expected_files": [
+        "syncthing-folders-versioning.md"
+      ],
+      "expected_in_top_k": 3
+    },
+    {
+      "id": "Q09",
+      "query": "With Syncthing's staggered file versioning, during the first hour after a change, one version is kept per what interval?",
+      "type": "exact",
+      "expected_files": [
+        "syncthing-folders-versioning.md"
+      ],
+      "expected_in_top_k": 3
+    },
+    {
+      "id": "Q10",
+      "query": "In a Tailscale SSH access rule whose action is \"check\", what is the default checkPeriod when none is specified?",
+      "type": "exact",
+      "expected_files": [
+        "tailscale-acls-ssh.md"
+      ],
+      "expected_in_top_k": 3
+    },
+    {
+      "id": "Q11",
+      "query": "Tailnets created on or after which date have MagicDNS enabled by default?",
+      "type": "exact",
+      "expected_files": [
+        "tailscale-magicdns.md"
+      ],
+      "expected_in_top_k": 3
+    },
+    {
+      "id": "Q12",
+      "query": "A laptop sends all of its internet traffic through another machine in the tailnet but still needs to reach the printer on the Wi-Fi it is sitting on. Which command-line flag allows that?",
+      "type": "exact",
+      "expected_files": [
+        "tailscale-exit-nodes-subnets.md"
+      ],
+      "expected_in_top_k": 3
+    },
+    {
+      "id": "Q15",
+      "query": "How many levels deep can `@path` imports in CLAUDE.md files recursively import other files?",
+      "type": "exact",
+      "expected_files": [
+        "claude-code-memory.md"
+      ],
+      "expected_in_top_k": 3
+    },
+    {
+      "id": "Q16",
+      "query": "In Claude Code, the blurb that tells the model what a skill does and when to reach for it gets cut short in the catalogue the model sees. After how many characters?",
+      "type": "exact",
+      "expected_files": [
+        "claude-code-skills-subagents.md"
+      ],
+      "expected_in_top_k": 3
+    },
+    {
+      "id": "Q17",
+      "query": "When qmd's MCP server is started with the HTTP transport and no port is given, which host and port does it listen on?",
+      "type": "exact",
+      "expected_files": [
+        "qmd-search.md"
+      ],
+      "expected_in_top_k": 3
+    },
+    {
+      "id": "Q18",
+      "query": "On the Denon AVR-X1700H, what is the default Auto Standby time for the MAIN ZONE?",
+      "type": "exact",
+      "expected_files": [
+        "avr-setup.md"
+      ],
+      "expected_in_top_k": 3
+    },
+    {
+      "id": "Q19",
+      "query": "What range of speaker impedance does the Denon AVR-X1700H support?",
+      "type": "exact",
+      "expected_files": [
+        "avr-setup.md"
+      ],
+      "expected_in_top_k": 3
+    },
+    {
+      "id": "Q20",
+      "query": "The Denon AVR-X1700H's streaming and online features stopped working and restarting it did not help. Which two buttons on the receiver itself do you hold together to put only its networking setup back to factory state?",
+      "type": "exact",
+      "expected_files": [
+        "avr-setup.md"
+      ],
+      "expected_in_top_k": 3
+    },
+    {
+      "id": "Q21",
+      "query": "In the lab, what does Plex currently need in order to run?",
+      "type": "topical",
+      "expected_files": [
+        "plex.md",
+        "atlas.md",
+        "tank.md"
+      ],
+      "expected_in_top_k": 3
+    },
+    {
+      "id": "Q22",
+      "query": "What breaks or degrades in the lab if titan is switched off?",
+      "type": "topical",
+      "expected_files": [
+        "titan.md",
+        "ollama-endpoint.md",
+        "wiki-search.md"
+      ],
+      "expected_in_top_k": 3
+    },
+    {
+      "id": "Q23",
+      "query": "What does the nightly rclone backup need?",
+      "type": "topical",
+      "expected_files": [
+        "rclone-backup.md",
+        "tank.md",
+        "gate.md"
+      ],
+      "expected_in_top_k": 3
+    },
+    {
+      "id": "Q24",
+      "query": "What does the hermes VM need in order to run and boot?",
+      "type": "topical",
+      "expected_files": [
+        "hermes.md",
+        "atlas.md",
+        "tank.md"
+      ],
+      "expected_in_top_k": 3
+    },
+    {
+      "id": "Q25",
+      "query": "If atlas stops, what happens to the syncing of notes to pebble, and through which dependencies?",
+      "type": "topical",
+      "expected_files": [
+        "syncthing.md",
+        "atlas.md",
+        "tank.md",
+        "tailscale.md",
+        "pebble.md"
+      ],
+      "expected_in_top_k": 3
+    },
+    {
+      "id": "Q26",
+      "query": "If gate goes down, which lab services or devices lose function?",
+      "type": "topical",
+      "expected_files": [
+        "gate.md",
+        "tailscale.md",
+        "pebble.md",
+        "reverse-proxy.md",
+        "rclone-backup.md",
+        "atlas.md",
+        "aria.md"
+      ],
+      "expected_in_top_k": 3
+    },
+    {
+      "id": "Q27",
+      "query": "What does the wiki search service need, directly and indirectly, to answer keyword queries?",
+      "type": "topical",
+      "expected_files": [
+        "wiki-search.md",
+        "hermes.md",
+        "atlas.md",
+        "tank.md"
+      ],
+      "expected_in_top_k": 3
+    },
+    {
+      "id": "Q28",
+      "query": "If atlas shuts down, which lab hosts, pools and services stop with it?",
+      "type": "topical",
+      "expected_files": [
+        "atlas.md",
+        "tank.md",
+        "hermes.md",
+        "wiki-search.md",
+        "plex.md",
+        "reverse-proxy.md",
+        "syncthing.md",
+        "tailscale.md",
+        "rclone-backup.md"
+      ],
+      "expected_in_top_k": 3
+    },
+    {
+      "id": "Q29",
+      "query": "If the pool tank became unavailable while atlas kept running, which lab services would stop working, directly or through another host?",
+      "type": "topical",
+      "expected_files": [
+        "tank.md",
+        "hermes.md",
+        "wiki-search.md",
+        "plex.md",
+        "syncthing.md",
+        "rclone-backup.md"
+      ],
+      "expected_in_top_k": 3
+    },
+    {
+      "id": "Q30",
+      "query": "What breaks or degrades in the lab if hermes is down?",
+      "type": "topical",
+      "expected_files": [
+        "hermes.md",
+        "wiki-search.md"
+      ],
+      "expected_in_top_k": 3
+    }
+  ]
+}
