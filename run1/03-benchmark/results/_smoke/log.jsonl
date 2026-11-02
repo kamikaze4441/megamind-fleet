@@ -1,0 +1,12 @@
+{"ts": "2026-11-02T07:38:26.356+00:00", "ts_ns": 1793605106356541048, "qid": null, "variant": "V5", "cmd": "read", "args": ["atlas"], "bytes_out": 51, "chars_out": 51, "ms": 0.1, "refused": true}
+{"ts": "2026-11-02T07:38:26.390+00:00", "ts_ns": 1793605106390477636, "qid": "T1", "variant": "V5", "cmd": "start", "args": ["T1"], "bytes_out": 57, "chars_out": 57, "ms": 0.3, "refused": false}
+{"ts": "2026-11-02T07:38:26.433+00:00", "ts_ns": 1793605106433922363, "qid": "T1", "variant": "V5", "cmd": "index", "args": [], "bytes_out": 5464, "chars_out": 5378, "ms": 0.3, "refused": false}
+{"ts": "2026-11-02T07:38:26.474+00:00", "ts_ns": 1793605106474942476, "qid": "T1", "variant": "V5", "cmd": "read", "args": ["atlas", "1-8"], "bytes_out": 197, "chars_out": 197, "ms": 1.1, "refused": false}
+{"ts": "2026-11-02T07:38:26.509+00:00", "ts_ns": 1793605106509624935, "qid": "T1", "variant": "V5", "cmd": "read", "args": ["raw/lab/LAB-STATE.md"], "bytes_out": 73, "chars_out": 73, "ms": 0.9, "refused": true}
+{"ts": "2026-11-02T07:38:26.541+00:00", "ts_ns": 1793605106541820133, "qid": "T1", "variant": "V5", "cmd": "read", "args": ["../../etc/passwd"], "bytes_out": 63, "chars_out": 63, "ms": 0.8, "refused": true}
+{"ts": "2026-11-02T07:38:26.577+00:00", "ts_ns": 1793605106577797301, "qid": "T1", "variant": "V5", "cmd": "grep", "args": ["atlas"], "bytes_out": 88, "chars_out": 88, "ms": 0.1, "refused": true}
+{"ts": "2026-11-02T07:38:26.615+00:00", "ts_ns": 1793605106615349939, "qid": "T1", "variant": "V5", "cmd": "deps", "args": ["atlas"], "bytes_out": 907, "chars_out": 907, "ms": 7.7, "refused": false}
+{"ts": "2026-11-02T07:38:26.666+00:00", "ts_ns": 1793605106666828489, "qid": "T1", "variant": "V5", "cmd": "deps", "args": ["plex"], "bytes_out": 264, "chars_out": 264, "ms": 8.4, "refused": false}
+{"ts": "2026-11-02T07:38:26.723+00:00", "ts_ns": 1793605106723847497, "qid": "T1", "variant": "V5", "cmd": "depsview", "args": ["atlas"], "bytes_out": 92, "chars_out": 92, "ms": 0.2, "refused": true}
+{"ts": "2026-11-02T07:38:26.768+00:00", "ts_ns": 1793605106768969514, "qid": "T1", "variant": "V5", "cmd": "query", "args": ["what does hermes need"], "bytes_out": 1120, "chars_out": 1120, "ms": 51594.7, "refused": false}
+{"ts": "2026-11-02T07:39:18.398+00:00", "ts_ns": 1793605158398290332, "qid": "T1", "variant": "V5", "cmd": "answer", "args": ["T1", "hermes needs atlas and tank", "--pages", "hermes.md", "--confidence", "high"], "bytes_out": 53, "chars_out": 53, "ms": 0.8, "refused": false}

@@ -15,7 +15,7 @@ QMD is an on-device search engine for markdown notes and documentation. It combi
 - `qmd vsearch` — vector semantic search only.
 - `qmd query` — hybrid: FTS + vector + query expansion + re-ranking; `--no-rerank` skips LLM reranking (RRF scores only; faster on CPU).
 - `qmd get "docs/api-reference.md"` or by docid `qmd get "#abc123"`; `qmd multi-get "journals/2025-05*.md"`.
-- Options: `-n <num>` (default: 5, or 20 for --files/--json), `-c` collection, `--all`, `--min-score`, `--full`, `--format cli|json|csv|md|xml|files`, `--full-path`, `--explain`.
+- Options: `-n <num>` (default: 5, or 20 for --files/--json), `-c` collection, `--all`, `--min-score`, `--full`, `--format <kind>` (cli, json, csv, md, xml, files), `--full-path`, `--explain`.
 - Maintenance: `qmd status`, `qmd update`, `qmd cleanup`. MCP server: `qmd mcp` (or `qmd mcp --http`, default `localhost:8181`).
 
 ## Pipeline
@@ -30,7 +30,7 @@ Query expansion (fine-tuned model) produces typed sub-queries: `lex` goes to BM2
 Override embeddings with `QMD_EMBED_MODEL` and re-run `qmd embed -f`. Requires Node.js >= 22. Index stored in `~/.cache/qmd/index.sqlite`; config in `~/.config/qmd/index.yml`.
 
 ## Benchmarking
-`qmd bench <fixture.json>` runs each query against four backends — `bm25`, `vector`, `hybrid` (no reranking) and `full` — and reports precision@k, recall, MRR and F1. A fixture is JSON with `description`, `version`, `collection` and `queries` (`id`, `query`, `type`, `expected_files`, `expected_in_top_k`); `expected_files` are collection-relative paths as shown by `qmd ls`. If the collection isn't indexed, bench reports all zeros with no warning.
+`qmd bench my-fixture.json -c my-collection` runs each query against four backends — `bm25`, `vector`, `hybrid` (no reranking) and `full` — and reports precision@k, recall, MRR and F1. A fixture is JSON with `description`, `version`, `collection` and `queries` (`id`, `query`, `type`, `expected_files`, `expected_in_top_k`); `expected_files` are collection-relative paths as shown by `qmd ls`. If the collection isn't indexed, bench reports all zeros with no warning.
 
 In this lab the wiki search service on [[hermes]] runs qmd ([[wiki-search]]).
 

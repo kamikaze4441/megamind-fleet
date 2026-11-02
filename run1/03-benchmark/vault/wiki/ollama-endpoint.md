@@ -12,7 +12,7 @@ The lab's Ollama endpoint is http://10.77.0.30:11434 on [[titan]]. Ollama runs o
 The [[wiki-search]] service on [[hermes]] calls this endpoint for embeddings. When titan is off, new wiki pages are not embedded but keyword search still works.
 
 ## Background
-Port 11434 is Ollama's default (see [[ollama-server-gpu]] for `OLLAMA_HOST` and Vulkan device selection, and [[ollama-api]] for the endpoints).
+Ollama server settings and Vulkan device selection: [[ollama-server-gpu]]; API endpoints: [[ollama-api]].
 
 depends_on:: [[titan]] (Ollama runs on titan's Intel Arc GPU; the endpoint needs titan awake)
 derived_from:: [[raw/lab/LAB-STATE.md]]

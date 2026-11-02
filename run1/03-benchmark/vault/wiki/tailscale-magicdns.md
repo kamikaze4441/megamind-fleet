@@ -21,6 +21,6 @@ MagicDNS uses the device's machine name; renaming the machine changes its DNS en
 ## Disabling
 Tailnet-wide: toggle the same button on the **DNS** page. Per device, stop accepting network DNS settings: Linux `tailscale set --accept-dns=false`; macOS menu bar → **Preferences** → uncheck **Use Tailscale DNS settings**; Windows hold `SHIFT` while right-clicking the tray icon and deselect **Use Tailscale DNS**.
 
-Tailscale SSH uses MagicDNS names (`ssh device`) — see [[tailscale-acls-ssh]].
+Tailscale SSH also connects by MagicDNS name — see [[tailscale-acls-ssh]].
 
 derived_from:: [[raw/tailscale/magicdns.md]]

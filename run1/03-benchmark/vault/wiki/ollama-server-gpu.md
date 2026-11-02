@@ -2,7 +2,7 @@
 tags: [ollama, server, gpu, docker, environment-variables]
 created: 2026-11-02
 updated: 2026-11-02
-sources: [raw/ollama/faq.md, raw/ollama/gpu.md, raw/ollama/docker.md]
+sources: [raw/ollama/faq.md, raw/ollama/gpu.md, raw/ollama/docker.md, raw/ollama/modelfile.md]
 ---
 # Ollama server configuration, GPUs and Docker
 
@@ -21,7 +21,7 @@ The server is configured with environment variables: on Mac `launchctl setenv OL
 `ollama ps` shows where a model is loaded: `100% GPU`, `100% CPU`, or split like `48%/52% CPU/GPU`.
 
 ## GPUs
-- **Nvidia**: compute capability 5.0+ and driver 550 and newer (5.0 through 6.2 need 570 or newer). Limit GPUs with `CUDA_VISIBLE_DEVICES` (UUIDs from `nvidia-smi -L`; "-1" forces CPU). After Linux suspend/resume: `sudo rmmod nvidia_uvm && sudo modprobe nvidia_uvm`.
+- **Nvidia**: compute capability 5.0+ and driver 550 and newer (5.0 through 6.2 need 570 or newer). Limit GPUs with `CUDA_VISIBLE_DEVICES` (UUIDs from `nvidia-smi -L`; "-1" forces CPU). After Linux suspend/resume reload the UVM driver: `sudo rmmod nvidia_uvm`, then `sudo modprobe nvidia_uvm`.
 - **Metal** on Apple devices.
 - **Vulkan** (Windows and Linux, enabled by default when the backend is installed; Windows drivers usually bundle it; Linux Intel and AMD need extra components). Select devices with `GGML_VK_VISIBLE_DEVICES` (e.g. `GGML_VK_VISIBLE_DEVICES=1` for the discrete GPU on mixed iGPU/dGPU systems); disable with `OLLAMA_VULKAN=0` or `GGML_VK_VISIBLE_DEVICES=-1`. VRAM reporting needs root or `sudo setcap cap_perfmon+ep /usr/local/bin/ollama`.
 
@@ -35,3 +35,4 @@ The server is configured with environment variables: on Mac `launchctl setenv OL
 derived_from:: [[raw/ollama/faq.md]]
 derived_from:: [[raw/ollama/gpu.md]]
 derived_from:: [[raw/ollama/docker.md]]
+derived_from:: [[raw/ollama/modelfile.md]]

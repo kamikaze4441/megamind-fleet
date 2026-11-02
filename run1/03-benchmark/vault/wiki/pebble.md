@@ -12,7 +12,7 @@ pebble is a MacBook. Away from home it reaches [[hermes]] and [[plex]] only thro
 [[syncthing]] on atlas syncs tank/notes to pebble. Syncthing to pebble runs over Tailscale only (no relays, no LAN discovery).
 
 ## Exit node
-atlas is the tailnet's only exit node; pebble's traffic away from home therefore depends on atlas and on [[gate]] (Tailscale needs gate to reach the internet). Adding hermes as a second exit node is pending.
+atlas is the tailnet's only exit node, and Tailscale itself needs [[gate]] to reach the internet (see [[tailscale]]). Adding hermes as a second exit node is pending.
 
 ## Background
 How exit nodes and subnet routes work: [[tailscale-exit-nodes-subnets]]; MagicDNS names: [[tailscale-magicdns]].

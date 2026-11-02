@@ -21,7 +21,7 @@ Default patterns for auto-accepted folders were added in version 1.19.0; the `|`
 ## Ports and router
 - Local firewall: **22000/TCP** (TCP sync), **22000/UDP** (QUIC sync), **21027/UDP** (discovery broadcasts on IPv4 and multicasts on IPv6).
 - Router: enable UPnP on Syncthing and the router, or forward **22000/TCP** and **22000/UDP** with identical external and internal ports. A port forward on one device lets others connect to it even behind NAT. Without port forwarding, relaying may work but performs poorly compared with a direct connection.
-- Local discovery needs broad-/multicasts, often blocked between subnets. With static IPs, replace the default `dynamic` address with something like `tcp://192.168.1.xxx:22000, dynamic`.
+- Local discovery needs broad-/multicasts, often blocked between subnets. With static IPs, replace the default `dynamic` address with something like `tcp://192.168.1.xxx:22000` followed by `dynamic`.
 - `ufw`: `sudo ufw allow syncthing` (and `syncthing-gui` only for external GUI access; check with `sudo ufw status verbose`). Firewalld: `sudo firewall-cmd --zone=public --add-service=syncthing --permanent` then `sudo firewall-cmd --reload`.
 
 ## Remote web GUI

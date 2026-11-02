@@ -1,0 +1,405 @@
+#!/usr/bin/env python3
+# Query harness: the only interface a querier has to the vault; enforces the variant's allowed set and logs every call (ms, bytes_out) to $MM_RUN/log.jsonl.
+"""q — benchmark query harness.
+
+Environment:
+  MM_RUN      run directory under $B/results/ (create with bin/new-run)
+  MM_VARIANT  V0 … V7 (see VARIANTS below)
+
+Subcommands:
+  q start <QID>
+  q index
+  q read <path> [start-end]          path relative to the vault (wiki/x.md, raw/g/f.md, deps/x.md); 'x' or '[[x]]' means wiki/x.md
+  q grep <pattern> [dir] [--max-count N]
+  q ls [dir-or-glob]
+  q search|vsearch|query <query…>
+  q deps <slug>
+  q depsview <slug>
+  q answer <QID> "<answer>" [--pages a.md,b.md] [--confidence high|medium|low]
+
+Every call appends {ts, ts_ns, qid, variant, cmd, args, bytes_out, chars_out, ms, refused} to $MM_RUN/log.jsonl.
+bytes_out = UTF-8 bytes printed to the querier (the token proxy is chars_out / 4).
+"""
+import fcntl, glob, json, os, re, subprocess, sys, time
+from datetime import datetime, timezone
+
+B = "/workspace/megamind-fleet/run1/03-benchmark"
+VAULT = f"{B}/vault"
+RESULTS = f"{B}/results"
+QMD_COLLECTION = "wiki"
+CAP_CHARS = 12000
+GREP_LINES = 60
+LS_LINES = 200
+STEP_CAP = 8          # harness calls per question, not counting start/answer
+
+# ---- allowed-set table: add a variant by adding a row -------------------------------------
+# cmds: subcommands allowed besides start/answer; read: top-level vault entries q read may open;
+# grep/ls: directories q grep / q ls may search.
+VARIANTS = {
+    "V0": dict(cmds={"read", "grep"},                         read={"raw"},                     grep={"raw"}, ls=set()),
+    "V1": dict(cmds={"index", "read"},                        read={"wiki", "index.md"},        grep=set(),   ls=set()),
+    "V2": dict(cmds={"index", "read", "search"},              read={"wiki", "index.md"},        grep=set(),   ls=set()),
+    "V3": dict(cmds={"index", "read", "vsearch"},             read={"wiki", "index.md"},        grep=set(),   ls=set()),
+    "V4": dict(cmds={"index", "read", "query"},               read={"wiki", "index.md"},        grep=set(),   ls=set()),
+    "V5": dict(cmds={"index", "read", "query", "deps"},       read={"wiki", "index.md"},        grep=set(),   ls=set()),
+    "V6": dict(cmds={"index", "read", "query", "deps", "depsview"}, read={"wiki", "index.md", "deps"}, grep=set(), ls=set()),
+    "V7": dict(cmds={"index", "read", "grep", "ls"},          read={"wiki", "index.md"},        grep={"wiki"}, ls={"wiki"}),
+}
+ALWAYS = {"start", "answer"}
+# --------------------------------------------------------------------------------------------
+
+
+class Refused(Exception):
+    pass
+
+
+def now():
+    ns = time.time_ns()
+    return ns, datetime.fromtimestamp(ns / 1e9, timezone.utc).isoformat(timespec="milliseconds")
+
+
+def env():
+    run, var = os.environ.get("MM_RUN", ""), os.environ.get("MM_VARIANT", "")
+    if not run or not var:
+        sys.stdout.write("REFUSED: export MM_RUN and MM_VARIANT first (see your PROTOCOL file)\n")
+        sys.exit(2)
+    run = os.path.realpath(run)
+    if not run.startswith(os.path.realpath(RESULTS) + os.sep) or not os.path.isdir(run):
+        sys.stdout.write(f"REFUSED: MM_RUN must be an existing directory under {RESULTS}/ (create it with bin/new-run)\n")
+        sys.exit(2)
+    if var not in VARIANTS:
+        sys.stdout.write(f"REFUSED: unknown MM_VARIANT {var!r}; valid: {', '.join(VARIANTS)}\n")
+        sys.exit(2)
+    return run, var
+
+
+def state_path(run):
+    return os.path.join(run, ".active")
+
+
+def get_active(run):
+    try:
+        return json.load(open(state_path(run)))
+    except (OSError, ValueError):
+        return None
+
+
+def set_active(run, data):
+    if data is None:
+        try:
+            os.remove(state_path(run))
+        except OSError:
+            pass
+    else:
+        json.dump(data, open(state_path(run), "w"))
+
+
+def log(run, rec):
+    with open(os.path.join(run, "log.jsonl"), "a") as f:
+        fcntl.flock(f, fcntl.LOCK_EX)
+        f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+        fcntl.flock(f, fcntl.LOCK_UN)
+
+
+def cap(text, hint=None):
+    if len(text) <= CAP_CHARS:
+        return text
+    cut = text[:CAP_CHARS]
+    cut = cut[: cut.rfind("\n") + 1] or cut
+    tail = "[truncated]"
+    if hint:
+        tail += " " + hint
+    return cut + tail + "\n"
+
+
+# ---- path handling -------------------------------------------------------------------------
+def resolve(path, allowed):
+    """Map a querier path to a real file inside an allowed vault entry, or raise Refused."""
+    p = path.strip()
+    m = re.fullmatch(r"\[\[([^\]|#]+)(?:[|#][^\]]*)?\]\]", p)
+    if m:
+        p = m.group(1)
+    while p.startswith("./"):
+        p = p[2:]
+    if p.startswith("vault/"):
+        p = p[len("vault/"):]
+    if "/" not in p and p != "index.md":
+        p = f"wiki/{p}"
+    if p.startswith("wiki/") and not p.endswith(".md"):
+        p += ".md"
+    if p.startswith("deps/") and not p.endswith(".md"):
+        p += ".md"
+    if ".." in p.split("/") or p.startswith("/"):
+        raise Refused("path must be relative to the vault and stay inside it")
+    top = p.split("/", 1)[0]
+    if top not in allowed:
+        raise Refused(f"'{top}' is not readable in this variant (allowed: {', '.join(sorted(allowed))})")
+    real = os.path.realpath(os.path.join(VAULT, p))
+    root = os.path.realpath(os.path.join(VAULT, top))
+    if not (real == root or real.startswith(root + os.sep)):
+        raise Refused("path escapes the allowed directory")
+    if not os.path.isfile(real):
+        raise Refused(f"no such file: {p}")
+    if real.endswith(".pdf"):
+        raise Refused("binary PDF; read the extracted .txt next to it")
+    return p, real
+
+
+def number(lines, start):
+    w = len(str(start + len(lines)))
+    return "".join(f"{str(i).rjust(w)}| {l}" for i, l in enumerate(lines, start))
+
+
+# ---- subcommands ---------------------------------------------------------------------------
+def c_index(args, cfg):
+    return open(os.path.join(VAULT, "index.md")).read()
+
+
+def c_read(args, cfg):
+    if not args or len(args) > 2:
+        raise Refused("usage: q read <path> [start-end]")
+    p, real = resolve(args[0], cfg["read"])
+    lines = open(real, errors="replace").read().splitlines(keepends=True)
+    start, end = 1, len(lines)
+    if len(args) == 2:
+        m = re.fullmatch(r"(\d+)-(\d*)", args[1])
+        if not m:
+            raise Refused("line range must look like 40-120 (or 40- for to the end)")
+        start = max(1, int(m.group(1)))
+        end = min(len(lines), int(m.group(2))) if m.group(2) else len(lines)
+    body = number(lines[start - 1:end], start)
+    head = f"# {p} (lines {start}-{end} of {len(lines)})\n"
+    out = head + body
+    if len(out) > CAP_CHARS:
+        shown = cap(out)
+        last = re.findall(r"^\s*(\d+)\|", shown, re.M)
+        nxt = int(last[-1]) + 1 if last else start
+        return cap(out, f"next: q read {p} {nxt}-")
+    return out
+
+
+def c_grep(args, cfg):
+    maxn = GREP_LINES
+    rest = []
+    i = 0
+    while i < len(args):
+        if args[i] == "--max-count":
+            if i + 1 >= len(args) or not args[i + 1].isdigit():
+                raise Refused("--max-count needs a number (1-60)")
+            maxn = max(1, min(GREP_LINES, int(args[i + 1])))
+            i += 2
+            continue
+        rest.append(args[i])
+        i += 1
+    if not rest or len(rest) > 2:
+        raise Refused("usage: q grep <pattern> [dir] [--max-count N]")
+    pattern = rest[0]
+    dirs = sorted(cfg["grep"])
+    if len(rest) == 2:
+        d = rest[1].rstrip("/")
+        if d.startswith("vault/"):
+            d = d[len("vault/"):]
+        if ".." in d.split("/") or d.split("/", 1)[0] not in cfg["grep"]:
+            raise Refused(f"grep is limited to: {', '.join(dirs)}")
+        if not os.path.exists(os.path.join(VAULT, d)):
+            raise Refused(f"no such directory: {d}")
+        dirs = [d]
+    cmd = ["rg", "-n", "-i", "--no-ignore", "--no-heading", "--color", "never",
+           "--max-columns", "300", "--max-columns-preview", "-e", pattern, "--"] + [d + "/" for d in dirs]
+    r = subprocess.run(cmd, cwd=VAULT, capture_output=True, text=True, timeout=60)
+    if r.returncode == 2:
+        raise Refused("bad pattern: " + r.stderr.strip().splitlines()[-1] if r.stderr.strip() else "bad pattern")
+    lines = r.stdout.splitlines()
+    total = len(lines)
+    out = "\n".join(lines[:maxn]) + ("\n" if lines else "")
+    if total > maxn:
+        out += f"[{total - maxn} more matching lines not shown; narrow the pattern or the dir]\n"
+    if total == 0:
+        out = "(no matches)\n"
+    return cap(out)
+
+
+def c_ls(args, cfg):
+    if len(args) > 1:
+        raise Refused("usage: q ls [dir-or-glob]")
+    arg = (args[0] if args else "wiki").rstrip("/")
+    if arg.startswith("vault/"):
+        arg = arg[len("vault/"):]
+    if ".." in arg.split("/") or arg.split("/", 1)[0] not in cfg["ls"]:
+        raise Refused(f"ls is limited to: {', '.join(sorted(cfg['ls']))}")
+    target = os.path.join(VAULT, arg)
+    if os.path.isdir(target):
+        names = sorted(os.listdir(target))
+        out = [f"{arg}/{n}" for n in names]
+    else:
+        out = sorted(os.path.relpath(x, VAULT) for x in glob.glob(target))
+    total = len(out)
+    text = "\n".join(out[:LS_LINES]) + ("\n" if out else "(no files)\n")
+    if total > LS_LINES:
+        text += f"[{total - LS_LINES} more not shown]\n"
+    return text
+
+
+def c_qmd(kind, args, cfg):
+    if not args:
+        raise Refused(f"usage: q {kind} <query>")
+    query = " ".join(args)
+    cmd = ["qmd", kind, query, "-n", "5", "-c", QMD_COLLECTION, "--json"]
+    if kind == "query":
+        cmd.insert(3, "--no-rerank")
+    r = subprocess.run(cmd, capture_output=True, text=True, timeout=300, cwd="/tmp")
+    try:
+        res = json.loads(r.stdout)
+    except ValueError:
+        return f"(qmd returned no parseable results; exit {r.returncode})\n"
+    if not res:
+        return "(no results)\n"
+    out = []
+    for x in res:
+        f = x.get("file", "").replace(f"qmd://{QMD_COLLECTION}/", "wiki/")
+        snip = re.sub(r"^@@[^\n]*\n", "", x.get("snippet", ""))
+        snip = " ".join(snip.split())[:240]
+        out.append(f"{f}:{x.get('line', '')}  score {x.get('score', 0):.2f}  {x.get('title', '')}\n    {snip}")
+    return "\n".join(out) + "\n"
+
+
+def slug_of(args):
+    if len(args) != 1:
+        raise Refused("usage: q deps <slug>")
+    s = args[0].strip()
+    s = re.sub(r"^\[\[|\]\]$", "", s)
+    s = re.sub(r"^(vault/)?wiki/", "", s)
+    s = s[:-3] if s.endswith(".md") else s
+    if not re.fullmatch(r"[a-z0-9][a-z0-9-]*", s):
+        raise Refused("slug must look like 'atlas' or 'rclone-backup'")
+    if not os.path.isfile(os.path.join(VAULT, "wiki", s + ".md")):
+        raise Refused(f"no such page: wiki/{s}.md")
+    return s
+
+
+def above_superseded(lines):
+    for i, l in enumerate(lines):
+        if re.match(r"^## Superseded\s*$", l):
+            return i
+    return len(lines)
+
+
+def c_deps(args, cfg):
+    s = slug_of(args)
+    lines = open(os.path.join(VAULT, "wiki", s + ".md")).read().splitlines()
+    cut = above_superseded(lines)
+    own = [l for l in lines[:cut] if l.startswith("depends_on::")]
+    out = [f"# deps for wiki/{s}.md", "## Needs (depends_on:: lines on this page)"]
+    out += own or ["(none)"]
+    out.append(f"## Needed by (pages whose depends_on:: names [[{s}]])")
+    r = subprocess.run(["rg", "-n", "--no-ignore", "--no-heading", "--color", "never",
+                        "-e", rf"^depends_on:: \[\[{re.escape(s)}\]\]", "--", "wiki/"],
+                       cwd=VAULT, capture_output=True, text=True, timeout=60)
+    back = []
+    for m in r.stdout.splitlines():
+        path, ln, text = m.split(":", 2)
+        flines = open(os.path.join(VAULT, path)).read().splitlines()
+        if int(ln) - 1 < above_superseded(flines):
+            back.append(f"{path}: {text}")
+    out += sorted(back) or ["(none)"]
+    return "\n".join(out) + "\n"
+
+
+def c_depsview(args, cfg):
+    s = slug_of(args)
+    p = os.path.join(VAULT, "deps", s + ".md")
+    if not os.path.isfile(p):
+        raise Refused(f"no deps view for {s}; run bin/build-deps.py")
+    return open(p).read()
+
+
+# ---- main ----------------------------------------------------------------------------------
+def main():
+    argv = sys.argv[1:]
+    if not argv or argv[0] in ("-h", "--help", "help"):
+        sys.stdout.write(__doc__)
+        return 0
+    run, var = env()
+    cfg = VARIANTS[var]
+    cmd, args = argv[0], argv[1:]
+    t0, iso = now()
+    active = get_active(run)
+    qid = active["qid"] if active else None
+    refused = False
+    try:
+        if cmd not in ALWAYS and cmd not in cfg["cmds"]:
+            known = ALWAYS | {"index", "read", "grep", "ls", "search", "vsearch", "query", "deps", "depsview"}
+            if cmd in known:
+                raise Refused(f"'{cmd}' is not allowed in {var} (allowed: {', '.join(sorted(cfg['cmds'] | ALWAYS))})")
+            raise Refused(f"unknown subcommand '{cmd}'")
+        if cmd == "start":
+            if len(args) != 1 or not re.fullmatch(r"[A-Za-z0-9_.-]+", args[0]):
+                raise Refused("usage: q start <QID>")
+            if active:
+                raise Refused(f"question {active['qid']} is still open; close it with q answer first")
+            qid = args[0]
+            set_active(run, {"qid": qid, "start_ns": t0, "steps": 0})
+            out = f"started {qid} ({var}); at most {STEP_CAP} harness calls before q answer\n"
+        elif cmd == "answer":
+            if len(args) < 2:
+                raise Refused('usage: q answer <QID> "<answer>" [--pages a.md,b.md] [--confidence high|medium|low]')
+            aq, text, rest = args[0], args[1], args[2:]
+            if not active or active["qid"] != aq:
+                raise Refused(f"no open question {aq}; run q start {aq} first")
+            pages, conf = "", ""
+            i = 0
+            while i < len(rest):
+                if rest[i] == "--pages" and i + 1 < len(rest):
+                    pages = rest[i + 1]; i += 2
+                elif rest[i] == "--confidence" and i + 1 < len(rest):
+                    conf = rest[i + 1].lower(); i += 2
+                else:
+                    raise Refused(f"unexpected argument {rest[i]!r}")
+            if conf and conf not in ("high", "medium", "low"):
+                raise Refused("--confidence must be high, medium or low")
+            clean = lambda s: " ".join(s.replace("\t", " ").split())
+            with open(os.path.join(run, "answers.tsv"), "a") as f:
+                fcntl.flock(f, fcntl.LOCK_EX)
+                f.write(f"{aq}\t{clean(text)}\t{clean(pages)}\t{conf}\n")
+                fcntl.flock(f, fcntl.LOCK_UN)
+            set_active(run, None)
+            wall = (t0 - active["start_ns"]) / 1e9
+            out = f"recorded answer for {aq} ({wall:.1f} s since start, {active['steps']} calls)\n"
+            qid = aq
+        else:
+            if not active:
+                raise Refused("no open question; run q start <QID> first")
+            if active["steps"] >= STEP_CAP:
+                raise Refused(f"step cap of {STEP_CAP} calls reached for {qid}; answer now with q answer")
+            active["steps"] += 1
+            set_active(run, active)
+            if cmd == "index":
+                out = c_index(args, cfg)
+            elif cmd == "read":
+                out = c_read(args, cfg)
+            elif cmd == "grep":
+                out = c_grep(args, cfg)
+            elif cmd == "ls":
+                out = c_ls(args, cfg)
+            elif cmd in ("search", "vsearch", "query"):
+                out = c_qmd(cmd, args, cfg)
+            elif cmd == "deps":
+                out = c_deps(args, cfg)
+            elif cmd == "depsview":
+                out = c_depsview(args, cfg)
+            out = cap(out)
+    except Refused as e:
+        refused = True
+        out = f"REFUSED: {e}\n"
+    except subprocess.TimeoutExpired:
+        out = "ERROR: command timed out\n"
+    sys.stdout.write(out)
+    sys.stdout.flush()
+    t1, _ = now()
+    log(run, dict(ts=iso, ts_ns=t0, qid=qid, variant=var, cmd=cmd, args=args,
+                  bytes_out=len(out.encode()), chars_out=len(out), ms=round((t1 - t0) / 1e6, 1), refused=refused))
+    return 2 if refused else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

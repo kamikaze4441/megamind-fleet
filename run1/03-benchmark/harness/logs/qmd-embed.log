@@ -1,0 +1,7 @@
+Model: embeddinggemma-300M-Q8_0.gguf
+
+[?25lQMD Warning: no GPU acceleration, running on CPU (slow). Run 'qmd doctor' for device diagnostics.
+[?25h██████████████████████████████ 100%                                    
+
+✓ Done! Embedded 51 chunks from 37 documents in 28s
+embed_rc=0 embed_ms=28682
