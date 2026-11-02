@@ -2,3 +2,30 @@ qid	answer	pages	confidence
 Q01	High-water is the default and recommended allocation method for a new user share (array only).	unraid-shares.md	high
 Q02	The Tunable (md_write_method) setting on Settings → Disk Settings selects the write mode; Turbo Write (Reconstruct) is the alternative to the default Read/Modify/Write.	unraid-array-parity.md	high
 Q03	unknown		low
+Q04	Unraid limits the ZFS ARC to usually about 1/8th of total RAM by default.	unraid-pools-zfs.md	high
+Q05	FROM is the mandatory instruction in an Ollama Modelfile (marked required); it names the base model.	ollama-modelfile.md	high
+Q06	The default is 512 queued requests (overload returns a 503 error); the OLLAMA_MAX_QUEUE environment variable changes that number.	ollama-server-gpu.md	high
+Q07	The cap_perfmon capability, granted with sudo setcap cap_perfmon+ep /usr/local/bin/ollama, lets Vulkan GPUs report VRAM without root.	ollama-server-gpu.md	high
+Q08	The red "Override Changes" button enforces this host's state on the rest of the cluster when a Send Only folder is out of sync.	syncthing-folders-versioning.md	high
+Q09	During the first hour after a change, Staggered versioning keeps one version per 30-second interval.	syncthing-folders-versioning.md	high
+Q10	The default checkPeriod for a check rule is 12 hours (allowed range one minute to 168 hours, or always).	tailscale-acls-ssh.md	high
+Q11	Tailnets created on or after October 20, 2022 have MagicDNS enabled by default.	tailscale-magicdns.md	high
+Q12	The --exit-node-allow-lan-access=true flag (used with tailscale set --exit-node) allows local network access, off by default.	tailscale-exit-nodes-subnets.md	high
+Q13	unknown		low
+Q14	unknown		low
+Q15	@path imports in CLAUDE.md files have a maximum depth of four hops.	claude-code-memory.md	high
+Q16	The skill description (with when_to_use) is truncated at 1,536 characters in the skill listing.	claude-code-skills-subagents.md	high
+Q17	With qmd mcp --http and no port given, it listens on localhost:8181.	qmd-search.md	high
+Q18	The MAIN ZONE Auto Standby default is 15 minutes (options 60, 30, 15 or Off).	avr-setup.md	high
+Q19	The AVR-X1700H supports speakers with an impedance of 4 to 16 ohms.	avr-setup.md	high
+Q20	Hold TUNER PRESET CH + and ZONE2 ON/OFF together (after selecting HEOS Music with SOURCE SELECT) to reset only the network settings.	avr-setup.md	high
+Q21	Plex needs atlas (it runs as a Docker container there) and tank (library on tank/media, appdata on tank/appdata). The titan dependency is superseded history and does not count.	plex.md	high
+Q22	If titan is off, the Ollama endpoint on titan stops (direct). The wiki search service on hermes, which calls that endpoint for embeddings, degrades: new pages are not embedded but keyword search still works (second hop). The old titan link on Plex is superseded and ignored.	titan.md,ollama-endpoint.md,wiki-search.md	medium
+Q23	The nightly rclone backup needs atlas (the job runs there), tank (it reads the 05:45 tank snapshot) and gate (internet access to upload to the cloud remote).	rclone-backup.md	high
+Q24	The hermes VM needs atlas (it runs on and stops with atlas) and tank (its vdisk is on tank/domains; it cannot boot without tank).	hermes.md	high
+Q25	If atlas stops, the Syncthing container on atlas stops, so tank/notes no longer syncs to pebble (direct). Syncthing to pebble also runs only over Tailscale, which is an Unraid plugin on atlas, so that path is lost too (through Tailscale).	syncthing.md,tailscale.md	medium
+Q26	Direct (needs gate): the reverse proxy (outside access on 443), Tailscale (internet access), the nightly rclone backup (cloud upload), aria the AV receiver (network features), and atlas notifications (email agent). Second hop via Tailscale: Syncthing to pebble and pebble's remote access to hermes and Plex.	gate.md,reverse-proxy.md,tailscale.md,rclone-backup.md,aria.md,atlas.md,syncthing.md,pebble.md	medium
+Q27	Directly it needs hermes (the VM it runs on). Indirectly, hermes needs atlas and tank (its vdisk is on tank/domains), and atlas needs apc-1 for power. Keyword search still works without the Ollama endpoint on titan, which only affects embeddings for new pages.	wiki-search.md,hermes.md,atlas.md	medium
+Q28	If atlas shuts down, the ZFS pool tank stops (it exists only while atlas runs), and these need atlas directly: the hermes VM, Plex, the Caddy reverse proxy, Syncthing, the Tailscale plugin and the nightly rclone backup. Second hop: the wiki search service (needs hermes) and pebble's remote access (needs Tailscale).	apc-1.md,atlas.md,tank.md,hermes.md,wiki-search.md,pebble.md	medium
+Q29	If tank is unavailable with atlas running, these directly stop or fail: Plex (library and appdata), the hermes VM (cannot boot, its vdisk is on tank), Syncthing (notes sync) and the nightly rclone backup (snapshot). Second hop: the wiki search service (through hermes) and syncing to pebble (through Syncthing).	tank.md,plex.md,hermes.md,syncthing.md,rclone-backup.md,wiki-search.md,pebble.md	medium
+Q30	If hermes is down, the wiki search service (qmd) directly loses function and its nightly index rebuild stops, so the index goes stale. Second hop: the Caddy reverse proxy's wiki search front end is affected, and pebble cannot reach hermes remotely.	hermes.md,wiki-search.md,reverse-proxy.md,pebble.md	medium
