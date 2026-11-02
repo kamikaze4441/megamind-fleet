@@ -1,0 +1,41 @@
+qid	wall_s	calls	refused	bytes_out	chars_out	tokens_proxy	pages_read	raw_read	pages_cited	answer_chars	recall
+Q01	4.0	3	0	8959	8869	2217	unraid-shares.md		unraid-shares.md	139	1.0
+Q02	2.7	1	0	687	675	169			unraid-array-parity.md	130	1.0
+Q03	6.6	4	1	4673	4649	1162	unraid-pools-zfs.md			124	0.0
+Q04	2.4	1	0	5384	5376	1344			unraid-pools-zfs.md	84	1.0
+Q05	2.3	1	0	2377	2377	594	ollama-modelfile.md		ollama-modelfile.md	87	1.0
+Q06	2.5	1	0	316	316	79			ollama-server-gpu.md	149	1.0
+Q07	3.6	2	0	1540	1540	385	ollama-server-gpu.md		ollama-server-gpu.md	129	1.0
+Q08	4.9	2	0	3041	3039	760	syncthing-folders-versioning.md		syncthing-folders-versioning.md	101	1.0
+Q09	2.4	1	0	1069	1069	267	syncthing-folders-versioning.md		syncthing-folders-versioning.md	92	1.0
+Q10	2.4	1	0	228	228	57			tailscale-acls-ssh.md	120	1.0
+Q11	2.4	1	0	1870	1868	467			tailscale-magicdns.md	79	1.0
+Q12	2.6	1	0	4628	4616	1154			tailscale-exit-nodes-subnets.md	148	1.0
+Q13	7.2	4	1	4113	4111	1028	claude-code-mcp.md			137	1.0
+Q14	5.6	2	0	3624	3618	904	claude-code-hooks.md			195	1.0
+Q15	4.8	2	0	3583	3581	895	claude-code-memory.md		claude-code-memory.md	77	1.0
+Q16	2.6	1	0	3477	3475	869	claude-code-skills-subagents.md		claude-code-skills-subagents.md	102	1.0
+Q17	2.4	1	0	262	262	66			qmd-search.md	80	1.0
+Q18	2.4	1	0	561	559	140			avr-setup.md	90	1.0
+Q19	2.0	1	0	302	299	75			avr-setup.md	67	1.0
+Q20	4.2	2	1	2838	2827	707	avr-setup.md		avr-setup.md	132	1.0
+Q21	2.5	1	0	1065	1065	266	plex.md		plex.md	167	0.33
+Q22	8.9	5	0	3433	3433	858	ollama-endpoint.md,titan.md,wiki-search.md		ollama-endpoint.md,titan.md,wiki-search.md	213	1.0
+Q23	1.9	1	0	1062	1062	266	rclone-backup.md		rclone-backup.md	166	0.33
+Q24	2.1	1	0	1232	1232	308	hermes.md		hermes.md	141	0.33
+Q25	5.6	4	0	3872	3872	968	pebble.md,syncthing.md,tailscale.md		pebble.md,syncthing.md,tailscale.md	257	0.6
+Q26	10.5	4	0	4051	4051	1013	aria.md,atlas.md,reverse-proxy.md		aria.md,atlas.md,gate.md,pebble.md,rclone-backup.md,reverse-proxy.md,syncthing.md,tailscale.md	323	1.0
+Q27	4.3	1	0	1279	1279	320	wiki-search.md		atlas.md,hermes.md,tank.md,wiki-search.md	263	1.0
+Q28	4.6	1	0	725	725	181			atlas.md,hermes.md,pebble.md,plex.md,rclone-backup.md,reverse-proxy.md,syncthing.md,tailscale.md,tank.md,wiki-search.md	310	1.0
+Q29	3.9	1	0	1153	1151	288	tank.md		hermes.md,plex.md,rclone-backup.md,reverse-proxy.md,syncthing.md,tank.md,wiki-search.md	335	1.0
+Q30	4.4	2	0	441	441	110	hermes.md		hermes.md,pebble.md,reverse-proxy.md,wiki-search.md	282	1.0
+
+# questions	30
+# median_wall_s	3.15	# total_wall_s	118.7
+# median_calls	1.0	# total_calls	54
+# median_bytes_out	1705.0	# total_bytes_out	71845
+# median_chars_out	1704.0	# total_chars_out	71665
+# median_tokens_proxy	426.0	# total_tokens_proxy	17917
+# median_recall	1.0	# total_recall	26.59
+# median_pages_read	1.0
+# token proxy = chars printed by the harness / 4 (not Console usage)
