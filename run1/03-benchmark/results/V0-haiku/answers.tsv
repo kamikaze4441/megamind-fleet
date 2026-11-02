@@ -1,0 +1,31 @@
+qid	answer	pages	confidence
+Q01	High-water is the default and recommended allocation method for a new user share.	raw/unraid/shares.md	high
+Q02	The tunable named Tunable (md_write_method) on Settings > Disk Settings selects the write mode; choose Reconstruct Write (Turbo Write) there.	raw/unraid/array-overview.md	high
+Q03	New user shares default to 10% of the disk's total capacity for Minimum Free Space.	raw/unraid/shares.md	medium
+Q04	Unraid automatically limits ZFS to usually about 1/8th of total RAM for its ARC read cache.	raw/unraid/zfs-storage.md	high
+Q05	FROM is the required instruction in a Modelfile; it defines the base model to use.	raw/ollama/modelfile.md	high
+Q06	The default is 512 queued requests; the OLLAMA_MAX_QUEUE environment variable changes that limit.	raw/ollama/faq.md	high
+Q07	The cap_perfmon capability, set with sudo setcap cap_perfmon+ep on the ollama binary, lets Vulkan GPUs report available VRAM without running as root.	raw/ollama/gpu.md	high
+Q08	The red Override Changes button, shown at the bottom of the folder details when a send-only folder is out of sync, enforces this device's state on the cluster.	raw/syncthing/foldertypes.md	high
+Q09	During the first hour, the oldest version in every 30-second interval is kept.	raw/syncthing/versioning.md	high
+Q10	The default checkPeriod is 12 hours when none is specified for a check action.	raw/tailscale/tailscale-ssh.md	high
+Q11	Tailnets created on or after October 20, 2022 have MagicDNS enabled by default.	raw/tailscale/magicdns.md	high
+Q12	The --exit-node-allow-lan-access flag (set to true), passed to tailscale up or tailscale set, allows direct access to the local network while using an exit node.	raw/tailscale/exit-nodes.md	high
+Q13	By default Claude Code limits MCP tool output to 25,000 tokens; the MAX_MCP_OUTPUT_TOKENS environment variable changes it.	raw/claude-code/mcp.md	high
+Q14	SessionEnd hooks have a default timeout of 1.5 seconds, adjustable with CLAUDE_CODE_SESSIONEND_HOOKS_TIMEOUT_MS.	raw/claude-code/hooks.md	high
+Q15	Imported files can recursively import other files to a maximum depth of four hops.	raw/claude-code/memory.md	high
+Q16	The combined description and when_to_use text is truncated after 1,536 characters in the skill listing.	raw/claude-code/skills.md	high
+Q17	With --http and no port, qmd mcp listens on localhost:8181 (the endpoint is http://localhost:8181/mcp).	raw/qmd/README.md	high
+Q18	unknown		low
+Q19	The manual says to use speakers with an impedance of 4 to 16 ohms.	raw/manual/denon-avr-x1700h-owners-manual.txt	high
+Q20	unknown		low
+Q21	Plex runs as a Docker container on atlas, so it needs atlas, and it reads its library from tank/media and keeps appdata on tank/appdata, so it needs the tank pool as well.	raw/lab/LAB-STATE.md	high
+Q22	If titan is off, the Ollama endpoint on it is unavailable, so the wiki search service cannot embed new wiki pages, though keyword search still works. Titan is the only lab host listed as taking down the Ollama endpoint.	raw/lab/LAB-STATE.md	medium
+Q23	The nightly rclone backup runs on atlas at 06:00 and reads the tank snapshot from 05:45, so it needs tank and needs gate for internet access to upload to offsite-crypt.	raw/lab/LAB-STATE.md	high
+Q24	The hermes VM runs on atlas and stops when atlas stops, and it cannot boot without tank, since its vdisk is on tank/domains.	raw/lab/LAB-STATE.md	high
+Q25	Syncing of tank/notes to pebble stops, because Syncthing runs as a container on atlas and needs tank, which exists only while atlas runs; Syncthing to pebble also runs only over Tailscale, which is an Unraid plugin on atlas.	raw/lab/LAB-STATE.md	high
+Q26	gate is the lab's only route to the internet, so with it down the nightly rclone backup, Unraid email notifications, outside access to Caddy-fronted Plex and wiki search (port 443 forwarding), Tailscale remote access, and aria's network features (its address comes from gate's DHCP) lose function.	raw/lab/LAB-STATE.md	medium
+Q27	The wiki search service (qmd) needs hermes directly, since hermes hosts it and the wiki repo. Indirectly it needs atlas, tank (hermes's vdisk is on tank/domains) and apc-1 via atlas. Keyword search still works without titan; titan's Ollama is only needed for embeddings.	raw/lab/LAB-STATE.md	medium
+Q28	With atlas down, the hermes VM and the tank pool stop too. Services that stop: Plex, the Caddy reverse proxy, Syncthing, Tailscale remote access (atlas is the exit node), the nightly rclone backup, Unraid notifications, and the wiki search service on hermes.	raw/lab/LAB-STATE.md	medium
+Q29	If tank became unavailable while atlas kept running, Plex (media and appdata), Syncthing (tank/notes), and the nightly rclone backup (reads the tank snapshot) would stop directly. Through hermes, whose vdisk is on tank/domains and which cannot boot without tank, the wiki search service would stop; Caddy would then fail to front Plex and wiki search.	raw/lab/LAB-STATE.md	medium
+Q30	If hermes is down, the wiki search service (qmd) stops, and its index goes stale because the nightly rebuild timer runs on hermes. The wiki repo at /srv/wiki is unavailable, and pebble loses access to hermes. Caddy's wiki search route also fails.	raw/lab/LAB-STATE.md	medium
