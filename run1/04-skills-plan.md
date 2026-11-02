@@ -510,6 +510,13 @@ The scout runs fortnightly (05 schedules it weekly on Mondays at 03:30). Steps:
 
 ---
 
+### 3.8 Director's additions after the community pass (R5, `02-research/g2-community-skills.md`, all [verified] GitHub issues)
+- **Description limit:** the claude.ai uploader's only reported error is "must be at most 1024 characters" (mrKanoh #4, adai-v1 #95); the 200-character figure appears in the Help Center only. The plan keeps ≤200 as the safe choice; the validation checklist tests ≤1,024 as the hard limit and warns above 200.
+- **Angle brackets:** claude.ai and Cowork reject `<` or `>` inside `description`; on git-sync such skills are silently dropped while the sync reports success, and `claude plugin validate` passes (claude-code #82749, #63081). The checklist adds "no `<` or `>` in description".
+- **Strip step:** the common fix for non-spec frontmatter keys is a packaging step that keeps Claude Code-only keys in source and strips them from the upload bundle (anthropics/skills #37, rfsbraz #25). The build script does this; the stripped bundle's description must still say when not to use the skill.
+- **Vendoring by SHA is the right call:** upstream fixes in kepano/obsidian-skills (#146, open) and wshobson/agents (#786) never reached installed plugins because versions were not bumped. `gh skill` (GitHub CLI ≥2.90, preview) pins a tag or SHA and writes repo/ref/tree-SHA provenance into the frontmatter — a candidate for `pins.json` provenance fields, not adopted yet (preview).
+- **Stale cloud skills:** a scheduled cloud routine ran a stale skill for days while reporting success (R4, claude-code #93163/#84611): the scout's starting message states its `scout_skill_version` and the PR body repeats it, so a stale skill is visible.
+
 ## 4. Open questions / not verified
 
 Director's decisions on the drafter's questions (D20–D23 in `07-decisions.md`):
