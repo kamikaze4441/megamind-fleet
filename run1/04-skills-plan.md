@@ -126,7 +126,7 @@ MEGAMIND's own skills (`scout-5090`, `crystallize`, `housekeeping`, `megamind-sc
 - **Notes:** T0 runs lint as a report. Hooks are not used: hooks are root-owned and none come from upstream.
 
 ### 2.4 `check_evidence.py` (inside `skills/lint/scripts/`)
-- **What it does:** "Report-only; never modifies files" (L4). Three sweeps: Fidelity, Evidence errors, Inventory (L6–17). Imports only `re`, `sys`, `dataclasses`, `pathlib`. There are no write calls and no network use; no `open(` and no write calls; "write" appears only in the docstring at L25.
+- **What it does:** "Report-only; never modifies files" (L4). Three sweeps: Fidelity, Evidence errors, Inventory (L6–17). Imports only `re`, `sys`, `dataclasses`, `pathlib`. There is no network use, no `open(` and no write call; "write" appears only in the docstring at L25.
 - **Licence:** MIT, Yuhan Lei; the notice travels. The modified file keeps a header line "Modified for MEGAMIND from Astro-Han/karpathy-llm-wiki@eafcc77".
 - **Commit SHA:** eafcc77001e496cc43499e4923b663aec722c813.
 - **Safety verdict:** no installer, no hooks, no MCP. Runs as `python3 <skill-dir>/scripts/check_evidence.py <root>` (SKILL.md L195). Install as a pinned, reviewed script.
