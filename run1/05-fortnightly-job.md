@@ -197,7 +197,7 @@ The agent files belong in the fleet repo (for example `agents/megamind-scout.md`
 - The project rule "No Fable in unattended profiles" is respected.
 - All three models have public list prices, which a budgeted session requires [5].
 
-### Lead agent sketch (`agents/megamind-scout.md`, design choice)
+### Lead agent sketch (`deploy/agents/megamind-scout.md`, design choice; director D21: all `ant apply` project files live under `deploy/`, never at the repository root, so the Claude Code plugin whose source is `./` cannot load them as subagents)
 
 ```markdown
 ---
@@ -281,7 +281,7 @@ multiagent:
 - `workflows` is disabled: runs "start without approval" and every agent "uses tokens" [13].
 - Readers receive URLs from the lead, which got them from the user message. `web_fetch` opens a URL from another agent only if it first reached that agent through an allowed source, such as a user message [6].
 
-### Reader sketch (`agents/megamind-scout-reader.md`, design choice)
+### Reader sketch (`deploy/agents/megamind-scout-reader.md`, design choice)
 
 ```markdown
 ---

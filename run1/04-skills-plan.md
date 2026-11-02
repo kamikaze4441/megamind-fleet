@@ -511,20 +511,18 @@ The scout runs fortnightly (05 schedules it weekly on Mondays at 03:30). Steps:
 ---
 
 ## 4. Open questions / not verified
-- **Q1 (owner):** Command namespacing on the VM. Options:
-  - install the plugin and use `/megamind:ingest`; or
-  - copy the folders into the vault's project `.claude/skills/` so the bare commands keep working, with no settings write.
 
-  Related: the current fork of karpathy-llm-wiki has no recorded pin in this run. It must be diffed against eafcc77 before replacement.
-- **Q2 (director):** 05 §4 suggests `agents/megamind-scout*.md` at the fleet repo root. With `"source": "./"`, a root `agents/` directory loads as plugin subagents [P4 L297]. Move the agent files to `deploy/agents/`, or give the plugin a subdirectory source.
-- **Q3 (owner):** `critic-review` model: Haiku per the vault default, or Sonnet for merge reviews?
-- **Q4 (director):** Two pin files: `scout/pins.json` (watch list, scout may not edit) and `skills/pins.json` (packaging pins, scout may update a refreshed skill's `sha`/`pinned`). Should they merge? If they merge, the scout's rule B needs one carve-out.
-- **Q5 (owner):** OCR for scanned PDFs (not planned; `pdftotext` returns nothing for image-only pages).
+Director's decisions on the drafter's questions (D20–D23 in `07-decisions.md`):
+- **Q1 → decided:** on the VM the owner copies the skill folders into the vault's own `.claude/skills/` (bare `/ingest`, `/query`, `/lint` keep working; no settings write; the folders are tripwire files that T1 already checks). The plugin route (`/megamind:<name>`) is for the owner's other Claude Code installs (the Mac, the bench container) and the marketplace entry exists for them. The current fork of karpathy-llm-wiki is diffed against eafcc77 before replacement (P7 step).
+- **Q2 → decided:** `ant apply` project files (agents, environment, deployment) live under `deploy/` in the fleet repository, never at the root, so the plugin's `"source": "./"` cannot pick them up as subagents. `05-fortnightly-job.md` §4 is annotated accordingly.
+- **Q3 → decided (director, not owner):** `critic-review` runs on Sonnet 5.5 for merge reviews, Haiku for lint-style passes — the master prompt's §6 already puts review work on Sonnet and bulk reading on Haiku; no new policy.
+- **Q4 → decided:** the two pin files stay separate. `scout/pins.json` is the watch list (scout read-only). `skills/pins.json` is the packaging record; deployment rule B gets one carve-out: the scout may change only the `sha` and `pinned` fields of the one skill it refreshes, in the same PR as the refresh.
+- **Q5 (owner, later):** OCR for scanned PDFs is not planned (`pdftotext` returns nothing for image-only pages); raise it when a scanned manual appears.
 - **Not verified:**
   - Whether claude.ai enforces the 200- or the 1,024-character description limit [e2] vs [e4]. The plan writes ≤200 to be safe.
   - claude.ai skill ZIP size limit (not stated) [e1].
   - Whether nested `metadata:` maps (ECC `metadata: {origin: ECC}`) pass the claude.ai uploader. The spec says string→string map [e13], which this is; not tested.
-  - Whether `"source": "./"` copies the whole fleet repo (research files included) into each user's plugin cache. The docs say a root plugin "gets every submodule … or none" [P3 L187]; whole-tree copying is inferred, not stated.
+  - Whether `"source": "./"` copies the whole fleet repo (research files included) into each user's plugin cache. The docs say a root plugin "gets every submodule … or none" [P3 L187]; whole-tree copying is inferred, not stated. If it does, the plugin source moves to a `plugin/` subdirectory that the build script fills.
   - Whether the VM has `poppler-utils` installed (the sandbox had `pdftotext`; the VM was not inspected).
   - `ant apply` was not run. Its pinning behaviour is taken from [e14] and 05 §4.
 
