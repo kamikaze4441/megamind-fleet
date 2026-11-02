@@ -518,6 +518,10 @@ Everything is described for the owner to run. Each step has a pass condition.
 
 ---
 
+### 9a. Director's addition after the community pass (R4, `02-research/g-community.md`)
+- **Memory stores may not mount in scheduled-deployment sessions.** anthropics/claude-cookbooks issue #830 (open on 2026-11-02; [community][verified] by R4) reports 3/3 scheduled-deployment sessions where the attached memory store did not mount while 5/5 directly created sessions did, and the API still returned `mount_path`. Until that issue closes, the scout's state (last-seen SHAs, docs outline hashes, run log) is kept in the fleet repository itself — `scout/state/` on the PR branch, merged with the proposals — and the memory store in the deployment file is a secondary copy, written through the in-container `memory_*` tools if the mount is absent. The starting message's step D is read with that fallback. The dry run (§8) adds a check: "the mount path exists and is writable, or the fallback was used and logged".
+- **Managed Agents pricing in practice:** R4 found no community cost figures beyond the docs' $0.08 per session-hour; the per-run cap stays the control.
+
 ## Validation of the deployment file
 
 Every frontmatter key of `05-deployments/megamind-scout.md` was checked against the Create Deployment reference [3] and the `ant apply` page [4], re-read on 2026-11-02. The YAML parses (checked with Python `yaml.safe_load`). Top-level keys: `name`, `agent`, `environment_id`, `schedule`, `budget`, `resources`, `vault_ids`, `description`, `metadata`.

@@ -1,1 +1,3 @@
 qid	answer	pages	confidence
+Q01	High-water is the default and recommended allocation method for array user shares.	unraid-shares.md	high
+Q02	The Tunable (md_write_method) setting under Settings → Disk Settings selects the write mode; Turbo Write (Reconstruct) is the reconstruct-write option.	unraid-array-parity.md	high
