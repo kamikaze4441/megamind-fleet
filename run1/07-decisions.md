@@ -1,0 +1,12 @@
+# Run 1 — decision log
+
+Format: D<n> · date · what · why · evidence · proposed by. Newest at the bottom.
+
+| # | Date | Decision | Why | Evidence | Proposed by |
+| --- | --- | --- | --- | --- | --- |
+| D1 | 2026-11-02 | Repository branch `claude/run1`, pushed after each finished deliverable; no `/run1` on `main` until the owner merges | The push rule requires a `claude/` branch; keeps `main` clean for the owner | push succeeded on the first try | director |
+| D2 | 2026-11-02 | Three Opus research threads (R1: Managed Agents + skills install; R2: ECC/OMC/more repos; R3: chat history + reachability), one Argon thread (R4), one builder thread in two steps, one auditor thread later | Few, large, well-briefed delegations keep the $55 budget; topics grouped by shared sources (R1 reads the platform docs once; R2 clones once) | brief, rule 7 | director |
+| D3 | 2026-11-02 | The benchmark question key stays in the auditor's reply to me, not on disk, until all querier runs are done; then the auditor writes `key.md` and the `qmd bench` fixture is built from it | Spec: "the key stays in its reply to you, never on disk until grading"; `qmd bench` needs the key, so it runs after the queriers | brief, benchmark spec | director |
+| D4 | 2026-11-02 | The querier token proxy is `bytes_out` of every harness call, logged by `bin/q`; wall time is `q start`→`q answer`; page recall is expected ∩ (read ∪ cited) | The queriers are agents, not scripts; the harness is the only path to the vault, so its log is the complete record of what they read | benchmark spec (harness proxy for tokens) | director |
+| D5 | 2026-11-02 | The reuse map (`01`) is written by the director from the research files, not delegated | It is a judgement over the master prompt, which is the director's job; the research files supply the evidence | brief rule 7 | director |
+| D6 | 2026-11-02 | `04-skills-plan.md` is drafted by R2 after (b)–(d) and `05-fortnightly-job.md` by R1 after (a); the director edits and the auditor signs off 04 | The drafters already hold the sources in context; avoids re-reading | brief rule 7 | director |
