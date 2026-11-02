@@ -138,7 +138,7 @@ converter: chat-convert <version>
 | sidechain / subagent lines, meta, compaction summary, injected harness events | dropped [16] |
 | images | `> [image]` |
 
-- **Edge neutralization:** chats carry no edges (§4, §7 rule 5). The converter rewrites any `depends_on::`, `supersedes::` or `derived_from::` that appears in chat text, and any wikilink `[[`. These are wrapped in inline code, so `rg` backlinks and lint never read a chat line as an edge or a link. A body line that equals `## Superseded` is demoted.
+- **Edge neutralization:** chats carry no edges (§4, §7 rule 5). The converter escapes any `depends_on::`, `supersedes::` or `derived_from::` in chat text to `depends_on\::` (and likewise), and escapes every `[[` to `\[\[`. Markdown still renders the text as written, but neither `rg` for the field names, nor a backlink search for `[[page`, nor lint can match a chat line as an edge or a link. A body line that equals `## Superseded` is demoted to `#### Superseded (quoted)`.
 - **Ending:** the last turn, then exactly one provenance block. Nothing else follows: no edges, no tags, no generated links.
 
 ### D4. Index
@@ -202,7 +202,7 @@ converter: chat-convert <version>
 | Idempotency | Run twice | Second run: zero writes, manifest unchanged, no commit |
 | Update | Change one message and bump `updated_at` | The same file is rewritten. File count unchanged |
 | Absence | Drop one chat from the export | File kept, manifest status `absent-since-…` |
-| Edge neutralization | Chat text containing `depends_on:: [[x]] (y)` and `## Superseded` | `rg '^depends_on::' chats/` returns nothing and the vault lint sees no edge |
+| Edge neutralization | Chat text containing `depends_on:: [[x]] (y)` and `## Superseded` | `rg 'depends_on::' chats/` and `rg '\[\[x' chats/` return nothing outside the provenance block, and the vault lint sees no edge |
 | Live guard | Transcript with a matching `~/.claude/sessions/` file | Skipped |
 | Fail closed | Unknown export layout | No writes, one lint line |
 
