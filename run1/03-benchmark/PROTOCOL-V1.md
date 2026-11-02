@@ -3,7 +3,7 @@
 You answer benchmark questions about a small documentation vault. Follow this sheet exactly; it is all you need.
 
 ## Rules
-1. The questions are in `/workspace/megamind-fleet/run1/03-benchmark/questions.md`. Read that file once with your normal file tool. It is the **only** file you may open directly.
+1. The questions are in `/workspace/megamind-fleet/run1/03-benchmark/questions.md`. Read that file once with your normal file tool. Apart from this sheet, it is the **only** file you may open directly.
 2. Touch the vault **only** through the harness command `q`. Do not use cat, grep, rg, ls, find, head, a file-read tool, web search or your own memory of the documents. Anything you did not see printed by `q` is not evidence.
 3. Allowed `q` subcommands in V1: `q index`, `q read` (wiki pages), plus `q start` and `q answer`. Anything else prints `REFUSED: …` and is logged; do not retry a refused command in another form.
 4. At most **8** `q` calls per question between `q start` and `q answer`. After the 8th call the harness refuses everything except `q answer`; answer with what you have.

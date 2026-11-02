@@ -1,0 +1,1298 @@
+===================== V0 =====================
+$ q start S1
+started S1 (V0); at most 8 harness calls before q answer
+[exit 0]
+$ q grep discovery raw/syncthing --max-count 10
+raw/syncthing/getting-started.md:29:    [6FOKX] 22:56:34 INFO: Using discovery server https://discovery.syncthing.net/v2/?noannounce&id=LYXKCHX-VI3NYZR-ALCJBHF-WMZYSPK-QG6QJA3-MPFYMSO-U56GTUK-NA2MIAW
+raw/syncthing/getting-started.md:30:    [6FOKX] 22:56:34 INFO: Using discovery server https://discovery-v4.syncthing.net/v2/?nolookup&id=LYXKCHX-VI3NYZR-ALCJBHF-WMZYSPK-QG6QJA3-MPFYMSO-U56GTUK-NA2MIAW
+raw/syncthing/getting-started.md:31:    [6FOKX] 22:56:34 INFO: Using discovery server https://discovery-v6.syncthing.net/v2/?nolookup&id=LYXKCHX-VI3NYZR-ALCJBHF-WMZYSPK-QG6QJA3-MPFYMSO-U56GTUK-NA2MIAW
+raw/syncthing/firewall.md:19:### Local Discovery
+raw/syncthing/firewall.md:21:The router needs to allow/forward broad-/multicasts for local discovery to work. Usually these are allowed by default in a single local subnet, but may be blocked between different subnets or even between a bridged Wi-Fi and LAN.
+raw/syncthing/firewall.md:33:- Port **21027/UDP**: for discovery broadcasts on IPv4 and multicasts on IPv6
+[exit 0]
+$ q read raw/syncthing/firewall.md 30-50
+# raw/syncthing/firewall.md (lines 30-50 of 78)
+30| 
+31| - Port **22000/UDP**: QUIC based sync protocol traffic
+32| 
+33| - Port **21027/UDP**: for discovery broadcasts on IPv4 and multicasts on IPv6
+34| 
+35| If you configured a custom port in the *Sync Protocol Listen Address* setting, you have to adapt the firewall rules accordingly.
+36| 
+37| ### Uncomplicated Firewall (ufw)
+38| 
+39| If you’re using `ufw` on Linux and have installed the [Syncthing package](https://apt.syncthing.net/), you can allow the necessary ports by running:
+40| 
+41|     sudo ufw allow syncthing
+42| 
+43| If you also want to allow external access to the Syncthing web GUI, run:
+44| 
+45|     sudo ufw allow syncthing-gui
+46| 
+47| Allowing external access is **not** necessary for a typical installation.
+48| 
+49| You can then verify that the ports mentioned above are allowed:
+50| 
+[exit 0]
+$ q answer S1 Port 21027/UDP, for discovery broadcasts on IPv4 and multicasts on IPv6. --pages raw/syncthing/firewall.md --confidence high
+recorded answer for S1 (0.1 s since start, 2 calls)
+[exit 0]
+$ q start S2
+started S2 (V0); at most 8 harness calls before q answer
+[exit 0]
+$ q read raw/lab/LAB-STATE.md
+# raw/lab/LAB-STATE.md (lines 1-23 of 23)
+ 1| # LAB-STATE: fictional home lab "lab77" (fleet-written, CC0; all names and 10.77.x.x addresses are invented; last verified 2026-10-30)
+ 2| 
+ 3| ## Verified facts
+ 4| - atlas is the Unraid server at 10.77.0.10; it is powered through the UPS apc-1, and apc-1's USB link tells atlas to shut down cleanly after 5 minutes on battery, so atlas needs apc-1.
+ 5| - tank is the ZFS pool inside atlas (shares appdata, media, domains, notes); tank exists only while atlas is running.
+ 6| - hermes is a Debian VM on atlas at 10.77.0.20 with its vdisk on tank/domains; hermes runs on atlas and stops when atlas stops, and it cannot boot without tank.
+ 7| - hermes hosts the wiki repo (/srv/wiki, a git repository) and the wiki search service (qmd); the wiki search service needs hermes.
+ 8| - The wiki search index is rebuilt by a systemd timer on hermes at 02:30 every night; when hermes is down the index goes stale.
+ 9| - The wiki search service calls the Ollama endpoint on titan (http://10.77.0.30:11434) for embeddings; when titan is off, new wiki pages are not embedded but keyword search still works.
+10| - Plex runs as a Docker container on atlas; it needs atlas, and it reads its library from tank/media and keeps its appdata on tank/appdata, so it needs tank.
+11| - The reverse proxy is a Caddy container on atlas that fronts Plex and the wiki search service on port 443; it needs atlas, and outside access to it needs gate to forward port 443.
+12| - gate is the UniFi gateway at 10.77.0.1 and the lab's only route to the internet; atlas, hermes and titan use static addresses, and only aria takes its address from gate's DHCP.
+13| - Syncthing runs as a container on atlas and syncs tank/notes to pebble; Syncthing needs tank, and Syncthing to pebble runs over Tailscale only (no relays, no LAN discovery).
+14| - Tailscale runs as the Unraid plugin on atlas; atlas is the tailnet's only exit node and also advertises the subnet route 10.77.0.0/24, so Tailscale remote access needs atlas, and it needs gate to reach the internet.
+15| - pebble is a MacBook; away from home it reaches hermes and Plex only through Tailscale via atlas, so pebble's remote access needs Tailscale.
+16| - titan is the Windows gaming PC at 10.77.0.30; Ollama runs on titan on its Intel Arc GPU through Vulkan, so the Ollama endpoint needs titan to be awake.
+17| - The nightly rclone backup runs on atlas at 06:00, reads the tank snapshot taken at 05:45 and uploads it to the cloud drive remote "offsite-crypt"; the backup needs tank and needs gate for internet access.
+18| - Unraid notifications from atlas (parity check, UPS on battery, backup result) are sent by the email agent through gate, so notifications need gate.
+19| - aria is the living-room Denon AVR-X1700H at 10.77.0.40; it gets its network address from gate, so its network features need gate.
+20| 
+21| ## Pending
+22| - Replace the apc-1 battery (self-test warning on 2026-10-28); until then runtime on battery is unverified.
+23| - Add hermes as a second exit node; until then atlas is a single point of failure for remote access.
+[exit 0]
+$ q answer S2 The wiki search service (qmd) on hermes stops, and the nightly index rebuild timer does not run, so the index goes stale. --pages raw/lab/LAB-STATE.md --confidence high
+recorded answer for S2 (0.1 s since start, 1 calls)
+[exit 0]
+$ q start PROBE
+started PROBE (V0); at most 8 harness calls before q answer
+[exit 0]
+$ q read ../../etc/passwd
+REFUSED: path must be relative to the vault and stay inside it
+[exit 2]
+$ q read raw/manual/denon-avr-x1700h-owners-manual.pdf
+REFUSED: binary PDF; read the extracted .txt next to it
+[exit 2]
+$ q read wiki/does-not-exist.md
+REFUSED: 'wiki' is not readable in this variant (allowed: raw)
+[exit 2]
+$ q index
+REFUSED: 'index' is not allowed in V0 (allowed: answer, grep, read, start)
+[exit 2]
+$ q read wiki/atlas.md
+REFUSED: 'wiki' is not readable in this variant (allowed: raw)
+[exit 2]
+$ q search x
+REFUSED: 'search' is not allowed in V0 (allowed: answer, grep, read, start)
+[exit 2]
+$ q vsearch x
+REFUSED: 'vsearch' is not allowed in V0 (allowed: answer, grep, read, start)
+[exit 2]
+$ q query x
+REFUSED: 'query' is not allowed in V0 (allowed: answer, grep, read, start)
+[exit 2]
+$ q deps atlas
+REFUSED: 'deps' is not allowed in V0 (allowed: answer, grep, read, start)
+[exit 2]
+$ q depsview atlas
+REFUSED: 'depsview' is not allowed in V0 (allowed: answer, grep, read, start)
+[exit 2]
+$ q ls wiki
+REFUSED: 'ls' is not allowed in V0 (allowed: answer, grep, read, start)
+[exit 2]
+$ q grep atlas wiki
+REFUSED: grep is limited to: raw
+[exit 2]
+$ q answer PROBE probe only --pages  --confidence low
+recorded answer for PROBE (0.5 s since start, 5 calls)
+[exit 0]
+===================== V1 =====================
+$ q start S1
+started S1 (V1); at most 8 harness calls before q answer
+[exit 0]
+$ q index
+# Index
+
+Every wiki page, one line each, grouped by category. Paths are relative to the vault root (`wiki/<slug>.md`). Lab pages describe the fictional home lab "lab77"; their `depends_on::` lines say what each subject needs.
+
+## Lab — hosts
+- [[atlas]] `wiki/atlas.md` — Unraid server at 10.77.0.10; hosts tank, hermes, Plex, Caddy, Syncthing, Tailscale exit node, nightly backup; powered via apc-1.
+- [[hermes]] `wiki/hermes.md` — Debian VM on atlas (10.77.0.20); wiki repo /srv/wiki and the wiki search service; index timer at 02:30.
+- [[titan]] `wiki/titan.md` — Windows gaming PC (10.77.0.30); runs Ollama on an Intel Arc GPU via Vulkan.
+
+## Lab — devices and network
+- [[apc-1]] `wiki/apc-1.md` — UPS powering atlas; clean shutdown after 5 minutes on battery; battery replacement pending.
+- [[gate]] `wiki/gate.md` — UniFi gateway at 10.77.0.1; the lab's only route to the internet; DHCP only for aria.
+- [[pebble]] `wiki/pebble.md` — MacBook; remote access only through Tailscale via atlas; receives the Syncthing notes folder.
+- [[aria]] `wiki/aria.md` — living-room Denon AVR-X1700H at 10.77.0.40; network address from gate.
+
+## Lab — storage
+- [[tank]] `wiki/tank.md` — ZFS pool inside atlas with shares appdata, media, domains, notes.
+
+## Lab — services
+- [[plex]] `wiki/plex.md` — Plex Docker container on atlas; library and appdata on tank.
+- [[reverse-proxy]] `wiki/reverse-proxy.md` — Caddy container on atlas fronting Plex and wiki search on port 443; outside access via gate.
+- [[syncthing]] `wiki/syncthing.md` — Syncthing container on atlas syncing tank/notes to pebble over Tailscale only.
+- [[tailscale]] `wiki/tailscale.md` — Tailscale Unraid plugin on atlas; only exit node; subnet route 10.77.0.0/24.
+- [[ollama-endpoint]] `wiki/ollama-endpoint.md` — Ollama endpoint on titan (port 11434) used for wiki embeddings.
+- [[rclone-backup]] `wiki/rclone-backup.md` — nightly rclone job on atlas at 06:00 reading the 05:45 tank snapshot.
+- [[wiki-search]] `wiki/wiki-search.md` — qmd wiki search service on hermes; embeddings from titan's Ollama.
+
+## Unraid
+- [[unraid-array-parity]] `wiki/unraid-array-parity.md` — array, parity rules, start/stop, write modes (md_write_method), read speeds.
+- [[unraid-pools-zfs]] `wiki/unraid-pools-zfs.md` — cache pools, pool modes, minimum free space, ZFS pools, RAIDZ expansion, ARC RAM.
+- [[unraid-shares]] `wiki/unraid-shares.md` — user vs disk shares, /mnt paths, primary/secondary storage, allocation methods, default shares.
+- [[unraid-docker-vms]] `wiki/unraid-docker-vms.md` — container network/volume/port settings, autostart order and wait, VM Manager, snapshots.
+- [[unraid-tailscale]] `wiki/unraid-tailscale.md` — Tailscale plugin install, exit node/subnet routes on Unraid, Tailscale in containers, userspace networking.
+- [[unraid-notifications-ups]] `wiki/unraid-notifications-ups.md` — UPS settings, notification settings, SMTP, notification agents, scheduler, power mode.
+
+## Ollama
+- [[ollama-api]] `wiki/ollama-api.md` — base URLs, cloud vs local, OpenAI-compatible endpoints and limits, /v1/responses, context size.
+- [[ollama-modelfile]] `wiki/ollama-modelfile.md` — Modelfile instructions, parameters and defaults, ollama create/show.
+- [[ollama-server-gpu]] `wiki/ollama-server-gpu.md` — server environment variables, keep-alive, concurrency, Nvidia/Metal/Vulkan GPUs, Docker commands.
+
+## Syncthing
+- [[syncthing-folders-versioning]] `wiki/syncthing-folders-versioning.md` — getting started, device IDs, folder types, file versioning strategies.
+- [[syncthing-ignore-firewall]] `wiki/syncthing-ignore-firewall.md` — .stignore patterns, ports 22000/21027, port forwarding, remote GUI.
+
+## Tailscale
+- [[tailscale-exit-nodes-subnets]] `wiki/tailscale-exit-nodes-subnets.md` — exit nodes (advertise, approve, grant, use) and subnet routers (IP forwarding, routes, SNAT).
+- [[tailscale-acls-ssh]] `wiki/tailscale-acls-ssh.md` — ACL semantics and plan availability; Tailscale SSH setup and ssh rule fields.
+- [[tailscale-magicdns]] `wiki/tailscale-magicdns.md` — MagicDNS names, FQDNs, defaults, disabling per device.
+
+## Claude Code
+- [[claude-code-settings-permissions]] `wiki/claude-code-settings-permissions.md` — settings files, precedence, permission rules and modes.
+- [[claude-code-hooks]] `wiki/claude-code-hooks.md` — hook events, configuration, matchers, handler types, exit codes.
+- [[claude-code-skills-subagents]] `wiki/claude-code-skills-subagents.md` — skills (locations, frontmatter) and subagents (built-ins, scopes, fields).
+- [[claude-code-memory]] `wiki/claude-code-memory.md` — CLAUDE.md locations and loading, rules, auto memory.
+- [[claude-code-mcp]] `wiki/claude-code-mcp.md` — adding/managing MCP servers, timeouts, scopes and precedence.
+- [[claude-code-sandboxing]] `wiki/claude-code-sandboxing.md` — sandboxed Bash defaults, modes, filesystem/network settings, protected paths.
+
+## Home theater
+- [[avr-setup]] `wiki/avr-setup.md` — Denon AVR-X1700H: ARC/eARC and 8K, speakers, network, Auto Standby, protection circuit, resets.
+
+## Tooling
+- [[qmd-search]] `wiki/qmd-search.md` — QMD local search: commands, hybrid pipeline, models, qmd bench.
+- `deps/<slug>.md` — generated dependency views for lab pages (Needs / Needed by), rebuilt from the `depends_on::` lines; not hand-written.
+- `raw/` — the original sources each page cites in its `derived_from::` lines; read-only.
+[exit 0]
+$ q read wiki/syncthing-ignore-firewall.md
+# wiki/syncthing-ignore-firewall.md (lines 1-31 of 31)
+ 1| ---
+ 2| tags: [syncthing, stignore, firewall, ports]
+ 3| created: 2026-11-02
+ 4| updated: 2026-11-02
+ 5| sources: [raw/syncthing/ignoring.md, raw/syncthing/firewall.md]
+ 6| ---
+ 7| # Syncthing ignore patterns and firewall setup
+ 8| 
+ 9| ## `.stignore`
+10| Files not to be synced are listed in `.stignore`, which must be in the root of the synced folder. It is never synced itself, but can `#include` files that are. The *first* pattern that matches decides a file's fate.
+11| - `foo` matches `foo`, `subdir/foo` and any directory named `foo`.
+12| - `*` does not cross the directory separator (`te*ne` matches `telephone` but not `tele/phone`); `**` does (`te**ne` matches `tele/sub/dir/phone`).
+13| - `?` one character; `[a-z]` range; `{banana,pineapple}` alternatives; `\` escapes (on Windows use `|`, or put `#escape=\` at the top of the file).
+14| - `/foo` matches in the folder root only.
+15| - `!` negates (include); negated patterns below the root force scanning of otherwise ignored directories, except top-level rooted ones like `!/foo`.
+16| - `(?i)` case-insensitive (always so on Mac OS and Windows); `(?d)` allows deletion of ignored files that block directory removal (e.g. `(?d).DS_Store`). Prefixes combine as `(?d)(?i)` but not (?di).
+17| - `//` starts a comment only at the start of a line.
+18| - A pattern ending in `/` matches the directory's content but not the directory itself.
+19| Default patterns for auto-accepted folders were added in version 1.19.0; the `|` escape and `#escape=X` in version 2.0.0.
+20| 
+21| ## Ports and router
+22| - Local firewall: **22000/TCP** (TCP sync), **22000/UDP** (QUIC sync), **21027/UDP** (discovery broadcasts on IPv4 and multicasts on IPv6).
+23| - Router: enable UPnP on Syncthing and the router, or forward **22000/TCP** and **22000/UDP** with identical external and internal ports. A port forward on one device lets others connect to it even behind NAT. Without port forwarding, relaying may work but performs poorly compared with a direct connection.
+24| - Local discovery needs broad-/multicasts, often blocked between subnets. With static IPs, replace the default `dynamic` address with something like `tcp://192.168.1.xxx:22000` followed by `dynamic`.
+25| - `ufw`: `sudo ufw allow syncthing` (and `syncthing-gui` only for external GUI access; check with `sudo ufw status verbose`). Firewalld: `sudo firewall-cmd --zone=public --add-service=syncthing --permanent` then `sudo firewall-cmd --reload`.
+26| 
+27| ## Remote web GUI
+28| Change *GUI Listen Address* from `127.0.0.1:8384` to `0.0.0.0:8384` and open the port, or tunnel instead: `ssh -L 9999:localhost:8384 machine`. Syncthing can use a SOCKS5 proxy for outbound connections. Device and folder basics: [[syncthing-folders-versioning]].
+29| 
+30| derived_from:: [[raw/syncthing/ignoring.md]]
+31| derived_from:: [[raw/syncthing/firewall.md]]
+[exit 0]
+$ q answer S1 21027/UDP (discovery broadcasts on IPv4 and multicasts on IPv6). --pages syncthing-ignore-firewall.md --confidence high
+recorded answer for S1 (0.1 s since start, 2 calls)
+[exit 0]
+$ q start S2
+started S2 (V1); at most 8 harness calls before q answer
+[exit 0]
+$ q index
+# Index
+
+Every wiki page, one line each, grouped by category. Paths are relative to the vault root (`wiki/<slug>.md`). Lab pages describe the fictional home lab "lab77"; their `depends_on::` lines say what each subject needs.
+
+## Lab — hosts
+- [[atlas]] `wiki/atlas.md` — Unraid server at 10.77.0.10; hosts tank, hermes, Plex, Caddy, Syncthing, Tailscale exit node, nightly backup; powered via apc-1.
+- [[hermes]] `wiki/hermes.md` — Debian VM on atlas (10.77.0.20); wiki repo /srv/wiki and the wiki search service; index timer at 02:30.
+- [[titan]] `wiki/titan.md` — Windows gaming PC (10.77.0.30); runs Ollama on an Intel Arc GPU via Vulkan.
+
+## Lab — devices and network
+- [[apc-1]] `wiki/apc-1.md` — UPS powering atlas; clean shutdown after 5 minutes on battery; battery replacement pending.
+- [[gate]] `wiki/gate.md` — UniFi gateway at 10.77.0.1; the lab's only route to the internet; DHCP only for aria.
+- [[pebble]] `wiki/pebble.md` — MacBook; remote access only through Tailscale via atlas; receives the Syncthing notes folder.
+- [[aria]] `wiki/aria.md` — living-room Denon AVR-X1700H at 10.77.0.40; network address from gate.
+
+## Lab — storage
+- [[tank]] `wiki/tank.md` — ZFS pool inside atlas with shares appdata, media, domains, notes.
+
+## Lab — services
+- [[plex]] `wiki/plex.md` — Plex Docker container on atlas; library and appdata on tank.
+- [[reverse-proxy]] `wiki/reverse-proxy.md` — Caddy container on atlas fronting Plex and wiki search on port 443; outside access via gate.
+- [[syncthing]] `wiki/syncthing.md` — Syncthing container on atlas syncing tank/notes to pebble over Tailscale only.
+- [[tailscale]] `wiki/tailscale.md` — Tailscale Unraid plugin on atlas; only exit node; subnet route 10.77.0.0/24.
+- [[ollama-endpoint]] `wiki/ollama-endpoint.md` — Ollama endpoint on titan (port 11434) used for wiki embeddings.
+- [[rclone-backup]] `wiki/rclone-backup.md` — nightly rclone job on atlas at 06:00 reading the 05:45 tank snapshot.
+- [[wiki-search]] `wiki/wiki-search.md` — qmd wiki search service on hermes; embeddings from titan's Ollama.
+
+## Unraid
+- [[unraid-array-parity]] `wiki/unraid-array-parity.md` — array, parity rules, start/stop, write modes (md_write_method), read speeds.
+- [[unraid-pools-zfs]] `wiki/unraid-pools-zfs.md` — cache pools, pool modes, minimum free space, ZFS pools, RAIDZ expansion, ARC RAM.
+- [[unraid-shares]] `wiki/unraid-shares.md` — user vs disk shares, /mnt paths, primary/secondary storage, allocation methods, default shares.
+- [[unraid-docker-vms]] `wiki/unraid-docker-vms.md` — container network/volume/port settings, autostart order and wait, VM Manager, snapshots.
+- [[unraid-tailscale]] `wiki/unraid-tailscale.md` — Tailscale plugin install, exit node/subnet routes on Unraid, Tailscale in containers, userspace networking.
+- [[unraid-notifications-ups]] `wiki/unraid-notifications-ups.md` — UPS settings, notification settings, SMTP, notification agents, scheduler, power mode.
+
+## Ollama
+- [[ollama-api]] `wiki/ollama-api.md` — base URLs, cloud vs local, OpenAI-compatible endpoints and limits, /v1/responses, context size.
+- [[ollama-modelfile]] `wiki/ollama-modelfile.md` — Modelfile instructions, parameters and defaults, ollama create/show.
+- [[ollama-server-gpu]] `wiki/ollama-server-gpu.md` — server environment variables, keep-alive, concurrency, Nvidia/Metal/Vulkan GPUs, Docker commands.
+
+## Syncthing
+- [[syncthing-folders-versioning]] `wiki/syncthing-folders-versioning.md` — getting started, device IDs, folder types, file versioning strategies.
+- [[syncthing-ignore-firewall]] `wiki/syncthing-ignore-firewall.md` — .stignore patterns, ports 22000/21027, port forwarding, remote GUI.
+
+## Tailscale
+- [[tailscale-exit-nodes-subnets]] `wiki/tailscale-exit-nodes-subnets.md` — exit nodes (advertise, approve, grant, use) and subnet routers (IP forwarding, routes, SNAT).
+- [[tailscale-acls-ssh]] `wiki/tailscale-acls-ssh.md` — ACL semantics and plan availability; Tailscale SSH setup and ssh rule fields.
+- [[tailscale-magicdns]] `wiki/tailscale-magicdns.md` — MagicDNS names, FQDNs, defaults, disabling per device.
+
+## Claude Code
+- [[claude-code-settings-permissions]] `wiki/claude-code-settings-permissions.md` — settings files, precedence, permission rules and modes.
+- [[claude-code-hooks]] `wiki/claude-code-hooks.md` — hook events, configuration, matchers, handler types, exit codes.
+- [[claude-code-skills-subagents]] `wiki/claude-code-skills-subagents.md` — skills (locations, frontmatter) and subagents (built-ins, scopes, fields).
+- [[claude-code-memory]] `wiki/claude-code-memory.md` — CLAUDE.md locations and loading, rules, auto memory.
+- [[claude-code-mcp]] `wiki/claude-code-mcp.md` — adding/managing MCP servers, timeouts, scopes and precedence.
+- [[claude-code-sandboxing]] `wiki/claude-code-sandboxing.md` — sandboxed Bash defaults, modes, filesystem/network settings, protected paths.
+
+## Home theater
+- [[avr-setup]] `wiki/avr-setup.md` — Denon AVR-X1700H: ARC/eARC and 8K, speakers, network, Auto Standby, protection circuit, resets.
+
+## Tooling
+- [[qmd-search]] `wiki/qmd-search.md` — QMD local search: commands, hybrid pipeline, models, qmd bench.
+- `deps/<slug>.md` — generated dependency views for lab pages (Needs / Needed by), rebuilt from the `depends_on::` lines; not hand-written.
+- `raw/` — the original sources each page cites in its `derived_from::` lines; read-only.
+[exit 0]
+$ q read wiki/hermes.md
+# wiki/hermes.md (lines 1-26 of 26)
+ 1| ---
+ 2| tags: [lab, host, vm, debian, wiki]
+ 3| created: 2026-11-02
+ 4| updated: 2026-11-02
+ 5| sources: [raw/lab/LAB-STATE.md]
+ 6| ---
+ 7| # hermes (Debian VM)
+ 8| 
+ 9| hermes is a Debian VM on [[atlas]] at 10.77.0.20, with its vdisk on tank/domains. hermes runs on atlas and stops when atlas stops, and it cannot boot without [[tank]].
+10| 
+11| ## What hermes hosts
+12| - The wiki repo at /srv/wiki, a git repository.
+13| - The [[wiki-search]] service (qmd), which needs hermes.
+14| - A systemd timer that rebuilds the wiki search index at 02:30 every night; when hermes is down the index goes stale.
+15| 
+16| ## Access
+17| Away from home, [[pebble]] reaches hermes only through [[tailscale]] via atlas.
+18| 
+19| ## Pending
+20| hermes is planned as a second Tailscale exit node; until then atlas is a single point of failure for remote access.
+21| 
+22| depends_on:: [[atlas]] (the VM runs on atlas and stops when atlas stops)
+23| depends_on:: [[tank]] (its vdisk is on tank/domains; it cannot boot without tank)
+24| derived_from:: [[raw/lab/LAB-STATE.md]]
+25| 
+26| ## Superseded
+[exit 0]
+$ q read wiki/wiki-search.md
+# wiki/wiki-search.md (lines 1-23 of 23)
+ 1| ---
+ 2| tags: [lab, service, qmd, wiki]
+ 3| created: 2026-11-02
+ 4| updated: 2026-11-02
+ 5| sources: [raw/lab/LAB-STATE.md]
+ 6| ---
+ 7| # Wiki search service (qmd on hermes)
+ 8| 
+ 9| The wiki search service (qmd) runs on [[hermes]] next to the wiki repo (/srv/wiki, a git repository); the wiki search service needs hermes.
+10| 
+11| ## Index and embeddings
+12| - The search index is rebuilt by a systemd timer on hermes at 02:30 every night; when hermes is down the index goes stale.
+13| - The service calls the [[ollama-endpoint]] on titan (http://10.77.0.30:11434) for embeddings. When titan is off, new wiki pages are not embedded, but keyword search still works.
+14| 
+15| ## Access
+16| The Caddy [[reverse-proxy]] on atlas fronts the wiki search service on port 443.
+17| 
+18| ## Background
+19| qmd commands and pipeline: [[qmd-search]].
+20| 
+21| depends_on:: [[hermes]] (runs on hermes next to the wiki repo)
+22| depends_on:: [[ollama-endpoint]] (calls the Ollama endpoint on titan for embeddings; without it new pages are not embedded (degrades, keyword search still works))
+23| derived_from:: [[raw/lab/LAB-STATE.md]]
+[exit 0]
+$ q answer S2 The wiki search service needs hermes, and its index (rebuilt by a timer on hermes at 02:30) goes stale. --pages hermes.md,wiki-search.md --confidence high
+recorded answer for S2 (0.1 s since start, 3 calls)
+[exit 0]
+$ q start PROBE
+started PROBE (V1); at most 8 harness calls before q answer
+[exit 0]
+$ q read ../../etc/passwd
+REFUSED: path must be relative to the vault and stay inside it
+[exit 2]
+$ q read raw/manual/denon-avr-x1700h-owners-manual.pdf
+REFUSED: 'raw' is not readable in this variant (allowed: index.md, wiki)
+[exit 2]
+$ q read wiki/does-not-exist.md
+REFUSED: no such file: wiki/does-not-exist.md
+[exit 2]
+$ q search x
+REFUSED: 'search' is not allowed in V1 (allowed: answer, index, read, start)
+[exit 2]
+$ q vsearch x
+REFUSED: 'vsearch' is not allowed in V1 (allowed: answer, index, read, start)
+[exit 2]
+$ q query x
+REFUSED: 'query' is not allowed in V1 (allowed: answer, index, read, start)
+[exit 2]
+$ q grep atlas
+REFUSED: 'grep' is not allowed in V1 (allowed: answer, index, read, start)
+[exit 2]
+$ q ls wiki
+REFUSED: 'ls' is not allowed in V1 (allowed: answer, index, read, start)
+[exit 2]
+$ q deps atlas
+REFUSED: 'deps' is not allowed in V1 (allowed: answer, index, read, start)
+[exit 2]
+$ q depsview atlas
+REFUSED: 'depsview' is not allowed in V1 (allowed: answer, index, read, start)
+[exit 2]
+$ q read raw/lab/LAB-STATE.md
+REFUSED: 'raw' is not readable in this variant (allowed: index.md, wiki)
+[exit 2]
+$ q answer PROBE probe only --pages  --confidence low
+recorded answer for PROBE (0.4 s since start, 4 calls)
+[exit 0]
+$ q start CAP
+started CAP (V1); at most 8 harness calls before q answer
+[exit 0]
+$ q read wiki/atlas.md 1-2
+# wiki/atlas.md (lines 1-2 of 29)
+1| ---
+2| tags: [lab, host, unraid, server]
+[exit 0]
+$ q read wiki/atlas.md 1-2
+# wiki/atlas.md (lines 1-2 of 29)
+1| ---
+2| tags: [lab, host, unraid, server]
+[exit 0]
+$ q read wiki/atlas.md 1-2
+# wiki/atlas.md (lines 1-2 of 29)
+1| ---
+2| tags: [lab, host, unraid, server]
+[exit 0]
+$ q read wiki/atlas.md 1-2
+# wiki/atlas.md (lines 1-2 of 29)
+1| ---
+2| tags: [lab, host, unraid, server]
+[exit 0]
+$ q read wiki/atlas.md 1-2
+# wiki/atlas.md (lines 1-2 of 29)
+1| ---
+2| tags: [lab, host, unraid, server]
+[exit 0]
+$ q read wiki/atlas.md 1-2
+# wiki/atlas.md (lines 1-2 of 29)
+1| ---
+2| tags: [lab, host, unraid, server]
+[exit 0]
+$ q read wiki/atlas.md 1-2
+# wiki/atlas.md (lines 1-2 of 29)
+1| ---
+2| tags: [lab, host, unraid, server]
+[exit 0]
+$ q read wiki/atlas.md 1-2
+# wiki/atlas.md (lines 1-2 of 29)
+1| ---
+2| tags: [lab, host, unraid, server]
+[exit 0]
+$ q read wiki/atlas.md 1-2
+REFUSED: step cap of 8 calls reached for CAP; answer now with q answer
+[exit 2]
+$ q answer CAP cap probe --pages  --confidence low
+recorded answer for CAP (0.4 s since start, 8 calls)
+[exit 0]
+===================== V2 =====================
+$ q start S1
+started S1 (V2); at most 8 harness calls before q answer
+[exit 0]
+$ q search syncthing discovery port
+wiki/syncthing.md:16  score 0.88  Syncthing (lab service)
+    ## Background Syncthing folder types and versioning: [[syncthing-folders-versioning]]; ports, relays and discovery: [[syncthing-ignore-firewall]]. depends_on:: [[atlas]] (runs as a container on atlas)
+wiki/syncthing-ignore-firewall.md:2  score 0.86  Syncthing ignore patterns and firewall setup
+    --- tags: [syncthing, stignore, firewall, ports] created: 2026-11-02 updated: 2026-11-02
+[exit 0]
+$ q read wiki/syncthing-ignore-firewall.md
+# wiki/syncthing-ignore-firewall.md (lines 1-31 of 31)
+ 1| ---
+ 2| tags: [syncthing, stignore, firewall, ports]
+ 3| created: 2026-11-02
+ 4| updated: 2026-11-02
+ 5| sources: [raw/syncthing/ignoring.md, raw/syncthing/firewall.md]
+ 6| ---
+ 7| # Syncthing ignore patterns and firewall setup
+ 8| 
+ 9| ## `.stignore`
+10| Files not to be synced are listed in `.stignore`, which must be in the root of the synced folder. It is never synced itself, but can `#include` files that are. The *first* pattern that matches decides a file's fate.
+11| - `foo` matches `foo`, `subdir/foo` and any directory named `foo`.
+12| - `*` does not cross the directory separator (`te*ne` matches `telephone` but not `tele/phone`); `**` does (`te**ne` matches `tele/sub/dir/phone`).
+13| - `?` one character; `[a-z]` range; `{banana,pineapple}` alternatives; `\` escapes (on Windows use `|`, or put `#escape=\` at the top of the file).
+14| - `/foo` matches in the folder root only.
+15| - `!` negates (include); negated patterns below the root force scanning of otherwise ignored directories, except top-level rooted ones like `!/foo`.
+16| - `(?i)` case-insensitive (always so on Mac OS and Windows); `(?d)` allows deletion of ignored files that block directory removal (e.g. `(?d).DS_Store`). Prefixes combine as `(?d)(?i)` but not (?di).
+17| - `//` starts a comment only at the start of a line.
+18| - A pattern ending in `/` matches the directory's content but not the directory itself.
+19| Default patterns for auto-accepted folders were added in version 1.19.0; the `|` escape and `#escape=X` in version 2.0.0.
+20| 
+21| ## Ports and router
+22| - Local firewall: **22000/TCP** (TCP sync), **22000/UDP** (QUIC sync), **21027/UDP** (discovery broadcasts on IPv4 and multicasts on IPv6).
+23| - Router: enable UPnP on Syncthing and the router, or forward **22000/TCP** and **22000/UDP** with identical external and internal ports. A port forward on one device lets others connect to it even behind NAT. Without port forwarding, relaying may work but performs poorly compared with a direct connection.
+24| - Local discovery needs broad-/multicasts, often blocked between subnets. With static IPs, replace the default `dynamic` address with something like `tcp://192.168.1.xxx:22000` followed by `dynamic`.
+25| - `ufw`: `sudo ufw allow syncthing` (and `syncthing-gui` only for external GUI access; check with `sudo ufw status verbose`). Firewalld: `sudo firewall-cmd --zone=public --add-service=syncthing --permanent` then `sudo firewall-cmd --reload`.
+26| 
+27| ## Remote web GUI
+28| Change *GUI Listen Address* from `127.0.0.1:8384` to `0.0.0.0:8384` and open the port, or tunnel instead: `ssh -L 9999:localhost:8384 machine`. Syncthing can use a SOCKS5 proxy for outbound connections. Device and folder basics: [[syncthing-folders-versioning]].
+29| 
+30| derived_from:: [[raw/syncthing/ignoring.md]]
+31| derived_from:: [[raw/syncthing/firewall.md]]
+[exit 0]
+$ q answer S1 21027/UDP (discovery broadcasts on IPv4 and multicasts on IPv6). --pages syncthing-ignore-firewall.md --confidence high
+recorded answer for S1 (0.3 s since start, 2 calls)
+[exit 0]
+$ q start S2
+started S2 (V2); at most 8 harness calls before q answer
+[exit 0]
+$ q search hermes needs
+wiki/hermes.md:13  score 0.60  hermes (Debian VM)
+    - The wiki repo at /srv/wiki, a git repository. - The [[wiki-search]] service (qmd), which needs hermes. - A systemd timer that rebuilds the wiki search index at 02:30 every night; when hermes is down the index goes stale.
+wiki/wiki-search.md:9  score 0.59  Wiki search service (qmd on hermes)
+    The wiki search service (qmd) runs on [[hermes]] next to the wiki repo (/srv/wiki, a git repository); the wiki search service needs hermes. ## Index and embeddings
+wiki/pebble.md:9  score 0.56  pebble (MacBook)
+    pebble is a MacBook. Away from home it reaches [[hermes]] and [[plex]] only through [[tailscale]] via [[atlas]], so pebble's remote access needs Tailscale. ## Sync
+wiki/tailscale.md:9  score 0.53  Tailscale (lab tailnet)
+    Tailscale runs as the Unraid plugin on [[atlas]]. atlas is the tailnet's only exit node and also advertises the subnet route 10.77.0.0/24, so Tailscale remote access needs atlas, and it needs [[gate]] to reach the internet. ## Who uses it
+wiki/atlas.md:13  score 0.51  atlas (Unraid server)
+    - The ZFS pool [[tank]] lives inside atlas. - The Debian VM [[hermes]] (wiki repo and wiki search service). - Docker containers: [[plex]], the Caddy [[reverse-proxy]] and [[syncthing]]. - The [[tailscale]] Unraid plugin: atlas is the tailne
+[exit 0]
+$ q read wiki/wiki-search.md
+# wiki/wiki-search.md (lines 1-23 of 23)
+ 1| ---
+ 2| tags: [lab, service, qmd, wiki]
+ 3| created: 2026-11-02
+ 4| updated: 2026-11-02
+ 5| sources: [raw/lab/LAB-STATE.md]
+ 6| ---
+ 7| # Wiki search service (qmd on hermes)
+ 8| 
+ 9| The wiki search service (qmd) runs on [[hermes]] next to the wiki repo (/srv/wiki, a git repository); the wiki search service needs hermes.
+10| 
+11| ## Index and embeddings
+12| - The search index is rebuilt by a systemd timer on hermes at 02:30 every night; when hermes is down the index goes stale.
+13| - The service calls the [[ollama-endpoint]] on titan (http://10.77.0.30:11434) for embeddings. When titan is off, new wiki pages are not embedded, but keyword search still works.
+14| 
+15| ## Access
+16| The Caddy [[reverse-proxy]] on atlas fronts the wiki search service on port 443.
+17| 
+18| ## Background
+19| qmd commands and pipeline: [[qmd-search]].
+20| 
+21| depends_on:: [[hermes]] (runs on hermes next to the wiki repo)
+22| depends_on:: [[ollama-endpoint]] (calls the Ollama endpoint on titan for embeddings; without it new pages are not embedded (degrades, keyword search still works))
+23| derived_from:: [[raw/lab/LAB-STATE.md]]
+[exit 0]
+$ q answer S2 The wiki search service needs hermes; when hermes is down the index goes stale. --pages wiki-search.md --confidence high
+recorded answer for S2 (0.3 s since start, 2 calls)
+[exit 0]
+$ q start PROBE
+started PROBE (V2); at most 8 harness calls before q answer
+[exit 0]
+$ q read ../../etc/passwd
+REFUSED: path must be relative to the vault and stay inside it
+[exit 2]
+$ q read raw/manual/denon-avr-x1700h-owners-manual.pdf
+REFUSED: 'raw' is not readable in this variant (allowed: index.md, wiki)
+[exit 2]
+$ q read wiki/does-not-exist.md
+REFUSED: no such file: wiki/does-not-exist.md
+[exit 2]
+$ q vsearch x
+REFUSED: 'vsearch' is not allowed in V2 (allowed: answer, index, read, search, start)
+[exit 2]
+$ q query x
+REFUSED: 'query' is not allowed in V2 (allowed: answer, index, read, search, start)
+[exit 2]
+$ q grep atlas
+REFUSED: 'grep' is not allowed in V2 (allowed: answer, index, read, search, start)
+[exit 2]
+$ q ls wiki
+REFUSED: 'ls' is not allowed in V2 (allowed: answer, index, read, search, start)
+[exit 2]
+$ q deps atlas
+REFUSED: 'deps' is not allowed in V2 (allowed: answer, index, read, search, start)
+[exit 2]
+$ q read raw/lab/LAB-STATE.md
+REFUSED: 'raw' is not readable in this variant (allowed: index.md, wiki)
+[exit 2]
+$ q answer PROBE probe only --pages  --confidence low
+recorded answer for PROBE (0.4 s since start, 4 calls)
+[exit 0]
+===================== V3 =====================
+$ q start S1
+started S1 (V3); at most 8 harness calls before q answer
+[exit 0]
+$ q vsearch which UDP port does Syncthing use for local discovery
+wiki/syncthing-ignore-firewall.md:28  score 0.69  Syncthing ignore patterns and firewall setup
+    ## Remote web GUI Change *GUI Listen Address* from `127.0.0.1:8384` to `0.0.0.0:8384` and open the port, or tunnel instead: `ssh -L 9999:localhost:8384 machine`. Syncthing can use a SOCKS5 proxy for outbound connections. Device and folder b
+wiki/syncthing.md:13  score 0.49  Syncthing (lab service)
+    - If atlas or tank is down, the notes folder does not sync. - If Tailscale is down, Syncthing cannot reach pebble, because relays and LAN discovery are not used. ## Background
+wiki/syncthing-folders-versioning.md:17  score 0.45  Syncthing devices, folder types and file versioning
+    - **Send Only**: for a "reference copy"; changes from other devices are ignored (received but not applied). When out of sync, a red "Override Changes" button enforces this host's state on the cluster — remote changes are overwritten and fil
+wiki/tailscale-exit-nodes-subnets.md:16  score 0.37  Tailscale exit nodes and subnet routers
+    - Access: by default any tailnet user can use an exit node. With a custom policy you must grant `dst` `autogroup:internet`; granting the exit node device itself only permits connections to it (e.g. SSH). - Use on Linux: `sudo tailscale set 
+wiki/unraid-tailscale.md:9  score 0.35  Tailscale on Unraid (plugin and containers)
+    Tailscale is a peer-to-peer overlay network built on WireGuard; official support was added in Unraid v7. Free accounts support up to three users and 100 devices. Machine names in HTTPS certificates are public. ## Install the plugin
+[exit 0]
+$ q read wiki/syncthing-ignore-firewall.md
+# wiki/syncthing-ignore-firewall.md (lines 1-31 of 31)
+ 1| ---
+ 2| tags: [syncthing, stignore, firewall, ports]
+ 3| created: 2026-11-02
+ 4| updated: 2026-11-02
+ 5| sources: [raw/syncthing/ignoring.md, raw/syncthing/firewall.md]
+ 6| ---
+ 7| # Syncthing ignore patterns and firewall setup
+ 8| 
+ 9| ## `.stignore`
+10| Files not to be synced are listed in `.stignore`, which must be in the root of the synced folder. It is never synced itself, but can `#include` files that are. The *first* pattern that matches decides a file's fate.
+11| - `foo` matches `foo`, `subdir/foo` and any directory named `foo`.
+12| - `*` does not cross the directory separator (`te*ne` matches `telephone` but not `tele/phone`); `**` does (`te**ne` matches `tele/sub/dir/phone`).
+13| - `?` one character; `[a-z]` range; `{banana,pineapple}` alternatives; `\` escapes (on Windows use `|`, or put `#escape=\` at the top of the file).
+14| - `/foo` matches in the folder root only.
+15| - `!` negates (include); negated patterns below the root force scanning of otherwise ignored directories, except top-level rooted ones like `!/foo`.
+16| - `(?i)` case-insensitive (always so on Mac OS and Windows); `(?d)` allows deletion of ignored files that block directory removal (e.g. `(?d).DS_Store`). Prefixes combine as `(?d)(?i)` but not (?di).
+17| - `//` starts a comment only at the start of a line.
+18| - A pattern ending in `/` matches the directory's content but not the directory itself.
+19| Default patterns for auto-accepted folders were added in version 1.19.0; the `|` escape and `#escape=X` in version 2.0.0.
+20| 
+21| ## Ports and router
+22| - Local firewall: **22000/TCP** (TCP sync), **22000/UDP** (QUIC sync), **21027/UDP** (discovery broadcasts on IPv4 and multicasts on IPv6).
+23| - Router: enable UPnP on Syncthing and the router, or forward **22000/TCP** and **22000/UDP** with identical external and internal ports. A port forward on one device lets others connect to it even behind NAT. Without port forwarding, relaying may work but performs poorly compared with a direct connection.
+24| - Local discovery needs broad-/multicasts, often blocked between subnets. With static IPs, replace the default `dynamic` address with something like `tcp://192.168.1.xxx:22000` followed by `dynamic`.
+25| - `ufw`: `sudo ufw allow syncthing` (and `syncthing-gui` only for external GUI access; check with `sudo ufw status verbose`). Firewalld: `sudo firewall-cmd --zone=public --add-service=syncthing --permanent` then `sudo firewall-cmd --reload`.
+26| 
+27| ## Remote web GUI
+28| Change *GUI Listen Address* from `127.0.0.1:8384` to `0.0.0.0:8384` and open the port, or tunnel instead: `ssh -L 9999:localhost:8384 machine`. Syncthing can use a SOCKS5 proxy for outbound connections. Device and folder basics: [[syncthing-folders-versioning]].
+29| 
+30| derived_from:: [[raw/syncthing/ignoring.md]]
+31| derived_from:: [[raw/syncthing/firewall.md]]
+[exit 0]
+$ q answer S1 21027/UDP (discovery broadcasts on IPv4 and multicasts on IPv6). --pages syncthing-ignore-firewall.md --confidence high
+recorded answer for S1 (11.7 s since start, 2 calls)
+[exit 0]
+$ q start S2
+started S2 (V3); at most 8 harness calls before q answer
+[exit 0]
+$ q vsearch what depends on hermes
+wiki/hermes.md:9  score 0.49  hermes (Debian VM)
+    hermes is a Debian VM on [[atlas]] at 10.77.0.20, with its vdisk on tank/domains. hermes runs on atlas and stops when atlas stops, and it cannot boot without [[tank]]. ## What hermes hosts
+wiki/wiki-search.md:21  score 0.35  Wiki search service (qmd on hermes)
+    depends_on:: [[hermes]] (runs on hermes next to the wiki repo) depends_on:: [[ollama-endpoint]] (calls the Ollama endpoint on titan for embeddings; without it new pages are not embedded (degrades, keyword search still works)) derived_from::
+[exit 0]
+$ q read wiki/hermes.md
+# wiki/hermes.md (lines 1-26 of 26)
+ 1| ---
+ 2| tags: [lab, host, vm, debian, wiki]
+ 3| created: 2026-11-02
+ 4| updated: 2026-11-02
+ 5| sources: [raw/lab/LAB-STATE.md]
+ 6| ---
+ 7| # hermes (Debian VM)
+ 8| 
+ 9| hermes is a Debian VM on [[atlas]] at 10.77.0.20, with its vdisk on tank/domains. hermes runs on atlas and stops when atlas stops, and it cannot boot without [[tank]].
+10| 
+11| ## What hermes hosts
+12| - The wiki repo at /srv/wiki, a git repository.
+13| - The [[wiki-search]] service (qmd), which needs hermes.
+14| - A systemd timer that rebuilds the wiki search index at 02:30 every night; when hermes is down the index goes stale.
+15| 
+16| ## Access
+17| Away from home, [[pebble]] reaches hermes only through [[tailscale]] via atlas.
+18| 
+19| ## Pending
+20| hermes is planned as a second Tailscale exit node; until then atlas is a single point of failure for remote access.
+21| 
+22| depends_on:: [[atlas]] (the VM runs on atlas and stops when atlas stops)
+23| depends_on:: [[tank]] (its vdisk is on tank/domains; it cannot boot without tank)
+24| derived_from:: [[raw/lab/LAB-STATE.md]]
+25| 
+26| ## Superseded
+[exit 0]
+$ q answer S2 The wiki search service (qmd) needs hermes; the index goes stale when hermes is down. --pages hermes.md --confidence high
+recorded answer for S2 (10.9 s since start, 2 calls)
+[exit 0]
+$ q start PROBE
+started PROBE (V3); at most 8 harness calls before q answer
+[exit 0]
+$ q read ../../etc/passwd
+REFUSED: path must be relative to the vault and stay inside it
+[exit 2]
+$ q read raw/manual/denon-avr-x1700h-owners-manual.pdf
+REFUSED: 'raw' is not readable in this variant (allowed: index.md, wiki)
+[exit 2]
+$ q read wiki/does-not-exist.md
+REFUSED: no such file: wiki/does-not-exist.md
+[exit 2]
+$ q search x
+REFUSED: 'search' is not allowed in V3 (allowed: answer, index, read, start, vsearch)
+[exit 2]
+$ q query x
+REFUSED: 'query' is not allowed in V3 (allowed: answer, index, read, start, vsearch)
+[exit 2]
+$ q grep atlas
+REFUSED: 'grep' is not allowed in V3 (allowed: answer, index, read, start, vsearch)
+[exit 2]
+$ q deps atlas
+REFUSED: 'deps' is not allowed in V3 (allowed: answer, index, read, start, vsearch)
+[exit 2]
+$ q read raw/lab/LAB-STATE.md
+REFUSED: 'raw' is not readable in this variant (allowed: index.md, wiki)
+[exit 2]
+$ q answer PROBE probe only --pages  --confidence low
+recorded answer for PROBE (0.3 s since start, 4 calls)
+[exit 0]
+===================== V4 =====================
+$ q start S1
+started S1 (V4); at most 8 harness calls before q answer
+[exit 0]
+$ q query which UDP port does Syncthing use for local discovery broadcasts
+wiki/syncthing-ignore-firewall.md:28  score 1.00  Syncthing ignore patterns and firewall setup
+    ## Remote web GUI Change *GUI Listen Address* from `127.0.0.1:8384` to `0.0.0.0:8384` and open the port, or tunnel instead: `ssh -L 9999:localhost:8384 machine`. Syncthing can use a SOCKS5 proxy for outbound connections. Device and folder b
+wiki/syncthing.md:13  score 0.50  Syncthing (lab service)
+    - If atlas or tank is down, the notes folder does not sync. - If Tailscale is down, Syncthing cannot reach pebble, because relays and LAN discovery are not used. ## Background
+wiki/syncthing-folders-versioning.md:17  score 0.33  Syncthing devices, folder types and file versioning
+    - **Send Only**: for a "reference copy"; changes from other devices are ignored (received but not applied). When out of sync, a red "Override Changes" button enforces this host's state on the cluster — remote changes are overwritten and fil
+wiki/tailscale-exit-nodes-subnets.md:16  score 0.25  Tailscale exit nodes and subnet routers
+    - Access: by default any tailnet user can use an exit node. With a custom policy you must grant `dst` `autogroup:internet`; granting the exit node device itself only permits connections to it (e.g. SSH). - Use on Linux: `sudo tailscale set 
+wiki/gate.md:12  score 0.20  gate (UniFi gateway)
+    ## What needs gate - [[reverse-proxy]]: outside access needs gate to forward port 443. - [[tailscale]]: needs gate to reach the internet. - [[rclone-backup]]: needs gate for internet access to upload to the cloud drive.
+[exit 0]
+$ q read wiki/syncthing-ignore-firewall.md
+# wiki/syncthing-ignore-firewall.md (lines 1-31 of 31)
+ 1| ---
+ 2| tags: [syncthing, stignore, firewall, ports]
+ 3| created: 2026-11-02
+ 4| updated: 2026-11-02
+ 5| sources: [raw/syncthing/ignoring.md, raw/syncthing/firewall.md]
+ 6| ---
+ 7| # Syncthing ignore patterns and firewall setup
+ 8| 
+ 9| ## `.stignore`
+10| Files not to be synced are listed in `.stignore`, which must be in the root of the synced folder. It is never synced itself, but can `#include` files that are. The *first* pattern that matches decides a file's fate.
+11| - `foo` matches `foo`, `subdir/foo` and any directory named `foo`.
+12| - `*` does not cross the directory separator (`te*ne` matches `telephone` but not `tele/phone`); `**` does (`te**ne` matches `tele/sub/dir/phone`).
+13| - `?` one character; `[a-z]` range; `{banana,pineapple}` alternatives; `\` escapes (on Windows use `|`, or put `#escape=\` at the top of the file).
+14| - `/foo` matches in the folder root only.
+15| - `!` negates (include); negated patterns below the root force scanning of otherwise ignored directories, except top-level rooted ones like `!/foo`.
+16| - `(?i)` case-insensitive (always so on Mac OS and Windows); `(?d)` allows deletion of ignored files that block directory removal (e.g. `(?d).DS_Store`). Prefixes combine as `(?d)(?i)` but not (?di).
+17| - `//` starts a comment only at the start of a line.
+18| - A pattern ending in `/` matches the directory's content but not the directory itself.
+19| Default patterns for auto-accepted folders were added in version 1.19.0; the `|` escape and `#escape=X` in version 2.0.0.
+20| 
+21| ## Ports and router
+22| - Local firewall: **22000/TCP** (TCP sync), **22000/UDP** (QUIC sync), **21027/UDP** (discovery broadcasts on IPv4 and multicasts on IPv6).
+23| - Router: enable UPnP on Syncthing and the router, or forward **22000/TCP** and **22000/UDP** with identical external and internal ports. A port forward on one device lets others connect to it even behind NAT. Without port forwarding, relaying may work but performs poorly compared with a direct connection.
+24| - Local discovery needs broad-/multicasts, often blocked between subnets. With static IPs, replace the default `dynamic` address with something like `tcp://192.168.1.xxx:22000` followed by `dynamic`.
+25| - `ufw`: `sudo ufw allow syncthing` (and `syncthing-gui` only for external GUI access; check with `sudo ufw status verbose`). Firewalld: `sudo firewall-cmd --zone=public --add-service=syncthing --permanent` then `sudo firewall-cmd --reload`.
+26| 
+27| ## Remote web GUI
+28| Change *GUI Listen Address* from `127.0.0.1:8384` to `0.0.0.0:8384` and open the port, or tunnel instead: `ssh -L 9999:localhost:8384 machine`. Syncthing can use a SOCKS5 proxy for outbound connections. Device and folder basics: [[syncthing-folders-versioning]].
+29| 
+30| derived_from:: [[raw/syncthing/ignoring.md]]
+31| derived_from:: [[raw/syncthing/firewall.md]]
+[exit 0]
+$ q answer S1 21027/UDP (discovery broadcasts on IPv4 and multicasts on IPv6). --pages syncthing-ignore-firewall.md --confidence high
+recorded answer for S1 (4.0 s since start, 2 calls)
+[exit 0]
+$ q start S2
+started S2 (V4); at most 8 harness calls before q answer
+[exit 0]
+$ q query what stops if hermes goes down
+wiki/hermes.md:14  score 1.00  hermes (Debian VM)
+    - The [[wiki-search]] service (qmd), which needs hermes. - A systemd timer that rebuilds the wiki search index at 02:30 every night; when hermes is down the index goes stale. ## Access
+wiki/wiki-search.md:12  score 0.50  Wiki search service (qmd on hermes)
+    ## Index and embeddings - The search index is rebuilt by a systemd timer on hermes at 02:30 every night; when hermes is down the index goes stale. - The service calls the [[ollama-endpoint]] on titan (http://10.77.0.30:11434) for embeddings
+wiki/atlas.md:19  score 0.33  atlas (Unraid server)
+    ## Power atlas is powered through the UPS [[apc-1]]. apc-1's USB link tells atlas to shut down cleanly after 5 minutes on battery, so atlas needs apc-1. The apc-1 battery replacement is pending (self-test warning on 2026-10-28), so runtime 
+wiki/apc-1.md:16  score 0.25  apc-1 (UPS)
+    ## Why it matters apc-1 sits at the bottom of the lab's dependency chain: atlas needs it, and the pool [[tank]], the VM [[hermes]], [[plex]], the [[reverse-proxy]], [[syncthing]], [[tailscale]] and the [[rclone-backup]] all need atlas. Unra
+wiki/tailscale.md:12  score 0.20  Tailscale (lab tailnet)
+    ## Who uses it - [[pebble]]: away from home it reaches [[hermes]] and [[plex]] only through Tailscale via atlas. - [[syncthing]]: sync to pebble runs over Tailscale only.
+[exit 0]
+$ q read wiki/hermes.md
+# wiki/hermes.md (lines 1-26 of 26)
+ 1| ---
+ 2| tags: [lab, host, vm, debian, wiki]
+ 3| created: 2026-11-02
+ 4| updated: 2026-11-02
+ 5| sources: [raw/lab/LAB-STATE.md]
+ 6| ---
+ 7| # hermes (Debian VM)
+ 8| 
+ 9| hermes is a Debian VM on [[atlas]] at 10.77.0.20, with its vdisk on tank/domains. hermes runs on atlas and stops when atlas stops, and it cannot boot without [[tank]].
+10| 
+11| ## What hermes hosts
+12| - The wiki repo at /srv/wiki, a git repository.
+13| - The [[wiki-search]] service (qmd), which needs hermes.
+14| - A systemd timer that rebuilds the wiki search index at 02:30 every night; when hermes is down the index goes stale.
+15| 
+16| ## Access
+17| Away from home, [[pebble]] reaches hermes only through [[tailscale]] via atlas.
+18| 
+19| ## Pending
+20| hermes is planned as a second Tailscale exit node; until then atlas is a single point of failure for remote access.
+21| 
+22| depends_on:: [[atlas]] (the VM runs on atlas and stops when atlas stops)
+23| depends_on:: [[tank]] (its vdisk is on tank/domains; it cannot boot without tank)
+24| derived_from:: [[raw/lab/LAB-STATE.md]]
+25| 
+26| ## Superseded
+[exit 0]
+$ q answer S2 The wiki search service (qmd) needs hermes; the index goes stale when hermes is down. --pages hermes.md --confidence high
+recorded answer for S2 (11.5 s since start, 2 calls)
+[exit 0]
+$ q start PROBE
+started PROBE (V4); at most 8 harness calls before q answer
+[exit 0]
+$ q read ../../etc/passwd
+REFUSED: path must be relative to the vault and stay inside it
+[exit 2]
+$ q read raw/manual/denon-avr-x1700h-owners-manual.pdf
+REFUSED: 'raw' is not readable in this variant (allowed: index.md, wiki)
+[exit 2]
+$ q read wiki/does-not-exist.md
+REFUSED: no such file: wiki/does-not-exist.md
+[exit 2]
+$ q search x
+REFUSED: 'search' is not allowed in V4 (allowed: answer, index, query, read, start)
+[exit 2]
+$ q vsearch x
+REFUSED: 'vsearch' is not allowed in V4 (allowed: answer, index, query, read, start)
+[exit 2]
+$ q grep atlas
+REFUSED: 'grep' is not allowed in V4 (allowed: answer, index, query, read, start)
+[exit 2]
+$ q deps atlas
+REFUSED: 'deps' is not allowed in V4 (allowed: answer, index, query, read, start)
+[exit 2]
+$ q depsview atlas
+REFUSED: 'depsview' is not allowed in V4 (allowed: answer, index, query, read, start)
+[exit 2]
+$ q read deps/atlas.md
+REFUSED: 'deps' is not readable in this variant (allowed: index.md, wiki)
+[exit 2]
+$ q answer PROBE probe only --pages  --confidence low
+recorded answer for PROBE (0.4 s since start, 4 calls)
+[exit 0]
+===================== V5 =====================
+$ q start S1
+started S1 (V5); at most 8 harness calls before q answer
+[exit 0]
+$ q query which UDP port does Syncthing use for local discovery broadcasts
+wiki/syncthing-ignore-firewall.md:28  score 1.00  Syncthing ignore patterns and firewall setup
+    ## Remote web GUI Change *GUI Listen Address* from `127.0.0.1:8384` to `0.0.0.0:8384` and open the port, or tunnel instead: `ssh -L 9999:localhost:8384 machine`. Syncthing can use a SOCKS5 proxy for outbound connections. Device and folder b
+wiki/syncthing.md:13  score 0.50  Syncthing (lab service)
+    - If atlas or tank is down, the notes folder does not sync. - If Tailscale is down, Syncthing cannot reach pebble, because relays and LAN discovery are not used. ## Background
+wiki/syncthing-folders-versioning.md:17  score 0.33  Syncthing devices, folder types and file versioning
+    - **Send Only**: for a "reference copy"; changes from other devices are ignored (received but not applied). When out of sync, a red "Override Changes" button enforces this host's state on the cluster — remote changes are overwritten and fil
+wiki/tailscale-exit-nodes-subnets.md:16  score 0.25  Tailscale exit nodes and subnet routers
+    - Access: by default any tailnet user can use an exit node. With a custom policy you must grant `dst` `autogroup:internet`; granting the exit node device itself only permits connections to it (e.g. SSH). - Use on Linux: `sudo tailscale set 
+wiki/gate.md:12  score 0.20  gate (UniFi gateway)
+    ## What needs gate - [[reverse-proxy]]: outside access needs gate to forward port 443. - [[tailscale]]: needs gate to reach the internet. - [[rclone-backup]]: needs gate for internet access to upload to the cloud drive.
+[exit 0]
+$ q read wiki/syncthing-ignore-firewall.md
+# wiki/syncthing-ignore-firewall.md (lines 1-31 of 31)
+ 1| ---
+ 2| tags: [syncthing, stignore, firewall, ports]
+ 3| created: 2026-11-02
+ 4| updated: 2026-11-02
+ 5| sources: [raw/syncthing/ignoring.md, raw/syncthing/firewall.md]
+ 6| ---
+ 7| # Syncthing ignore patterns and firewall setup
+ 8| 
+ 9| ## `.stignore`
+10| Files not to be synced are listed in `.stignore`, which must be in the root of the synced folder. It is never synced itself, but can `#include` files that are. The *first* pattern that matches decides a file's fate.
+11| - `foo` matches `foo`, `subdir/foo` and any directory named `foo`.
+12| - `*` does not cross the directory separator (`te*ne` matches `telephone` but not `tele/phone`); `**` does (`te**ne` matches `tele/sub/dir/phone`).
+13| - `?` one character; `[a-z]` range; `{banana,pineapple}` alternatives; `\` escapes (on Windows use `|`, or put `#escape=\` at the top of the file).
+14| - `/foo` matches in the folder root only.
+15| - `!` negates (include); negated patterns below the root force scanning of otherwise ignored directories, except top-level rooted ones like `!/foo`.
+16| - `(?i)` case-insensitive (always so on Mac OS and Windows); `(?d)` allows deletion of ignored files that block directory removal (e.g. `(?d).DS_Store`). Prefixes combine as `(?d)(?i)` but not (?di).
+17| - `//` starts a comment only at the start of a line.
+18| - A pattern ending in `/` matches the directory's content but not the directory itself.
+19| Default patterns for auto-accepted folders were added in version 1.19.0; the `|` escape and `#escape=X` in version 2.0.0.
+20| 
+21| ## Ports and router
+22| - Local firewall: **22000/TCP** (TCP sync), **22000/UDP** (QUIC sync), **21027/UDP** (discovery broadcasts on IPv4 and multicasts on IPv6).
+23| - Router: enable UPnP on Syncthing and the router, or forward **22000/TCP** and **22000/UDP** with identical external and internal ports. A port forward on one device lets others connect to it even behind NAT. Without port forwarding, relaying may work but performs poorly compared with a direct connection.
+24| - Local discovery needs broad-/multicasts, often blocked between subnets. With static IPs, replace the default `dynamic` address with something like `tcp://192.168.1.xxx:22000` followed by `dynamic`.
+25| - `ufw`: `sudo ufw allow syncthing` (and `syncthing-gui` only for external GUI access; check with `sudo ufw status verbose`). Firewalld: `sudo firewall-cmd --zone=public --add-service=syncthing --permanent` then `sudo firewall-cmd --reload`.
+26| 
+27| ## Remote web GUI
+28| Change *GUI Listen Address* from `127.0.0.1:8384` to `0.0.0.0:8384` and open the port, or tunnel instead: `ssh -L 9999:localhost:8384 machine`. Syncthing can use a SOCKS5 proxy for outbound connections. Device and folder basics: [[syncthing-folders-versioning]].
+29| 
+30| derived_from:: [[raw/syncthing/ignoring.md]]
+31| derived_from:: [[raw/syncthing/firewall.md]]
+[exit 0]
+$ q answer S1 21027/UDP (discovery broadcasts on IPv4 and multicasts on IPv6). --pages syncthing-ignore-firewall.md --confidence high
+recorded answer for S1 (4.5 s since start, 2 calls)
+[exit 0]
+$ q start S2
+started S2 (V5); at most 8 harness calls before q answer
+[exit 0]
+$ q deps hermes
+# deps for wiki/hermes.md
+## Needs (depends_on:: lines on this page)
+depends_on:: [[atlas]] (the VM runs on atlas and stops when atlas stops)
+depends_on:: [[tank]] (its vdisk is on tank/domains; it cannot boot without tank)
+## Needed by (pages whose depends_on:: names [[hermes]])
+wiki/wiki-search.md: depends_on:: [[hermes]] (runs on hermes next to the wiki repo)
+[exit 0]
+$ q deps wiki-search
+# deps for wiki/wiki-search.md
+## Needs (depends_on:: lines on this page)
+depends_on:: [[hermes]] (runs on hermes next to the wiki repo)
+depends_on:: [[ollama-endpoint]] (calls the Ollama endpoint on titan for embeddings; without it new pages are not embedded (degrades, keyword search still works))
+## Needed by (pages whose depends_on:: names [[wiki-search]])
+(none)
+[exit 0]
+$ q answer S2 Direct: the wiki search service (runs on hermes). Nothing else depends on wiki-search, so no second hop. --pages hermes.md,wiki-search.md --confidence high
+recorded answer for S2 (0.1 s since start, 2 calls)
+[exit 0]
+$ q start PROBE
+started PROBE (V5); at most 8 harness calls before q answer
+[exit 0]
+$ q read ../../etc/passwd
+REFUSED: path must be relative to the vault and stay inside it
+[exit 2]
+$ q read raw/manual/denon-avr-x1700h-owners-manual.pdf
+REFUSED: 'raw' is not readable in this variant (allowed: index.md, wiki)
+[exit 2]
+$ q read wiki/does-not-exist.md
+REFUSED: no such file: wiki/does-not-exist.md
+[exit 2]
+$ q depsview atlas
+REFUSED: 'depsview' is not allowed in V5 (allowed: answer, deps, index, query, read, start)
+[exit 2]
+$ q read deps/atlas.md
+REFUSED: 'deps' is not readable in this variant (allowed: index.md, wiki)
+[exit 2]
+$ q grep atlas
+REFUSED: 'grep' is not allowed in V5 (allowed: answer, deps, index, query, read, start)
+[exit 2]
+$ q deps ../etc
+REFUSED: slug must look like 'atlas' or 'rclone-backup'
+[exit 2]
+$ q deps titan
+# deps for wiki/titan.md
+## Needs (depends_on:: lines on this page)
+(none)
+## Needed by (pages whose depends_on:: names [[titan]])
+wiki/ollama-endpoint.md: depends_on:: [[titan]] (Ollama runs on titan's Intel Arc GPU; the endpoint needs titan awake)
+[exit 0]
+$ q answer PROBE probe only --pages  --confidence low
+recorded answer for PROBE (0.3 s since start, 6 calls)
+[exit 0]
+===================== V6 =====================
+$ q start S1
+started S1 (V6); at most 8 harness calls before q answer
+[exit 0]
+$ q query which UDP port does Syncthing use for local discovery broadcasts
+wiki/syncthing-ignore-firewall.md:28  score 1.00  Syncthing ignore patterns and firewall setup
+    ## Remote web GUI Change *GUI Listen Address* from `127.0.0.1:8384` to `0.0.0.0:8384` and open the port, or tunnel instead: `ssh -L 9999:localhost:8384 machine`. Syncthing can use a SOCKS5 proxy for outbound connections. Device and folder b
+wiki/syncthing.md:13  score 0.50  Syncthing (lab service)
+    - If atlas or tank is down, the notes folder does not sync. - If Tailscale is down, Syncthing cannot reach pebble, because relays and LAN discovery are not used. ## Background
+wiki/syncthing-folders-versioning.md:17  score 0.33  Syncthing devices, folder types and file versioning
+    - **Send Only**: for a "reference copy"; changes from other devices are ignored (received but not applied). When out of sync, a red "Override Changes" button enforces this host's state on the cluster — remote changes are overwritten and fil
+wiki/tailscale-exit-nodes-subnets.md:16  score 0.25  Tailscale exit nodes and subnet routers
+    - Access: by default any tailnet user can use an exit node. With a custom policy you must grant `dst` `autogroup:internet`; granting the exit node device itself only permits connections to it (e.g. SSH). - Use on Linux: `sudo tailscale set 
+wiki/gate.md:12  score 0.20  gate (UniFi gateway)
+    ## What needs gate - [[reverse-proxy]]: outside access needs gate to forward port 443. - [[tailscale]]: needs gate to reach the internet. - [[rclone-backup]]: needs gate for internet access to upload to the cloud drive.
+[exit 0]
+$ q read wiki/syncthing-ignore-firewall.md
+# wiki/syncthing-ignore-firewall.md (lines 1-31 of 31)
+ 1| ---
+ 2| tags: [syncthing, stignore, firewall, ports]
+ 3| created: 2026-11-02
+ 4| updated: 2026-11-02
+ 5| sources: [raw/syncthing/ignoring.md, raw/syncthing/firewall.md]
+ 6| ---
+ 7| # Syncthing ignore patterns and firewall setup
+ 8| 
+ 9| ## `.stignore`
+10| Files not to be synced are listed in `.stignore`, which must be in the root of the synced folder. It is never synced itself, but can `#include` files that are. The *first* pattern that matches decides a file's fate.
+11| - `foo` matches `foo`, `subdir/foo` and any directory named `foo`.
+12| - `*` does not cross the directory separator (`te*ne` matches `telephone` but not `tele/phone`); `**` does (`te**ne` matches `tele/sub/dir/phone`).
+13| - `?` one character; `[a-z]` range; `{banana,pineapple}` alternatives; `\` escapes (on Windows use `|`, or put `#escape=\` at the top of the file).
+14| - `/foo` matches in the folder root only.
+15| - `!` negates (include); negated patterns below the root force scanning of otherwise ignored directories, except top-level rooted ones like `!/foo`.
+16| - `(?i)` case-insensitive (always so on Mac OS and Windows); `(?d)` allows deletion of ignored files that block directory removal (e.g. `(?d).DS_Store`). Prefixes combine as `(?d)(?i)` but not (?di).
+17| - `//` starts a comment only at the start of a line.
+18| - A pattern ending in `/` matches the directory's content but not the directory itself.
+19| Default patterns for auto-accepted folders were added in version 1.19.0; the `|` escape and `#escape=X` in version 2.0.0.
+20| 
+21| ## Ports and router
+22| - Local firewall: **22000/TCP** (TCP sync), **22000/UDP** (QUIC sync), **21027/UDP** (discovery broadcasts on IPv4 and multicasts on IPv6).
+23| - Router: enable UPnP on Syncthing and the router, or forward **22000/TCP** and **22000/UDP** with identical external and internal ports. A port forward on one device lets others connect to it even behind NAT. Without port forwarding, relaying may work but performs poorly compared with a direct connection.
+24| - Local discovery needs broad-/multicasts, often blocked between subnets. With static IPs, replace the default `dynamic` address with something like `tcp://192.168.1.xxx:22000` followed by `dynamic`.
+25| - `ufw`: `sudo ufw allow syncthing` (and `syncthing-gui` only for external GUI access; check with `sudo ufw status verbose`). Firewalld: `sudo firewall-cmd --zone=public --add-service=syncthing --permanent` then `sudo firewall-cmd --reload`.
+26| 
+27| ## Remote web GUI
+28| Change *GUI Listen Address* from `127.0.0.1:8384` to `0.0.0.0:8384` and open the port, or tunnel instead: `ssh -L 9999:localhost:8384 machine`. Syncthing can use a SOCKS5 proxy for outbound connections. Device and folder basics: [[syncthing-folders-versioning]].
+29| 
+30| derived_from:: [[raw/syncthing/ignoring.md]]
+31| derived_from:: [[raw/syncthing/firewall.md]]
+[exit 0]
+$ q answer S1 21027/UDP (discovery broadcasts on IPv4 and multicasts on IPv6). --pages syncthing-ignore-firewall.md --confidence high
+recorded answer for S1 (4.3 s since start, 2 calls)
+[exit 0]
+$ q start S2
+started S2 (V6); at most 8 harness calls before q answer
+[exit 0]
+$ q depsview hermes
+# deps: hermes
+
+Generated by bin/build-deps.py from `depends_on::` lines (above `## Superseded`). Edge a -> b: a fails or degrades without b.
+
+## Needs
+### Direct
+- hermes -> [[atlas]] — the VM runs on atlas and stops when atlas stops (updated 2026-11-02)
+- hermes -> [[tank]] — its vdisk is on tank/domains; it cannot boot without tank (updated 2026-11-02)
+### Second hop
+- atlas -> [[apc-1]] — powered through the UPS; USB link triggers clean shutdown after 5 minutes on battery (updated 2026-11-02)
+- atlas -> [[gate]] — Unraid email notifications are sent through gate (updated 2026-11-02)
+- tank -> [[atlas]] — the pool is inside atlas and exists only while atlas is running (updated 2026-11-02)
+
+## Needed by
+### Direct
+- [[wiki-search]] -> hermes — runs on hermes next to the wiki repo (updated 2026-11-02)
+### Second hop
+- (none)
+
+22 pages have no edges
+[exit 0]
+$ q answer S2 Direct: the wiki search service; no second-hop dependents. --pages hermes.md,wiki-search.md --confidence high
+recorded answer for S2 (0.1 s since start, 1 calls)
+[exit 0]
+$ q start PROBE
+started PROBE (V6); at most 8 harness calls before q answer
+[exit 0]
+$ q read ../../etc/passwd
+REFUSED: path must be relative to the vault and stay inside it
+[exit 2]
+$ q read raw/manual/denon-avr-x1700h-owners-manual.pdf
+REFUSED: 'raw' is not readable in this variant (allowed: deps, index.md, wiki)
+[exit 2]
+$ q read wiki/does-not-exist.md
+REFUSED: no such file: wiki/does-not-exist.md
+[exit 2]
+$ q grep atlas
+REFUSED: 'grep' is not allowed in V6 (allowed: answer, deps, depsview, index, query, read, start)
+[exit 2]
+$ q ls wiki
+REFUSED: 'ls' is not allowed in V6 (allowed: answer, deps, depsview, index, query, read, start)
+[exit 2]
+$ q search x
+REFUSED: 'search' is not allowed in V6 (allowed: answer, deps, depsview, index, query, read, start)
+[exit 2]
+$ q read raw/lab/LAB-STATE.md
+REFUSED: 'raw' is not readable in this variant (allowed: deps, index.md, wiki)
+[exit 2]
+$ q depsview titan
+# deps: titan
+
+Generated by bin/build-deps.py from `depends_on::` lines (above `## Superseded`). Edge a -> b: a fails or degrades without b.
+
+## Needs
+### Direct
+- (none)
+### Second hop
+- (none)
+
+## Needed by
+### Direct
+- [[ollama-endpoint]] -> titan — Ollama runs on titan's Intel Arc GPU; the endpoint needs titan awake (updated 2026-11-02)
+### Second hop
+- [[wiki-search]] -> ollama-endpoint — calls the Ollama endpoint on titan for embeddings; without it new pages are not embedded (degrades, keyword search still works) (updated 2026-11-02)
+
+22 pages have no edges
+[exit 0]
+$ q answer PROBE probe only --pages  --confidence low
+recorded answer for PROBE (0.4 s since start, 5 calls)
+[exit 0]
+===================== V7 =====================
+$ q start S1
+started S1 (V7); at most 8 harness calls before q answer
+[exit 0]
+$ q index
+# Index
+
+Every wiki page, one line each, grouped by category. Paths are relative to the vault root (`wiki/<slug>.md`). Lab pages describe the fictional home lab "lab77"; their `depends_on::` lines say what each subject needs.
+
+## Lab — hosts
+- [[atlas]] `wiki/atlas.md` — Unraid server at 10.77.0.10; hosts tank, hermes, Plex, Caddy, Syncthing, Tailscale exit node, nightly backup; powered via apc-1.
+- [[hermes]] `wiki/hermes.md` — Debian VM on atlas (10.77.0.20); wiki repo /srv/wiki and the wiki search service; index timer at 02:30.
+- [[titan]] `wiki/titan.md` — Windows gaming PC (10.77.0.30); runs Ollama on an Intel Arc GPU via Vulkan.
+
+## Lab — devices and network
+- [[apc-1]] `wiki/apc-1.md` — UPS powering atlas; clean shutdown after 5 minutes on battery; battery replacement pending.
+- [[gate]] `wiki/gate.md` — UniFi gateway at 10.77.0.1; the lab's only route to the internet; DHCP only for aria.
+- [[pebble]] `wiki/pebble.md` — MacBook; remote access only through Tailscale via atlas; receives the Syncthing notes folder.
+- [[aria]] `wiki/aria.md` — living-room Denon AVR-X1700H at 10.77.0.40; network address from gate.
+
+## Lab — storage
+- [[tank]] `wiki/tank.md` — ZFS pool inside atlas with shares appdata, media, domains, notes.
+
+## Lab — services
+- [[plex]] `wiki/plex.md` — Plex Docker container on atlas; library and appdata on tank.
+- [[reverse-proxy]] `wiki/reverse-proxy.md` — Caddy container on atlas fronting Plex and wiki search on port 443; outside access via gate.
+- [[syncthing]] `wiki/syncthing.md` — Syncthing container on atlas syncing tank/notes to pebble over Tailscale only.
+- [[tailscale]] `wiki/tailscale.md` — Tailscale Unraid plugin on atlas; only exit node; subnet route 10.77.0.0/24.
+- [[ollama-endpoint]] `wiki/ollama-endpoint.md` — Ollama endpoint on titan (port 11434) used for wiki embeddings.
+- [[rclone-backup]] `wiki/rclone-backup.md` — nightly rclone job on atlas at 06:00 reading the 05:45 tank snapshot.
+- [[wiki-search]] `wiki/wiki-search.md` — qmd wiki search service on hermes; embeddings from titan's Ollama.
+
+## Unraid
+- [[unraid-array-parity]] `wiki/unraid-array-parity.md` — array, parity rules, start/stop, write modes (md_write_method), read speeds.
+- [[unraid-pools-zfs]] `wiki/unraid-pools-zfs.md` — cache pools, pool modes, minimum free space, ZFS pools, RAIDZ expansion, ARC RAM.
+- [[unraid-shares]] `wiki/unraid-shares.md` — user vs disk shares, /mnt paths, primary/secondary storage, allocation methods, default shares.
+- [[unraid-docker-vms]] `wiki/unraid-docker-vms.md` — container network/volume/port settings, autostart order and wait, VM Manager, snapshots.
+- [[unraid-tailscale]] `wiki/unraid-tailscale.md` — Tailscale plugin install, exit node/subnet routes on Unraid, Tailscale in containers, userspace networking.
+- [[unraid-notifications-ups]] `wiki/unraid-notifications-ups.md` — UPS settings, notification settings, SMTP, notification agents, scheduler, power mode.
+
+## Ollama
+- [[ollama-api]] `wiki/ollama-api.md` — base URLs, cloud vs local, OpenAI-compatible endpoints and limits, /v1/responses, context size.
+- [[ollama-modelfile]] `wiki/ollama-modelfile.md` — Modelfile instructions, parameters and defaults, ollama create/show.
+- [[ollama-server-gpu]] `wiki/ollama-server-gpu.md` — server environment variables, keep-alive, concurrency, Nvidia/Metal/Vulkan GPUs, Docker commands.
+
+## Syncthing
+- [[syncthing-folders-versioning]] `wiki/syncthing-folders-versioning.md` — getting started, device IDs, folder types, file versioning strategies.
+- [[syncthing-ignore-firewall]] `wiki/syncthing-ignore-firewall.md` — .stignore patterns, ports 22000/21027, port forwarding, remote GUI.
+
+## Tailscale
+- [[tailscale-exit-nodes-subnets]] `wiki/tailscale-exit-nodes-subnets.md` — exit nodes (advertise, approve, grant, use) and subnet routers (IP forwarding, routes, SNAT).
+- [[tailscale-acls-ssh]] `wiki/tailscale-acls-ssh.md` — ACL semantics and plan availability; Tailscale SSH setup and ssh rule fields.
+- [[tailscale-magicdns]] `wiki/tailscale-magicdns.md` — MagicDNS names, FQDNs, defaults, disabling per device.
+
+## Claude Code
+- [[claude-code-settings-permissions]] `wiki/claude-code-settings-permissions.md` — settings files, precedence, permission rules and modes.
+- [[claude-code-hooks]] `wiki/claude-code-hooks.md` — hook events, configuration, matchers, handler types, exit codes.
+- [[claude-code-skills-subagents]] `wiki/claude-code-skills-subagents.md` — skills (locations, frontmatter) and subagents (built-ins, scopes, fields).
+- [[claude-code-memory]] `wiki/claude-code-memory.md` — CLAUDE.md locations and loading, rules, auto memory.
+- [[claude-code-mcp]] `wiki/claude-code-mcp.md` — adding/managing MCP servers, timeouts, scopes and precedence.
+- [[claude-code-sandboxing]] `wiki/claude-code-sandboxing.md` — sandboxed Bash defaults, modes, filesystem/network settings, protected paths.
+
+## Home theater
+- [[avr-setup]] `wiki/avr-setup.md` — Denon AVR-X1700H: ARC/eARC and 8K, speakers, network, Auto Standby, protection circuit, resets.
+
+## Tooling
+- [[qmd-search]] `wiki/qmd-search.md` — QMD local search: commands, hybrid pipeline, models, qmd bench.
+- `deps/<slug>.md` — generated dependency views for lab pages (Needs / Needed by), rebuilt from the `depends_on::` lines; not hand-written.
+- `raw/` — the original sources each page cites in its `derived_from::` lines; read-only.
+[exit 0]
+$ q grep 21027|discovery wiki
+wiki/syncthing.md:9:Syncthing runs as a container on [[atlas]] and syncs tank/notes to [[pebble]]. Syncthing needs [[tank]], and Syncthing to pebble runs over [[tailscale]] only (no relays, no LAN discovery).
+wiki/syncthing.md:13:- If Tailscale is down, Syncthing cannot reach pebble, because relays and LAN discovery are not used.
+wiki/syncthing.md:16:Syncthing folder types and versioning: [[syncthing-folders-versioning]]; ports, relays and discovery: [[syncthing-ignore-firewall]].
+wiki/syncthing.md:20:depends_on:: [[tailscale]] (Syncthing to pebble runs over Tailscale only; no relays, no LAN discovery)
+wiki/pebble.md:12:[[syncthing]] on atlas syncs tank/notes to pebble. Syncthing to pebble runs over Tailscale only (no relays, no LAN discovery).
+wiki/syncthing-ignore-firewall.md:22:- Local firewall: **22000/TCP** (TCP sync), **22000/UDP** (QUIC sync), **21027/UDP** (discovery broadcasts on IPv4 and multicasts on IPv6).
+wiki/syncthing-ignore-firewall.md:24:- Local discovery needs broad-/multicasts, often blocked between subnets. With static IPs, replace the default `dynamic` address with something like `tcp://192.168.1.xxx:22000` followed by `dynamic`.
+[exit 0]
+$ q read wiki/syncthing-ignore-firewall.md 20-30
+# wiki/syncthing-ignore-firewall.md (lines 20-30 of 31)
+20| 
+21| ## Ports and router
+22| - Local firewall: **22000/TCP** (TCP sync), **22000/UDP** (QUIC sync), **21027/UDP** (discovery broadcasts on IPv4 and multicasts on IPv6).
+23| - Router: enable UPnP on Syncthing and the router, or forward **22000/TCP** and **22000/UDP** with identical external and internal ports. A port forward on one device lets others connect to it even behind NAT. Without port forwarding, relaying may work but performs poorly compared with a direct connection.
+24| - Local discovery needs broad-/multicasts, often blocked between subnets. With static IPs, replace the default `dynamic` address with something like `tcp://192.168.1.xxx:22000` followed by `dynamic`.
+25| - `ufw`: `sudo ufw allow syncthing` (and `syncthing-gui` only for external GUI access; check with `sudo ufw status verbose`). Firewalld: `sudo firewall-cmd --zone=public --add-service=syncthing --permanent` then `sudo firewall-cmd --reload`.
+26| 
+27| ## Remote web GUI
+28| Change *GUI Listen Address* from `127.0.0.1:8384` to `0.0.0.0:8384` and open the port, or tunnel instead: `ssh -L 9999:localhost:8384 machine`. Syncthing can use a SOCKS5 proxy for outbound connections. Device and folder basics: [[syncthing-folders-versioning]].
+29| 
+30| derived_from:: [[raw/syncthing/ignoring.md]]
+[exit 0]
+$ q answer S1 21027/UDP (discovery broadcasts on IPv4 and multicasts on IPv6). --pages syncthing-ignore-firewall.md --confidence high
+recorded answer for S1 (0.2 s since start, 3 calls)
+[exit 0]
+$ q start S2
+started S2 (V7); at most 8 harness calls before q answer
+[exit 0]
+$ q index
+# Index
+
+Every wiki page, one line each, grouped by category. Paths are relative to the vault root (`wiki/<slug>.md`). Lab pages describe the fictional home lab "lab77"; their `depends_on::` lines say what each subject needs.
+
+## Lab — hosts
+- [[atlas]] `wiki/atlas.md` — Unraid server at 10.77.0.10; hosts tank, hermes, Plex, Caddy, Syncthing, Tailscale exit node, nightly backup; powered via apc-1.
+- [[hermes]] `wiki/hermes.md` — Debian VM on atlas (10.77.0.20); wiki repo /srv/wiki and the wiki search service; index timer at 02:30.
+- [[titan]] `wiki/titan.md` — Windows gaming PC (10.77.0.30); runs Ollama on an Intel Arc GPU via Vulkan.
+
+## Lab — devices and network
+- [[apc-1]] `wiki/apc-1.md` — UPS powering atlas; clean shutdown after 5 minutes on battery; battery replacement pending.
+- [[gate]] `wiki/gate.md` — UniFi gateway at 10.77.0.1; the lab's only route to the internet; DHCP only for aria.
+- [[pebble]] `wiki/pebble.md` — MacBook; remote access only through Tailscale via atlas; receives the Syncthing notes folder.
+- [[aria]] `wiki/aria.md` — living-room Denon AVR-X1700H at 10.77.0.40; network address from gate.
+
+## Lab — storage
+- [[tank]] `wiki/tank.md` — ZFS pool inside atlas with shares appdata, media, domains, notes.
+
+## Lab — services
+- [[plex]] `wiki/plex.md` — Plex Docker container on atlas; library and appdata on tank.
+- [[reverse-proxy]] `wiki/reverse-proxy.md` — Caddy container on atlas fronting Plex and wiki search on port 443; outside access via gate.
+- [[syncthing]] `wiki/syncthing.md` — Syncthing container on atlas syncing tank/notes to pebble over Tailscale only.
+- [[tailscale]] `wiki/tailscale.md` — Tailscale Unraid plugin on atlas; only exit node; subnet route 10.77.0.0/24.
+- [[ollama-endpoint]] `wiki/ollama-endpoint.md` — Ollama endpoint on titan (port 11434) used for wiki embeddings.
+- [[rclone-backup]] `wiki/rclone-backup.md` — nightly rclone job on atlas at 06:00 reading the 05:45 tank snapshot.
+- [[wiki-search]] `wiki/wiki-search.md` — qmd wiki search service on hermes; embeddings from titan's Ollama.
+
+## Unraid
+- [[unraid-array-parity]] `wiki/unraid-array-parity.md` — array, parity rules, start/stop, write modes (md_write_method), read speeds.
+- [[unraid-pools-zfs]] `wiki/unraid-pools-zfs.md` — cache pools, pool modes, minimum free space, ZFS pools, RAIDZ expansion, ARC RAM.
+- [[unraid-shares]] `wiki/unraid-shares.md` — user vs disk shares, /mnt paths, primary/secondary storage, allocation methods, default shares.
+- [[unraid-docker-vms]] `wiki/unraid-docker-vms.md` — container network/volume/port settings, autostart order and wait, VM Manager, snapshots.
+- [[unraid-tailscale]] `wiki/unraid-tailscale.md` — Tailscale plugin install, exit node/subnet routes on Unraid, Tailscale in containers, userspace networking.
+- [[unraid-notifications-ups]] `wiki/unraid-notifications-ups.md` — UPS settings, notification settings, SMTP, notification agents, scheduler, power mode.
+
+## Ollama
+- [[ollama-api]] `wiki/ollama-api.md` — base URLs, cloud vs local, OpenAI-compatible endpoints and limits, /v1/responses, context size.
+- [[ollama-modelfile]] `wiki/ollama-modelfile.md` — Modelfile instructions, parameters and defaults, ollama create/show.
+- [[ollama-server-gpu]] `wiki/ollama-server-gpu.md` — server environment variables, keep-alive, concurrency, Nvidia/Metal/Vulkan GPUs, Docker commands.
+
+## Syncthing
+- [[syncthing-folders-versioning]] `wiki/syncthing-folders-versioning.md` — getting started, device IDs, folder types, file versioning strategies.
+- [[syncthing-ignore-firewall]] `wiki/syncthing-ignore-firewall.md` — .stignore patterns, ports 22000/21027, port forwarding, remote GUI.
+
+## Tailscale
+- [[tailscale-exit-nodes-subnets]] `wiki/tailscale-exit-nodes-subnets.md` — exit nodes (advertise, approve, grant, use) and subnet routers (IP forwarding, routes, SNAT).
+- [[tailscale-acls-ssh]] `wiki/tailscale-acls-ssh.md` — ACL semantics and plan availability; Tailscale SSH setup and ssh rule fields.
+- [[tailscale-magicdns]] `wiki/tailscale-magicdns.md` — MagicDNS names, FQDNs, defaults, disabling per device.
+
+## Claude Code
+- [[claude-code-settings-permissions]] `wiki/claude-code-settings-permissions.md` — settings files, precedence, permission rules and modes.
+- [[claude-code-hooks]] `wiki/claude-code-hooks.md` — hook events, configuration, matchers, handler types, exit codes.
+- [[claude-code-skills-subagents]] `wiki/claude-code-skills-subagents.md` — skills (locations, frontmatter) and subagents (built-ins, scopes, fields).
+- [[claude-code-memory]] `wiki/claude-code-memory.md` — CLAUDE.md locations and loading, rules, auto memory.
+- [[claude-code-mcp]] `wiki/claude-code-mcp.md` — adding/managing MCP servers, timeouts, scopes and precedence.
+- [[claude-code-sandboxing]] `wiki/claude-code-sandboxing.md` — sandboxed Bash defaults, modes, filesystem/network settings, protected paths.
+
+## Home theater
+- [[avr-setup]] `wiki/avr-setup.md` — Denon AVR-X1700H: ARC/eARC and 8K, speakers, network, Auto Standby, protection circuit, resets.
+
+## Tooling
+- [[qmd-search]] `wiki/qmd-search.md` — QMD local search: commands, hybrid pipeline, models, qmd bench.
+- `deps/<slug>.md` — generated dependency views for lab pages (Needs / Needed by), rebuilt from the `depends_on::` lines; not hand-written.
+- `raw/` — the original sources each page cites in its `derived_from::` lines; read-only.
+[exit 0]
+$ q read wiki/hermes.md
+# wiki/hermes.md (lines 1-26 of 26)
+ 1| ---
+ 2| tags: [lab, host, vm, debian, wiki]
+ 3| created: 2026-11-02
+ 4| updated: 2026-11-02
+ 5| sources: [raw/lab/LAB-STATE.md]
+ 6| ---
+ 7| # hermes (Debian VM)
+ 8| 
+ 9| hermes is a Debian VM on [[atlas]] at 10.77.0.20, with its vdisk on tank/domains. hermes runs on atlas and stops when atlas stops, and it cannot boot without [[tank]].
+10| 
+11| ## What hermes hosts
+12| - The wiki repo at /srv/wiki, a git repository.
+13| - The [[wiki-search]] service (qmd), which needs hermes.
+14| - A systemd timer that rebuilds the wiki search index at 02:30 every night; when hermes is down the index goes stale.
+15| 
+16| ## Access
+17| Away from home, [[pebble]] reaches hermes only through [[tailscale]] via atlas.
+18| 
+19| ## Pending
+20| hermes is planned as a second Tailscale exit node; until then atlas is a single point of failure for remote access.
+21| 
+22| depends_on:: [[atlas]] (the VM runs on atlas and stops when atlas stops)
+23| depends_on:: [[tank]] (its vdisk is on tank/domains; it cannot boot without tank)
+24| derived_from:: [[raw/lab/LAB-STATE.md]]
+25| 
+26| ## Superseded
+[exit 0]
+$ q grep depends_on:: \[\[hermes\]\] wiki
+wiki/wiki-search.md:21:depends_on:: [[hermes]] (runs on hermes next to the wiki repo)
+[exit 0]
+$ q answer S2 The wiki search service needs hermes; its index goes stale when hermes is down. --pages hermes.md,wiki-search.md --confidence high
+recorded answer for S2 (0.2 s since start, 3 calls)
+[exit 0]
+$ q start PROBE
+started PROBE (V7); at most 8 harness calls before q answer
+[exit 0]
+$ q read ../../etc/passwd
+REFUSED: path must be relative to the vault and stay inside it
+[exit 2]
+$ q read raw/manual/denon-avr-x1700h-owners-manual.pdf
+REFUSED: 'raw' is not readable in this variant (allowed: index.md, wiki)
+[exit 2]
+$ q read wiki/does-not-exist.md
+REFUSED: no such file: wiki/does-not-exist.md
+[exit 2]
+$ q search x
+REFUSED: 'search' is not allowed in V7 (allowed: answer, grep, index, ls, read, start)
+[exit 2]
+$ q vsearch x
+REFUSED: 'vsearch' is not allowed in V7 (allowed: answer, grep, index, ls, read, start)
+[exit 2]
+$ q query x
+REFUSED: 'query' is not allowed in V7 (allowed: answer, grep, index, ls, read, start)
+[exit 2]
+$ q deps atlas
+REFUSED: 'deps' is not allowed in V7 (allowed: answer, grep, index, ls, read, start)
+[exit 2]
+$ q depsview atlas
+REFUSED: 'depsview' is not allowed in V7 (allowed: answer, grep, index, ls, read, start)
+[exit 2]
+$ q read raw/lab/LAB-STATE.md
+REFUSED: 'raw' is not readable in this variant (allowed: index.md, wiki)
+[exit 2]
+$ q ls raw
+REFUSED: ls is limited to: wiki
+[exit 2]
+$ q grep atlas raw
+REFUSED: grep is limited to: wiki
+[exit 2]
+$ q read deps/atlas.md
+REFUSED: 'deps' is not readable in this variant (allowed: index.md, wiki)
+[exit 2]
+$ q grep depends_on:: \[\[titan\]\] wiki
+wiki/ollama-endpoint.md:17:depends_on:: [[titan]] (Ollama runs on titan's Intel Arc GPU; the endpoint needs titan awake)
+wiki/plex.md:23:depends_on:: [[titan]] (old transcoding on titan, moved 2026-09)
+[exit 0]
+$ q answer PROBE probe only --pages  --confidence low
+recorded answer for PROBE (0.5 s since start, 8 calls)
+[exit 0]

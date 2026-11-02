@@ -1,0 +1,4 @@
+qid	answer	pages	confidence
+S1	21027/UDP (discovery broadcasts on IPv4 and multicasts on IPv6).	syncthing-ignore-firewall.md	high
+S2	Direct: the wiki search service (runs on hermes). Nothing else depends on wiki-search, so no second hop.	hermes.md,wiki-search.md	high
+PROBE	probe only		low

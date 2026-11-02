@@ -1,0 +1,4 @@
+qid	answer	pages	confidence
+S1	Port 21027/UDP, for discovery broadcasts on IPv4 and multicasts on IPv6.	raw/syncthing/firewall.md	high
+S2	The wiki search service (qmd) on hermes stops, and the nightly index rebuild timer does not run, so the index goes stale.	raw/lab/LAB-STATE.md	high
+PROBE	probe only		low

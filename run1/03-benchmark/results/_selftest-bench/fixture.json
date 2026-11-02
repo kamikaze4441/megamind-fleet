@@ -1,0 +1,26 @@
+{
+  "description": "MEGAMIND run1 benchmark questions over the 'wiki' collection",
+  "version": 1,
+  "collection": "wiki",
+  "queries": [
+    {
+      "id": "S1",
+      "query": "Which UDP port does Syncthing use for local discovery broadcasts?",
+      "type": "semantic",
+      "expected_files": [
+        "syncthing-ignore-firewall.md"
+      ],
+      "expected_in_top_k": 3
+    },
+    {
+      "id": "S2",
+      "query": "What stops or degrades in the lab if hermes goes down?",
+      "type": "semantic",
+      "expected_files": [
+        "hermes.md",
+        "wiki-search.md"
+      ],
+      "expected_in_top_k": 3
+    }
+  ]
+}

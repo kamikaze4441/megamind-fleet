@@ -1,0 +1,5 @@
+qid	answer	pages	confidence
+S1	21027/UDP (discovery broadcasts on IPv4 and multicasts on IPv6).	syncthing-ignore-firewall.md	high
+S2	The wiki search service needs hermes, and its index (rebuilt by a timer on hermes at 02:30) goes stale.	hermes.md,wiki-search.md	high
+PROBE	probe only		low
+CAP	cap probe		low

@@ -28,12 +28,19 @@ add("manual-txt","manual","same manual, text extracted with `pdftotext` 24.02.0 
 add("lab-state","lab","LAB-STATE: fictional home lab \"lab77\"","(none; written by builder B1)","fleet-written, CC0","raw/lab/LAB-STATE.md")
 
 out = ["# Corpus (run 1, benchmark 03)", "",
- "Frozen at the step-1 report; `raw/` is not changed after that. Wiki pages fed by each source: filled in step 2 (column 'wiki pages').", "",
+ "Frozen at the step-1 report; `raw/` is not changed after that. Column 'wiki pages' lists the `vault/wiki/` pages whose `sources:` cite the file (filled after step 2).", "",
  "Conversion: `.md` URLs saved verbatim; HTML pages reduced to their main element (`<article>` on docs.unraid.net, `div[role=main]` on docs.syncthing.net) with Python `html.parser`, inline `<svg>` and `data:` images dropped, then `pandoc -f html -t gfm-raw_html --wrap=none`; heading permalink anchors (`[​](#…)`, `[¶](#…)`) removed and `data:` markdown images replaced by `[image: alt]`. Each file starts with a one-line `<!-- source: … | fetched: … -->` comment. Script: `/tmp/b1/fetch.py` (copied to `harness/fetch-corpus.py`).", "",
  "| id | group | title | URL | licence / terms | fetched | raw path | bytes | wiki pages |",
  "|---|---|---|---|---|---|---|---|---|"]
+import glob
+fed = {}
+for p in sorted(glob.glob(f"{B}/vault/wiki/*.md")):
+    m = re.search(r"^sources:\s*\[(.*)\]", open(p).read(), re.M)
+    for s in (m.group(1).split(",") if m else []):
+        fed.setdefault(s.strip(), []).append(os.path.basename(p)[:-3])
 for r in rows:
-    out.append("| " + " | ".join(str(x).replace("|","\\|") for x in r) + " | (step 2) |")
+    pages = fed.get(r[6]) or (fed.get(r[6][:-4] + ".txt") if r[6].endswith(".pdf") else None)
+    out.append("| " + " | ".join(str(x).replace("|","\\|") for x in r) + " | " + (", ".join(pages) if pages else "—") + " |")
 tot = sum(r[7] for r in rows)
 groups = {}
 for r in rows: groups.setdefault(r[1], []).append(r[7])

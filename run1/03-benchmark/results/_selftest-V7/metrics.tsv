@@ -1,0 +1,13 @@
+qid	wall_s	calls	refused	bytes_out	chars_out	tokens_proxy	pages_read	raw_read	pages_cited	answer_chars
+PROBE	0.5	13	12	1147	1147	287				10
+S1	0.2	3	0	8081	7995	1999	syncthing-ignore-firewall.md		syncthing-ignore-firewall.md	64
+S2	0.2	3	0	6780	6694	1674	hermes.md		hermes.md,wiki-search.md	79
+
+# questions	3
+# median_wall_s	0.2	# total_wall_s	0.9
+# median_calls	3	# total_calls	19
+# median_bytes_out	6780	# total_bytes_out	16008
+# median_chars_out	6694	# total_chars_out	15836
+# median_tokens_proxy	1674	# total_tokens_proxy	3960
+# median_pages_read	1
+# token proxy = chars printed by the harness / 4 (not Console usage)

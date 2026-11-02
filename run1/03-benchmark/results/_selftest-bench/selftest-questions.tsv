@@ -1,0 +1,3 @@
+qid	question	expected_pages
+S1	Which UDP port does Syncthing use for local discovery broadcasts?	syncthing-ignore-firewall.md
+S2	What stops or degrades in the lab if hermes goes down?	hermes.md,wiki-search.md
