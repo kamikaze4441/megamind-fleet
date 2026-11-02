@@ -182,6 +182,14 @@ Question: For draft claims A–I that rest on one source, does a second independ
 - `argon_research` "verify Managed Agents schedules, pricing, memory stores, and qmd" (job db5ef981, 3 turns, G/H/I): turns 1–2 done, turn 3 **refused**, "Gemini HTTP 402… Your prepayment credits are depleted". No cost line was returned. 3 `argon_result` polls after the failure returned the same error.
 - `argon_result {}` listing call: no cost.
 
+## Reddit: not reached from the sandbox; the owner's fold-in chat covers it through his Reddit connector
+Every Reddit item above rests on Argon's reading and is tagged `[Argon, not verified]`. Argon is now suspended (owner, Nov 2 01:00). The owner's fold-in chat should ask, through the Reddit connector (§9 rules: ≤3 `reddit_search` calls, then `reddit_thread` on the best ids; `reddit_wiki sub=ClaudeAI page=survivalguideweekly` first):
+1. r/ClaudeAI, r/ClaudeWorkflows, last 90 days: "LLM wiki" / "Karpathy wiki" / "second brain" with Claude Code — which threads report rot (duplicates, dead links after renames, stale facts) and what fixed it; scores and dates.
+2. r/ClaudeAI: "everything claude code" (ECC) and "oh-my-claudecode" (OMC) — complaints about installers rewriting settings or CLAUDE.md, token cost per turn, and what people copy instead of installing.
+3. r/ClaudeAI wiki `workflows/skills`: the current guidance on uploading custom skills to claude.ai (description limits, rejected frontmatter, mobile visibility) and on keeping skills in sync with Claude Code.
+4. r/ClaudeAI: "Managed Agents" scheduled deployments / memory stores — real costs per run, pauses at budget, memory-store mount failures.
+5. r/ClaudeAI, r/selfhosted: custom MCP connectors on claude.ai behind Cloudflare Access (Managed OAuth) — does the handshake work, and header-token ("Request headers") availability on Pro/Max.
+
 ## Sources
 1. https://github.com/anthropics/claude-ai-mcp/issues/10 — read 2026-11-02
 2. https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp — read 2026-11-02
