@@ -1,0 +1,3117 @@
+{
+  "timestamp": "2026-11-02T1136",
+  "fixture": "/workspace/megamind-fleet/run1/03-benchmark/grading/bench-fixture.json",
+  "results": [
+    {
+      "id": "Q01",
+      "query": "For a new Unraid user share, which allocation method is the default (and recommended) one?",
+      "type": "exact",
+      "backends": {
+        "bm25": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "unraid-shares.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 22,
+          "top_files": [
+            "qmd://wiki/unraid-shares.md"
+          ]
+        },
+        "vector": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "unraid-shares.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 7076,
+          "top_files": [
+            "qmd://wiki/unraid-shares.md",
+            "qmd://wiki/unraid-pools-zfs.md",
+            "qmd://wiki/unraid-docker-vms.md",
+            "qmd://wiki/unraid-array-parity.md",
+            "qmd://wiki/unraid-notifications-ups.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/tailscale-exit-nodes-subnets.md",
+            "qmd://wiki/unraid-tailscale.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/rclone-backup.md"
+          ]
+        },
+        "hybrid": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "unraid-shares.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 131,
+          "top_files": [
+            "qmd://wiki/unraid-shares.md",
+            "qmd://wiki/unraid-pools-zfs.md",
+            "qmd://wiki/unraid-docker-vms.md",
+            "qmd://wiki/unraid-array-parity.md",
+            "qmd://wiki/unraid-notifications-ups.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/tailscale-exit-nodes-subnets.md",
+            "qmd://wiki/unraid-tailscale.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/rclone-backup.md"
+          ]
+        },
+        "full": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "unraid-shares.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 104,
+          "top_files": [
+            "qmd://wiki/unraid-shares.md",
+            "qmd://wiki/unraid-pools-zfs.md",
+            "qmd://wiki/unraid-array-parity.md",
+            "qmd://wiki/unraid-docker-vms.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/unraid-notifications-ups.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/tailscale-exit-nodes-subnets.md",
+            "qmd://wiki/unraid-tailscale.md",
+            "qmd://wiki/rclone-backup.md"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q02",
+      "query": "In Unraid, which tunable on the Disk Settings page selects the array write mode (for example to switch to turbo/reconstruct write)?",
+      "type": "exact",
+      "backends": {
+        "bm25": {
+          "precision_at_k": 0,
+          "recall": 0,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0,
+          "mrr": 0,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [],
+          "unmatched_expected_files": [
+            "unraid-array-parity.md"
+          ],
+          "total_expected": 1,
+          "latency_ms": 1,
+          "top_files": []
+        },
+        "vector": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "unraid-array-parity.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 151,
+          "top_files": [
+            "qmd://wiki/unraid-array-parity.md",
+            "qmd://wiki/unraid-notifications-ups.md",
+            "qmd://wiki/unraid-pools-zfs.md",
+            "qmd://wiki/unraid-shares.md",
+            "qmd://wiki/unraid-tailscale.md",
+            "qmd://wiki/unraid-docker-vms.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/tailscale.md"
+          ]
+        },
+        "hybrid": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "unraid-array-parity.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 73289,
+          "top_files": [
+            "qmd://wiki/unraid-array-parity.md",
+            "qmd://wiki/unraid-pools-zfs.md",
+            "qmd://wiki/unraid-notifications-ups.md",
+            "qmd://wiki/unraid-shares.md",
+            "qmd://wiki/claude-code-settings-permissions.md",
+            "qmd://wiki/unraid-tailscale.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/claude-code-sandboxing.md",
+            "qmd://wiki/tailscale-magicdns.md"
+          ]
+        },
+        "full": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "unraid-array-parity.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 178957,
+          "top_files": [
+            "qmd://wiki/unraid-array-parity.md",
+            "qmd://wiki/unraid-pools-zfs.md",
+            "qmd://wiki/unraid-notifications-ups.md",
+            "qmd://wiki/unraid-shares.md",
+            "qmd://wiki/claude-code-settings-permissions.md",
+            "qmd://wiki/unraid-tailscale.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/claude-code-sandboxing.md",
+            "qmd://wiki/tailscale-magicdns.md"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q04",
+      "query": "Out of the box, roughly how much of the machine's memory does Unraid let the ZFS read cache occupy?",
+      "type": "exact",
+      "backends": {
+        "bm25": {
+          "precision_at_k": 0,
+          "recall": 0,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0,
+          "mrr": 0,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [],
+          "unmatched_expected_files": [
+            "unraid-pools-zfs.md"
+          ],
+          "total_expected": 1,
+          "latency_ms": 2,
+          "top_files": []
+        },
+        "vector": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 0,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 0.5,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "unraid-pools-zfs.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 131,
+          "top_files": [
+            "qmd://wiki/unraid-array-parity.md",
+            "qmd://wiki/unraid-pools-zfs.md",
+            "qmd://wiki/unraid-shares.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/unraid-docker-vms.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/plex.md",
+            "qmd://wiki/reverse-proxy.md",
+            "qmd://wiki/tailscale.md"
+          ]
+        },
+        "hybrid": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 0,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 0.5,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "unraid-pools-zfs.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 11484,
+          "top_files": [
+            "qmd://wiki/unraid-array-parity.md",
+            "qmd://wiki/unraid-pools-zfs.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/unraid-shares.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/unraid-docker-vms.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/plex.md",
+            "qmd://wiki/reverse-proxy.md",
+            "qmd://wiki/unraid-notifications-ups.md"
+          ]
+        },
+        "full": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 0,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 0.5,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "unraid-pools-zfs.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 144490,
+          "top_files": [
+            "qmd://wiki/unraid-array-parity.md",
+            "qmd://wiki/unraid-pools-zfs.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/unraid-shares.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/unraid-docker-vms.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/plex.md",
+            "qmd://wiki/reverse-proxy.md",
+            "qmd://wiki/unraid-notifications-ups.md"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q05",
+      "query": "Which instruction is mandatory in an Ollama Modelfile?",
+      "type": "exact",
+      "backends": {
+        "bm25": {
+          "precision_at_k": 0,
+          "recall": 0,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0,
+          "mrr": 0,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [],
+          "unmatched_expected_files": [
+            "ollama-modelfile.md"
+          ],
+          "total_expected": 1,
+          "latency_ms": 1,
+          "top_files": []
+        },
+        "vector": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "ollama-modelfile.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 96,
+          "top_files": [
+            "qmd://wiki/ollama-modelfile.md",
+            "qmd://wiki/ollama-api.md",
+            "qmd://wiki/ollama-server-gpu.md",
+            "qmd://wiki/ollama-endpoint.md",
+            "qmd://wiki/titan.md",
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/claude-code-settings-permissions.md",
+            "qmd://wiki/claude-code-memory.md",
+            "qmd://wiki/claude-code-hooks.md",
+            "qmd://wiki/hermes.md"
+          ]
+        },
+        "hybrid": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 0,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 0.5,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "ollama-modelfile.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 9038,
+          "top_files": [
+            "qmd://wiki/claude-code-settings-permissions.md",
+            "qmd://wiki/ollama-modelfile.md",
+            "qmd://wiki/ollama-api.md",
+            "qmd://wiki/ollama-server-gpu.md",
+            "qmd://wiki/ollama-endpoint.md",
+            "qmd://wiki/titan.md",
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/qmd-search.md",
+            "qmd://wiki/claude-code-memory.md",
+            "qmd://wiki/claude-code-hooks.md"
+          ]
+        },
+        "full": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 0,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 0.5,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "ollama-modelfile.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 153216,
+          "top_files": [
+            "qmd://wiki/claude-code-settings-permissions.md",
+            "qmd://wiki/ollama-modelfile.md",
+            "qmd://wiki/ollama-server-gpu.md",
+            "qmd://wiki/ollama-api.md",
+            "qmd://wiki/ollama-endpoint.md",
+            "qmd://wiki/titan.md",
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/qmd-search.md",
+            "qmd://wiki/claude-code-memory.md",
+            "qmd://wiki/claude-code-hooks.md"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q06",
+      "query": "By default, how many requests will the Ollama server queue when busy before it rejects additional ones, and which environment variable changes that number?",
+      "type": "exact",
+      "backends": {
+        "bm25": {
+          "precision_at_k": 0,
+          "recall": 0,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0,
+          "mrr": 0,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [],
+          "unmatched_expected_files": [
+            "ollama-server-gpu.md"
+          ],
+          "total_expected": 1,
+          "latency_ms": 1,
+          "top_files": []
+        },
+        "vector": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "ollama-server-gpu.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 182,
+          "top_files": [
+            "qmd://wiki/ollama-server-gpu.md",
+            "qmd://wiki/ollama-endpoint.md",
+            "qmd://wiki/ollama-api.md",
+            "qmd://wiki/ollama-modelfile.md",
+            "qmd://wiki/titan.md",
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/tailscale-acls-ssh.md",
+            "qmd://wiki/claude-code-mcp.md",
+            "qmd://wiki/claude-code-hooks.md",
+            "qmd://wiki/claude-code-settings-permissions.md"
+          ]
+        },
+        "hybrid": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "ollama-server-gpu.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 9639,
+          "top_files": [
+            "qmd://wiki/ollama-server-gpu.md",
+            "qmd://wiki/ollama-api.md",
+            "qmd://wiki/ollama-endpoint.md",
+            "qmd://wiki/ollama-modelfile.md",
+            "qmd://wiki/titan.md",
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/claude-code-mcp.md",
+            "qmd://wiki/claude-code-hooks.md",
+            "qmd://wiki/tailscale-acls-ssh.md",
+            "qmd://wiki/claude-code-settings-permissions.md"
+          ]
+        },
+        "full": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "ollama-server-gpu.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 150946,
+          "top_files": [
+            "qmd://wiki/ollama-server-gpu.md",
+            "qmd://wiki/ollama-modelfile.md",
+            "qmd://wiki/ollama-api.md",
+            "qmd://wiki/ollama-endpoint.md",
+            "qmd://wiki/titan.md",
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/claude-code-mcp.md",
+            "qmd://wiki/claude-code-hooks.md",
+            "qmd://wiki/tailscale-acls-ssh.md",
+            "qmd://wiki/claude-code-settings-permissions.md"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q07",
+      "query": "Which Linux capability can be granted to the ollama binary with setcap so that Vulkan GPUs report available VRAM without running Ollama as root?",
+      "type": "exact",
+      "backends": {
+        "bm25": {
+          "precision_at_k": 0,
+          "recall": 0,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0,
+          "mrr": 0,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [],
+          "unmatched_expected_files": [
+            "ollama-server-gpu.md"
+          ],
+          "total_expected": 1,
+          "latency_ms": 2,
+          "top_files": []
+        },
+        "vector": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "ollama-server-gpu.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 237,
+          "top_files": [
+            "qmd://wiki/ollama-server-gpu.md",
+            "qmd://wiki/ollama-endpoint.md",
+            "qmd://wiki/titan.md",
+            "qmd://wiki/ollama-api.md",
+            "qmd://wiki/ollama-modelfile.md",
+            "qmd://wiki/unraid-docker-vms.md",
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/hermes.md",
+            "qmd://wiki/tailscale-exit-nodes-subnets.md",
+            "qmd://wiki/claude-code-settings-permissions.md"
+          ]
+        },
+        "hybrid": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "ollama-server-gpu.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 55704,
+          "top_files": [
+            "qmd://wiki/ollama-server-gpu.md",
+            "qmd://wiki/ollama-endpoint.md",
+            "qmd://wiki/ollama-api.md",
+            "qmd://wiki/titan.md",
+            "qmd://wiki/ollama-modelfile.md",
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/claude-code-mcp.md",
+            "qmd://wiki/claude-code-settings-permissions.md",
+            "qmd://wiki/hermes.md",
+            "qmd://wiki/reverse-proxy.md"
+          ]
+        },
+        "full": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "ollama-server-gpu.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 162546,
+          "top_files": [
+            "qmd://wiki/ollama-server-gpu.md",
+            "qmd://wiki/ollama-endpoint.md",
+            "qmd://wiki/ollama-api.md",
+            "qmd://wiki/titan.md",
+            "qmd://wiki/ollama-modelfile.md",
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/claude-code-mcp.md",
+            "qmd://wiki/claude-code-settings-permissions.md",
+            "qmd://wiki/hermes.md",
+            "qmd://wiki/reverse-proxy.md"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q08",
+      "query": "A Syncthing send-only folder has gone out of sync. What is the label of the button that enforces this device's state on the rest of the cluster?",
+      "type": "exact",
+      "backends": {
+        "bm25": {
+          "precision_at_k": 0,
+          "recall": 0,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0,
+          "mrr": 0,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [],
+          "unmatched_expected_files": [
+            "syncthing-folders-versioning.md"
+          ],
+          "total_expected": 1,
+          "latency_ms": 3,
+          "top_files": []
+        },
+        "vector": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "syncthing-folders-versioning.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 188,
+          "top_files": [
+            "qmd://wiki/syncthing-folders-versioning.md",
+            "qmd://wiki/syncthing.md",
+            "qmd://wiki/syncthing-ignore-firewall.md",
+            "qmd://wiki/unraid-tailscale.md",
+            "qmd://wiki/pebble.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/claude-code-sandboxing.md",
+            "qmd://wiki/claude-code-hooks.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/apc-1.md"
+          ]
+        },
+        "hybrid": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "syncthing-folders-versioning.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 55438,
+          "top_files": [
+            "qmd://wiki/syncthing-folders-versioning.md",
+            "qmd://wiki/syncthing-ignore-firewall.md",
+            "qmd://wiki/syncthing.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/claude-code-sandboxing.md",
+            "qmd://wiki/gate.md",
+            "qmd://wiki/unraid-tailscale.md",
+            "qmd://wiki/claude-code-memory.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/claude-code-hooks.md"
+          ]
+        },
+        "full": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "syncthing-folders-versioning.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 187466,
+          "top_files": [
+            "qmd://wiki/syncthing-folders-versioning.md",
+            "qmd://wiki/syncthing.md",
+            "qmd://wiki/syncthing-ignore-firewall.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/claude-code-sandboxing.md",
+            "qmd://wiki/gate.md",
+            "qmd://wiki/unraid-tailscale.md",
+            "qmd://wiki/claude-code-memory.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/claude-code-hooks.md"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q09",
+      "query": "With Syncthing's staggered file versioning, during the first hour after a change, one version is kept per what interval?",
+      "type": "exact",
+      "backends": {
+        "bm25": {
+          "precision_at_k": 0,
+          "recall": 0,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0,
+          "mrr": 0,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [],
+          "unmatched_expected_files": [
+            "syncthing-folders-versioning.md"
+          ],
+          "total_expected": 1,
+          "latency_ms": 0,
+          "top_files": []
+        },
+        "vector": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "syncthing-folders-versioning.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 129,
+          "top_files": [
+            "qmd://wiki/syncthing-folders-versioning.md",
+            "qmd://wiki/syncthing.md",
+            "qmd://wiki/syncthing-ignore-firewall.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/unraid-array-parity.md",
+            "qmd://wiki/unraid-pools-zfs.md",
+            "qmd://wiki/unraid-shares.md",
+            "qmd://wiki/unraid-tailscale.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/tailscale-acls-ssh.md"
+          ]
+        },
+        "hybrid": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "syncthing-folders-versioning.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 8818,
+          "top_files": [
+            "qmd://wiki/syncthing-folders-versioning.md",
+            "qmd://wiki/syncthing.md",
+            "qmd://wiki/unraid-shares.md",
+            "qmd://wiki/syncthing-ignore-firewall.md",
+            "qmd://wiki/tailscale-acls-ssh.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/unraid-array-parity.md",
+            "qmd://wiki/unraid-tailscale.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/claude-code-sandboxing.md"
+          ]
+        },
+        "full": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "syncthing-folders-versioning.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 158346,
+          "top_files": [
+            "qmd://wiki/syncthing-folders-versioning.md",
+            "qmd://wiki/syncthing.md",
+            "qmd://wiki/unraid-shares.md",
+            "qmd://wiki/syncthing-ignore-firewall.md",
+            "qmd://wiki/tailscale-acls-ssh.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/unraid-array-parity.md",
+            "qmd://wiki/unraid-tailscale.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/claude-code-sandboxing.md"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q10",
+      "query": "In a Tailscale SSH access rule whose action is \"check\", what is the default checkPeriod when none is specified?",
+      "type": "exact",
+      "backends": {
+        "bm25": {
+          "precision_at_k": 0,
+          "recall": 0,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0,
+          "mrr": 0,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [],
+          "unmatched_expected_files": [
+            "tailscale-acls-ssh.md"
+          ],
+          "total_expected": 1,
+          "latency_ms": 1,
+          "top_files": []
+        },
+        "vector": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "tailscale-acls-ssh.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 124,
+          "top_files": [
+            "qmd://wiki/tailscale-acls-ssh.md",
+            "qmd://wiki/tailscale-exit-nodes-subnets.md",
+            "qmd://wiki/unraid-tailscale.md",
+            "qmd://wiki/tailscale-magicdns.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/unraid-notifications-ups.md",
+            "qmd://wiki/claude-code-sandboxing.md",
+            "qmd://wiki/pebble.md",
+            "qmd://wiki/claude-code-hooks.md",
+            "qmd://wiki/unraid-shares.md"
+          ]
+        },
+        "hybrid": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 0,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 0.5,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "tailscale-acls-ssh.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 9503,
+          "top_files": [
+            "qmd://wiki/gate.md",
+            "qmd://wiki/tailscale-acls-ssh.md",
+            "qmd://wiki/tailscale-exit-nodes-subnets.md",
+            "qmd://wiki/tailscale-magicdns.md",
+            "qmd://wiki/unraid-tailscale.md",
+            "qmd://wiki/claude-code-sandboxing.md",
+            "qmd://wiki/claude-code-settings-permissions.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/unraid-notifications-ups.md"
+          ]
+        },
+        "full": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 0,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 0.5,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "tailscale-acls-ssh.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 146708,
+          "top_files": [
+            "qmd://wiki/gate.md",
+            "qmd://wiki/tailscale-acls-ssh.md",
+            "qmd://wiki/tailscale-exit-nodes-subnets.md",
+            "qmd://wiki/tailscale-magicdns.md",
+            "qmd://wiki/unraid-tailscale.md",
+            "qmd://wiki/claude-code-sandboxing.md",
+            "qmd://wiki/claude-code-settings-permissions.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/unraid-notifications-ups.md"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q11",
+      "query": "Tailnets created on or after which date have MagicDNS enabled by default?",
+      "type": "exact",
+      "backends": {
+        "bm25": {
+          "precision_at_k": 0,
+          "recall": 0,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0,
+          "mrr": 0,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [],
+          "unmatched_expected_files": [
+            "tailscale-magicdns.md"
+          ],
+          "total_expected": 1,
+          "latency_ms": 0,
+          "top_files": []
+        },
+        "vector": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "tailscale-magicdns.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 92,
+          "top_files": [
+            "qmd://wiki/tailscale-magicdns.md",
+            "qmd://wiki/tailscale-exit-nodes-subnets.md",
+            "qmd://wiki/unraid-notifications-ups.md",
+            "qmd://wiki/unraid-tailscale.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/tailscale-acls-ssh.md",
+            "qmd://wiki/pebble.md",
+            "qmd://wiki/unraid-shares.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/hermes.md"
+          ]
+        },
+        "hybrid": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "tailscale-magicdns.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 9065,
+          "top_files": [
+            "qmd://wiki/tailscale-magicdns.md",
+            "qmd://wiki/tailscale-exit-nodes-subnets.md",
+            "qmd://wiki/unraid-notifications-ups.md",
+            "qmd://wiki/unraid-tailscale.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/tailscale-acls-ssh.md",
+            "qmd://wiki/pebble.md",
+            "qmd://wiki/unraid-shares.md",
+            "qmd://wiki/hermes.md",
+            "qmd://wiki/rclone-backup.md"
+          ]
+        },
+        "full": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "tailscale-magicdns.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 117832,
+          "top_files": [
+            "qmd://wiki/tailscale-magicdns.md",
+            "qmd://wiki/tailscale-acls-ssh.md",
+            "qmd://wiki/pebble.md",
+            "qmd://wiki/tailscale-exit-nodes-subnets.md",
+            "qmd://wiki/unraid-notifications-ups.md",
+            "qmd://wiki/unraid-tailscale.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/unraid-shares.md",
+            "qmd://wiki/hermes.md",
+            "qmd://wiki/rclone-backup.md"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q12",
+      "query": "A laptop sends all of its internet traffic through another machine in the tailnet but still needs to reach the printer on the Wi-Fi it is sitting on. Which command-line flag allows that?",
+      "type": "exact",
+      "backends": {
+        "bm25": {
+          "precision_at_k": 0,
+          "recall": 0,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0,
+          "mrr": 0,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [],
+          "unmatched_expected_files": [
+            "tailscale-exit-nodes-subnets.md"
+          ],
+          "total_expected": 1,
+          "latency_ms": 2,
+          "top_files": []
+        },
+        "vector": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "tailscale-exit-nodes-subnets.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 250,
+          "top_files": [
+            "qmd://wiki/tailscale-exit-nodes-subnets.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/syncthing-ignore-firewall.md",
+            "qmd://wiki/pebble.md",
+            "qmd://wiki/tailscale-magicdns.md",
+            "qmd://wiki/gate.md",
+            "qmd://wiki/unraid-tailscale.md",
+            "qmd://wiki/syncthing.md",
+            "qmd://wiki/titan.md",
+            "qmd://wiki/tailscale-acls-ssh.md"
+          ]
+        },
+        "hybrid": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "tailscale-exit-nodes-subnets.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 11220,
+          "top_files": [
+            "qmd://wiki/tailscale-exit-nodes-subnets.md",
+            "qmd://wiki/syncthing-ignore-firewall.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/pebble.md",
+            "qmd://wiki/tailscale-magicdns.md",
+            "qmd://wiki/gate.md",
+            "qmd://wiki/syncthing.md",
+            "qmd://wiki/titan.md",
+            "qmd://wiki/unraid-tailscale.md",
+            "qmd://wiki/reverse-proxy.md"
+          ]
+        },
+        "full": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "tailscale-exit-nodes-subnets.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 129004,
+          "top_files": [
+            "qmd://wiki/tailscale-exit-nodes-subnets.md",
+            "qmd://wiki/pebble.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/syncthing-ignore-firewall.md",
+            "qmd://wiki/tailscale-magicdns.md",
+            "qmd://wiki/gate.md",
+            "qmd://wiki/syncthing.md",
+            "qmd://wiki/titan.md",
+            "qmd://wiki/unraid-tailscale.md",
+            "qmd://wiki/reverse-proxy.md"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q15",
+      "query": "How many levels deep can `@path` imports in CLAUDE.md files recursively import other files?",
+      "type": "exact",
+      "backends": {
+        "bm25": {
+          "precision_at_k": 0,
+          "recall": 0,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0,
+          "mrr": 0,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [],
+          "unmatched_expected_files": [
+            "claude-code-memory.md"
+          ],
+          "total_expected": 1,
+          "latency_ms": 1,
+          "top_files": []
+        },
+        "vector": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "claude-code-memory.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 132,
+          "top_files": [
+            "qmd://wiki/claude-code-memory.md",
+            "qmd://wiki/claude-code-skills-subagents.md",
+            "qmd://wiki/claude-code-sandboxing.md",
+            "qmd://wiki/claude-code-hooks.md",
+            "qmd://wiki/claude-code-mcp.md",
+            "qmd://wiki/claude-code-settings-permissions.md",
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/qmd-search.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/reverse-proxy.md"
+          ]
+        },
+        "hybrid": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "claude-code-memory.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 8547,
+          "top_files": [
+            "qmd://wiki/claude-code-memory.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/claude-code-skills-subagents.md",
+            "qmd://wiki/claude-code-hooks.md",
+            "qmd://wiki/claude-code-sandboxing.md",
+            "qmd://wiki/claude-code-mcp.md",
+            "qmd://wiki/claude-code-settings-permissions.md",
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/qmd-search.md",
+            "qmd://wiki/rclone-backup.md"
+          ]
+        },
+        "full": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "claude-code-memory.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 155382,
+          "top_files": [
+            "qmd://wiki/claude-code-memory.md",
+            "qmd://wiki/claude-code-hooks.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/claude-code-skills-subagents.md",
+            "qmd://wiki/claude-code-sandboxing.md",
+            "qmd://wiki/claude-code-settings-permissions.md",
+            "qmd://wiki/claude-code-mcp.md",
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/qmd-search.md",
+            "qmd://wiki/rclone-backup.md"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q16",
+      "query": "In Claude Code, the blurb that tells the model what a skill does and when to reach for it gets cut short in the catalogue the model sees. After how many characters?",
+      "type": "exact",
+      "backends": {
+        "bm25": {
+          "precision_at_k": 0,
+          "recall": 0,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0,
+          "mrr": 0,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [],
+          "unmatched_expected_files": [
+            "claude-code-skills-subagents.md"
+          ],
+          "total_expected": 1,
+          "latency_ms": 1,
+          "top_files": []
+        },
+        "vector": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "claude-code-skills-subagents.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 191,
+          "top_files": [
+            "qmd://wiki/claude-code-skills-subagents.md",
+            "qmd://wiki/claude-code-hooks.md",
+            "qmd://wiki/claude-code-memory.md",
+            "qmd://wiki/claude-code-settings-permissions.md",
+            "qmd://wiki/claude-code-mcp.md",
+            "qmd://wiki/claude-code-sandboxing.md",
+            "qmd://wiki/ollama-server-gpu.md",
+            "qmd://wiki/ollama-modelfile.md",
+            "qmd://wiki/ollama-api.md",
+            "qmd://wiki/qmd-search.md"
+          ]
+        },
+        "hybrid": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "claude-code-skills-subagents.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 9221,
+          "top_files": [
+            "qmd://wiki/claude-code-skills-subagents.md",
+            "qmd://wiki/claude-code-settings-permissions.md",
+            "qmd://wiki/claude-code-hooks.md",
+            "qmd://wiki/claude-code-memory.md",
+            "qmd://wiki/claude-code-mcp.md",
+            "qmd://wiki/ollama-modelfile.md",
+            "qmd://wiki/claude-code-sandboxing.md",
+            "qmd://wiki/ollama-server-gpu.md",
+            "qmd://wiki/pebble.md",
+            "qmd://wiki/unraid-docker-vms.md"
+          ]
+        },
+        "full": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "claude-code-skills-subagents.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 165985,
+          "top_files": [
+            "qmd://wiki/claude-code-skills-subagents.md",
+            "qmd://wiki/claude-code-hooks.md",
+            "qmd://wiki/claude-code-settings-permissions.md",
+            "qmd://wiki/claude-code-memory.md",
+            "qmd://wiki/claude-code-mcp.md",
+            "qmd://wiki/ollama-modelfile.md",
+            "qmd://wiki/claude-code-sandboxing.md",
+            "qmd://wiki/ollama-server-gpu.md",
+            "qmd://wiki/pebble.md",
+            "qmd://wiki/unraid-docker-vms.md"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q17",
+      "query": "When qmd's MCP server is started with the HTTP transport and no port is given, which host and port does it listen on?",
+      "type": "exact",
+      "backends": {
+        "bm25": {
+          "precision_at_k": 0,
+          "recall": 0,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0,
+          "mrr": 0,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [],
+          "unmatched_expected_files": [
+            "qmd-search.md"
+          ],
+          "total_expected": 1,
+          "latency_ms": 0,
+          "top_files": []
+        },
+        "vector": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 0,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 0.3333333333333333,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "qmd-search.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 179,
+          "top_files": [
+            "qmd://wiki/claude-code-mcp.md",
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/qmd-search.md",
+            "qmd://wiki/reverse-proxy.md",
+            "qmd://wiki/claude-code-hooks.md",
+            "qmd://wiki/plex.md",
+            "qmd://wiki/ollama-endpoint.md",
+            "qmd://wiki/titan.md",
+            "qmd://wiki/syncthing-ignore-firewall.md",
+            "qmd://wiki/claude-code-settings-permissions.md"
+          ]
+        },
+        "hybrid": {
+          "precision_at_k": 0,
+          "recall": 1,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0,
+          "mrr": 0.16666666666666666,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [
+            "qmd-search.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 9946,
+          "top_files": [
+            "qmd://wiki/hermes.md",
+            "qmd://wiki/claude-code-mcp.md",
+            "qmd://wiki/claude-code-sandboxing.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/qmd-search.md",
+            "qmd://wiki/reverse-proxy.md",
+            "qmd://wiki/claude-code-hooks.md",
+            "qmd://wiki/plex.md",
+            "qmd://wiki/ollama-endpoint.md"
+          ]
+        },
+        "full": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 0,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 0.3333333333333333,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "qmd-search.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 133245,
+          "top_files": [
+            "qmd://wiki/hermes.md",
+            "qmd://wiki/claude-code-mcp.md",
+            "qmd://wiki/qmd-search.md",
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/claude-code-sandboxing.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/reverse-proxy.md",
+            "qmd://wiki/claude-code-hooks.md",
+            "qmd://wiki/plex.md",
+            "qmd://wiki/ollama-endpoint.md"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q18",
+      "query": "On the Denon AVR-X1700H, what is the default Auto Standby time for the MAIN ZONE?",
+      "type": "exact",
+      "backends": {
+        "bm25": {
+          "precision_at_k": 0,
+          "recall": 0,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0,
+          "mrr": 0,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [],
+          "unmatched_expected_files": [
+            "avr-setup.md"
+          ],
+          "total_expected": 1,
+          "latency_ms": 1,
+          "top_files": []
+        },
+        "vector": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "avr-setup.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 181,
+          "top_files": [
+            "qmd://wiki/avr-setup.md",
+            "qmd://wiki/aria.md",
+            "qmd://wiki/syncthing-folders-versioning.md",
+            "qmd://wiki/unraid-shares.md",
+            "qmd://wiki/unraid-array-parity.md",
+            "qmd://wiki/claude-code-mcp.md",
+            "qmd://wiki/tailscale-acls-ssh.md",
+            "qmd://wiki/tailscale-exit-nodes-subnets.md",
+            "qmd://wiki/unraid-pools-zfs.md",
+            "qmd://wiki/claude-code-memory.md"
+          ]
+        },
+        "hybrid": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "avr-setup.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 11591,
+          "top_files": [
+            "qmd://wiki/avr-setup.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/claude-code-memory.md",
+            "qmd://wiki/aria.md",
+            "qmd://wiki/syncthing-folders-versioning.md",
+            "qmd://wiki/unraid-shares.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/claude-code-mcp.md",
+            "qmd://wiki/unraid-array-parity.md",
+            "qmd://wiki/tailscale-exit-nodes-subnets.md"
+          ]
+        },
+        "full": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "avr-setup.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 165507,
+          "top_files": [
+            "qmd://wiki/avr-setup.md",
+            "qmd://wiki/aria.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/claude-code-memory.md",
+            "qmd://wiki/syncthing-folders-versioning.md",
+            "qmd://wiki/unraid-shares.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/claude-code-mcp.md",
+            "qmd://wiki/unraid-array-parity.md",
+            "qmd://wiki/tailscale-exit-nodes-subnets.md"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q19",
+      "query": "What range of speaker impedance does the Denon AVR-X1700H support?",
+      "type": "exact",
+      "backends": {
+        "bm25": {
+          "precision_at_k": 0,
+          "recall": 0,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0,
+          "mrr": 0,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [],
+          "unmatched_expected_files": [
+            "avr-setup.md"
+          ],
+          "total_expected": 1,
+          "latency_ms": 1,
+          "top_files": []
+        },
+        "vector": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "avr-setup.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 90,
+          "top_files": [
+            "qmd://wiki/avr-setup.md",
+            "qmd://wiki/aria.md",
+            "qmd://wiki/unraid-pools-zfs.md",
+            "qmd://wiki/unraid-array-parity.md",
+            "qmd://wiki/tailscale-acls-ssh.md",
+            "qmd://wiki/unraid-shares.md",
+            "qmd://wiki/tailscale-exit-nodes-subnets.md",
+            "qmd://wiki/apc-1.md",
+            "qmd://wiki/syncthing-ignore-firewall.md",
+            "qmd://wiki/atlas.md"
+          ]
+        },
+        "hybrid": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "avr-setup.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 9647,
+          "top_files": [
+            "qmd://wiki/avr-setup.md",
+            "qmd://wiki/aria.md",
+            "qmd://wiki/unraid-pools-zfs.md",
+            "qmd://wiki/unraid-array-parity.md",
+            "qmd://wiki/unraid-shares.md",
+            "qmd://wiki/tailscale-exit-nodes-subnets.md",
+            "qmd://wiki/apc-1.md",
+            "qmd://wiki/tailscale-acls-ssh.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/atlas.md"
+          ]
+        },
+        "full": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "avr-setup.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 132858,
+          "top_files": [
+            "qmd://wiki/avr-setup.md",
+            "qmd://wiki/aria.md",
+            "qmd://wiki/unraid-pools-zfs.md",
+            "qmd://wiki/unraid-array-parity.md",
+            "qmd://wiki/unraid-shares.md",
+            "qmd://wiki/tailscale-exit-nodes-subnets.md",
+            "qmd://wiki/apc-1.md",
+            "qmd://wiki/tailscale-acls-ssh.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/atlas.md"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q20",
+      "query": "The Denon AVR-X1700H's streaming and online features stopped working and restarting it did not help. Which two buttons on the receiver itself do you hold together to put only its networking setup back to factory state?",
+      "type": "exact",
+      "backends": {
+        "bm25": {
+          "precision_at_k": 0,
+          "recall": 0,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0,
+          "mrr": 0,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [],
+          "unmatched_expected_files": [
+            "avr-setup.md"
+          ],
+          "total_expected": 1,
+          "latency_ms": 1,
+          "top_files": []
+        },
+        "vector": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "avr-setup.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 198,
+          "top_files": [
+            "qmd://wiki/avr-setup.md",
+            "qmd://wiki/aria.md",
+            "qmd://wiki/syncthing-ignore-firewall.md",
+            "qmd://wiki/tailscale-exit-nodes-subnets.md",
+            "qmd://wiki/tailscale-magicdns.md",
+            "qmd://wiki/unraid-tailscale.md",
+            "qmd://wiki/claude-code-hooks.md",
+            "qmd://wiki/gate.md",
+            "qmd://wiki/unraid-notifications-ups.md",
+            "qmd://wiki/syncthing.md"
+          ]
+        },
+        "hybrid": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "avr-setup.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 54157,
+          "top_files": [
+            "qmd://wiki/avr-setup.md",
+            "qmd://wiki/gate.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/aria.md",
+            "qmd://wiki/syncthing-ignore-firewall.md",
+            "qmd://wiki/tailscale-magicdns.md",
+            "qmd://wiki/tailscale-exit-nodes-subnets.md",
+            "qmd://wiki/unraid-tailscale.md",
+            "qmd://wiki/unraid-shares.md",
+            "qmd://wiki/rclone-backup.md"
+          ]
+        },
+        "full": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 1,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 1,
+          "matched_files": [
+            "avr-setup.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 1,
+          "latency_ms": 176099,
+          "top_files": [
+            "qmd://wiki/avr-setup.md",
+            "qmd://wiki/aria.md",
+            "qmd://wiki/gate.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/syncthing-ignore-firewall.md",
+            "qmd://wiki/tailscale-magicdns.md",
+            "qmd://wiki/tailscale-exit-nodes-subnets.md",
+            "qmd://wiki/unraid-tailscale.md",
+            "qmd://wiki/unraid-shares.md",
+            "qmd://wiki/rclone-backup.md"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q21",
+      "query": "In the lab, what does Plex currently need in order to run?",
+      "type": "topical",
+      "backends": {
+        "bm25": {
+          "precision_at_k": 0,
+          "recall": 0,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0,
+          "mrr": 0,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [],
+          "unmatched_expected_files": [
+            "plex.md",
+            "atlas.md",
+            "tank.md"
+          ],
+          "total_expected": 3,
+          "latency_ms": 1,
+          "top_files": []
+        },
+        "vector": {
+          "precision_at_k": 0.6666666666666666,
+          "recall": 1,
+          "recall_at_1": 0.3333333333333333,
+          "recall_at_3": 0.6666666666666666,
+          "recall_at_5": 0.6666666666666666,
+          "mrr": 1,
+          "f1": 0.8,
+          "hits_at_k": 2,
+          "matched_files": [
+            "plex.md",
+            "atlas.md",
+            "tank.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 3,
+          "latency_ms": 97,
+          "top_files": [
+            "qmd://wiki/plex.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/pebble.md",
+            "qmd://wiki/reverse-proxy.md",
+            "qmd://wiki/apc-1.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/syncthing.md",
+            "qmd://wiki/hermes.md",
+            "qmd://wiki/titan.md"
+          ]
+        },
+        "hybrid": {
+          "precision_at_k": 0.6666666666666666,
+          "recall": 1,
+          "recall_at_1": 0,
+          "recall_at_3": 0.6666666666666666,
+          "recall_at_5": 0.6666666666666666,
+          "mrr": 0.5,
+          "f1": 0.8,
+          "hits_at_k": 2,
+          "matched_files": [
+            "plex.md",
+            "atlas.md",
+            "tank.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 3,
+          "latency_ms": 7753,
+          "top_files": [
+            "qmd://wiki/gate.md",
+            "qmd://wiki/plex.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/pebble.md",
+            "qmd://wiki/reverse-proxy.md",
+            "qmd://wiki/apc-1.md",
+            "qmd://wiki/syncthing.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/hermes.md"
+          ]
+        },
+        "full": {
+          "precision_at_k": 0.3333333333333333,
+          "recall": 1,
+          "recall_at_1": 0,
+          "recall_at_3": 0.3333333333333333,
+          "recall_at_5": 0.3333333333333333,
+          "mrr": 0.5,
+          "f1": 0.5,
+          "hits_at_k": 1,
+          "matched_files": [
+            "plex.md",
+            "atlas.md",
+            "tank.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 3,
+          "latency_ms": 115643,
+          "top_files": [
+            "qmd://wiki/gate.md",
+            "qmd://wiki/plex.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/pebble.md",
+            "qmd://wiki/reverse-proxy.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/apc-1.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/ollama-endpoint.md"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q22",
+      "query": "What breaks or degrades in the lab if titan is switched off?",
+      "type": "topical",
+      "backends": {
+        "bm25": {
+          "precision_at_k": 0,
+          "recall": 0,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0,
+          "mrr": 0,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [],
+          "unmatched_expected_files": [
+            "titan.md",
+            "ollama-endpoint.md",
+            "wiki-search.md"
+          ],
+          "total_expected": 3,
+          "latency_ms": 1,
+          "top_files": []
+        },
+        "vector": {
+          "precision_at_k": 0.6666666666666666,
+          "recall": 1,
+          "recall_at_1": 0.3333333333333333,
+          "recall_at_3": 0.6666666666666666,
+          "recall_at_5": 0.6666666666666666,
+          "mrr": 1,
+          "f1": 0.8,
+          "hits_at_k": 2,
+          "matched_files": [
+            "titan.md",
+            "ollama-endpoint.md",
+            "wiki-search.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 3,
+          "latency_ms": 104,
+          "top_files": [
+            "qmd://wiki/titan.md",
+            "qmd://wiki/ollama-endpoint.md",
+            "qmd://wiki/apc-1.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/syncthing.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/gate.md"
+          ]
+        },
+        "hybrid": {
+          "precision_at_k": 0.6666666666666666,
+          "recall": 1,
+          "recall_at_1": 0.3333333333333333,
+          "recall_at_3": 0.6666666666666666,
+          "recall_at_5": 0.6666666666666666,
+          "mrr": 1,
+          "f1": 0.8,
+          "hits_at_k": 2,
+          "matched_files": [
+            "titan.md",
+            "ollama-endpoint.md",
+            "wiki-search.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 3,
+          "latency_ms": 6863,
+          "top_files": [
+            "qmd://wiki/titan.md",
+            "qmd://wiki/ollama-endpoint.md",
+            "qmd://wiki/apc-1.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/avr-setup.md",
+            "qmd://wiki/syncthing.md",
+            "qmd://wiki/gate.md"
+          ]
+        },
+        "full": {
+          "precision_at_k": 0.6666666666666666,
+          "recall": 1,
+          "recall_at_1": 0.3333333333333333,
+          "recall_at_3": 0.6666666666666666,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 0.8,
+          "hits_at_k": 2,
+          "matched_files": [
+            "titan.md",
+            "ollama-endpoint.md",
+            "wiki-search.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 3,
+          "latency_ms": 131100,
+          "top_files": [
+            "qmd://wiki/titan.md",
+            "qmd://wiki/ollama-endpoint.md",
+            "qmd://wiki/plex.md",
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/apc-1.md",
+            "qmd://wiki/gate.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/syncthing.md"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q23",
+      "query": "What does the nightly rclone backup need?",
+      "type": "topical",
+      "backends": {
+        "bm25": {
+          "precision_at_k": 0,
+          "recall": 0,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0,
+          "mrr": 0,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [],
+          "unmatched_expected_files": [
+            "rclone-backup.md",
+            "tank.md",
+            "gate.md"
+          ],
+          "total_expected": 3,
+          "latency_ms": 1,
+          "top_files": []
+        },
+        "vector": {
+          "precision_at_k": 0.3333333333333333,
+          "recall": 0.6666666666666666,
+          "recall_at_1": 0.3333333333333333,
+          "recall_at_3": 0.3333333333333333,
+          "recall_at_5": 0.3333333333333333,
+          "mrr": 1,
+          "f1": 0.4444444444444444,
+          "hits_at_k": 1,
+          "matched_files": [
+            "rclone-backup.md",
+            "tank.md"
+          ],
+          "unmatched_expected_files": [
+            "gate.md"
+          ],
+          "total_expected": 3,
+          "latency_ms": 67,
+          "top_files": [
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/syncthing-folders-versioning.md",
+            "qmd://wiki/unraid-pools-zfs.md",
+            "qmd://wiki/syncthing.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/syncthing-ignore-firewall.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/unraid-docker-vms.md",
+            "qmd://wiki/reverse-proxy.md"
+          ]
+        },
+        "hybrid": {
+          "precision_at_k": 0.3333333333333333,
+          "recall": 0.3333333333333333,
+          "recall_at_1": 0,
+          "recall_at_3": 0.3333333333333333,
+          "recall_at_5": 0.3333333333333333,
+          "mrr": 0.5,
+          "f1": 0.3333333333333333,
+          "hits_at_k": 1,
+          "matched_files": [
+            "rclone-backup.md"
+          ],
+          "unmatched_expected_files": [
+            "tank.md",
+            "gate.md"
+          ],
+          "total_expected": 3,
+          "latency_ms": 50578,
+          "top_files": [
+            "qmd://wiki/claude-code-sandboxing.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/syncthing-folders-versioning.md",
+            "qmd://wiki/unraid-pools-zfs.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/claude-code-memory.md",
+            "qmd://wiki/unraid-docker-vms.md",
+            "qmd://wiki/syncthing-ignore-firewall.md",
+            "qmd://wiki/unraid-tailscale.md",
+            "qmd://wiki/claude-code-mcp.md"
+          ]
+        },
+        "full": {
+          "precision_at_k": 0.6666666666666666,
+          "recall": 1,
+          "recall_at_1": 0,
+          "recall_at_3": 0.6666666666666666,
+          "recall_at_5": 0.6666666666666666,
+          "mrr": 0.5,
+          "f1": 0.8,
+          "hits_at_k": 2,
+          "matched_files": [
+            "rclone-backup.md",
+            "tank.md",
+            "gate.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 3,
+          "latency_ms": 167775,
+          "top_files": [
+            "qmd://wiki/claude-code-sandboxing.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/gate.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/apc-1.md",
+            "qmd://wiki/syncthing-folders-versioning.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/unraid-pools-zfs.md",
+            "qmd://wiki/claude-code-memory.md",
+            "qmd://wiki/unraid-docker-vms.md"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q24",
+      "query": "What does the hermes VM need in order to run and boot?",
+      "type": "topical",
+      "backends": {
+        "bm25": {
+          "precision_at_k": 0,
+          "recall": 0,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0,
+          "mrr": 0,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [],
+          "unmatched_expected_files": [
+            "hermes.md",
+            "atlas.md",
+            "tank.md"
+          ],
+          "total_expected": 3,
+          "latency_ms": 0,
+          "top_files": []
+        },
+        "vector": {
+          "precision_at_k": 0.3333333333333333,
+          "recall": 1,
+          "recall_at_1": 0.3333333333333333,
+          "recall_at_3": 0.3333333333333333,
+          "recall_at_5": 0.3333333333333333,
+          "mrr": 1,
+          "f1": 0.5,
+          "hits_at_k": 1,
+          "matched_files": [
+            "hermes.md",
+            "atlas.md",
+            "tank.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 3,
+          "latency_ms": 96,
+          "top_files": [
+            "qmd://wiki/hermes.md",
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/unraid-docker-vms.md",
+            "qmd://wiki/ollama-server-gpu.md",
+            "qmd://wiki/titan.md",
+            "qmd://wiki/pebble.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/ollama-endpoint.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/tank.md"
+          ]
+        },
+        "hybrid": {
+          "precision_at_k": 0.3333333333333333,
+          "recall": 1,
+          "recall_at_1": 0.3333333333333333,
+          "recall_at_3": 0.3333333333333333,
+          "recall_at_5": 0.3333333333333333,
+          "mrr": 1,
+          "f1": 0.5,
+          "hits_at_k": 1,
+          "matched_files": [
+            "hermes.md",
+            "atlas.md",
+            "tank.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 3,
+          "latency_ms": 7365,
+          "top_files": [
+            "qmd://wiki/hermes.md",
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/unraid-docker-vms.md",
+            "qmd://wiki/ollama-server-gpu.md",
+            "qmd://wiki/titan.md",
+            "qmd://wiki/pebble.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/ollama-endpoint.md",
+            "qmd://wiki/tank.md"
+          ]
+        },
+        "full": {
+          "precision_at_k": 0.6666666666666666,
+          "recall": 1,
+          "recall_at_1": 0.3333333333333333,
+          "recall_at_3": 0.6666666666666666,
+          "recall_at_5": 0.6666666666666666,
+          "mrr": 1,
+          "f1": 0.8,
+          "hits_at_k": 2,
+          "matched_files": [
+            "hermes.md",
+            "atlas.md",
+            "tank.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 3,
+          "latency_ms": 117080,
+          "top_files": [
+            "qmd://wiki/hermes.md",
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/apc-1.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/reverse-proxy.md",
+            "qmd://wiki/ollama-endpoint.md",
+            "qmd://wiki/pebble.md",
+            "qmd://wiki/titan.md"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q25",
+      "query": "If atlas stops, what happens to the syncing of notes to pebble, and through which dependencies?",
+      "type": "topical",
+      "backends": {
+        "bm25": {
+          "precision_at_k": 0,
+          "recall": 0,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0,
+          "mrr": 0,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [],
+          "unmatched_expected_files": [
+            "syncthing.md",
+            "atlas.md",
+            "tank.md",
+            "tailscale.md",
+            "pebble.md"
+          ],
+          "total_expected": 5,
+          "latency_ms": 1,
+          "top_files": []
+        },
+        "vector": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 0.2,
+          "recall_at_3": 0.6,
+          "recall_at_5": 0.8,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 3,
+          "matched_files": [
+            "syncthing.md",
+            "atlas.md",
+            "tank.md",
+            "tailscale.md",
+            "pebble.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 5,
+          "latency_ms": 128,
+          "top_files": [
+            "qmd://wiki/syncthing.md",
+            "qmd://wiki/pebble.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/apc-1.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/plex.md",
+            "qmd://wiki/hermes.md",
+            "qmd://wiki/reverse-proxy.md"
+          ]
+        },
+        "hybrid": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 0.2,
+          "recall_at_3": 0.6,
+          "recall_at_5": 0.8,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 3,
+          "matched_files": [
+            "syncthing.md",
+            "atlas.md",
+            "tank.md",
+            "tailscale.md",
+            "pebble.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 5,
+          "latency_ms": 49915,
+          "top_files": [
+            "qmd://wiki/syncthing.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/pebble.md",
+            "qmd://wiki/syncthing-ignore-firewall.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/apc-1.md",
+            "qmd://wiki/plex.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/reverse-proxy.md"
+          ]
+        },
+        "full": {
+          "precision_at_k": 0.6666666666666666,
+          "recall": 1,
+          "recall_at_1": 0.2,
+          "recall_at_3": 0.4,
+          "recall_at_5": 0.8,
+          "mrr": 1,
+          "f1": 0.8,
+          "hits_at_k": 2,
+          "matched_files": [
+            "syncthing.md",
+            "atlas.md",
+            "tank.md",
+            "tailscale.md",
+            "pebble.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 5,
+          "latency_ms": 116871,
+          "top_files": [
+            "qmd://wiki/syncthing.md",
+            "qmd://wiki/hermes.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/pebble.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/plex.md",
+            "qmd://wiki/apc-1.md",
+            "qmd://wiki/reverse-proxy.md",
+            "qmd://wiki/aria.md"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q26",
+      "query": "If gate goes down, which lab services or devices lose function?",
+      "type": "topical",
+      "backends": {
+        "bm25": {
+          "precision_at_k": 0,
+          "recall": 0,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0,
+          "mrr": 0,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [],
+          "unmatched_expected_files": [
+            "gate.md",
+            "tailscale.md",
+            "pebble.md",
+            "reverse-proxy.md",
+            "rclone-backup.md",
+            "atlas.md",
+            "aria.md"
+          ],
+          "total_expected": 7,
+          "latency_ms": 1,
+          "top_files": []
+        },
+        "vector": {
+          "precision_at_k": 0.6666666666666666,
+          "recall": 1,
+          "recall_at_1": 0.14285714285714285,
+          "recall_at_3": 0.2857142857142857,
+          "recall_at_5": 0.42857142857142855,
+          "mrr": 1,
+          "f1": 0.8,
+          "hits_at_k": 2,
+          "matched_files": [
+            "gate.md",
+            "tailscale.md",
+            "pebble.md",
+            "reverse-proxy.md",
+            "rclone-backup.md",
+            "atlas.md",
+            "aria.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 7,
+          "latency_ms": 107,
+          "top_files": [
+            "qmd://wiki/gate.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/apc-1.md",
+            "qmd://wiki/reverse-proxy.md",
+            "qmd://wiki/syncthing.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/pebble.md",
+            "qmd://wiki/aria.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/wiki-search.md"
+          ]
+        },
+        "hybrid": {
+          "precision_at_k": 0.6666666666666666,
+          "recall": 1,
+          "recall_at_1": 0.14285714285714285,
+          "recall_at_3": 0.2857142857142857,
+          "recall_at_5": 0.42857142857142855,
+          "mrr": 1,
+          "f1": 0.8,
+          "hits_at_k": 2,
+          "matched_files": [
+            "gate.md",
+            "tailscale.md",
+            "pebble.md",
+            "reverse-proxy.md",
+            "rclone-backup.md",
+            "atlas.md",
+            "aria.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 7,
+          "latency_ms": 7006,
+          "top_files": [
+            "qmd://wiki/gate.md",
+            "qmd://wiki/hermes.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/apc-1.md",
+            "qmd://wiki/pebble.md",
+            "qmd://wiki/reverse-proxy.md",
+            "qmd://wiki/syncthing.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/aria.md",
+            "qmd://wiki/rclone-backup.md"
+          ]
+        },
+        "full": {
+          "precision_at_k": 0.6666666666666666,
+          "recall": 1,
+          "recall_at_1": 0.14285714285714285,
+          "recall_at_3": 0.2857142857142857,
+          "recall_at_5": 0.42857142857142855,
+          "mrr": 1,
+          "f1": 0.8,
+          "hits_at_k": 2,
+          "matched_files": [
+            "gate.md",
+            "tailscale.md",
+            "pebble.md",
+            "reverse-proxy.md",
+            "rclone-backup.md",
+            "atlas.md",
+            "aria.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 7,
+          "latency_ms": 114028,
+          "top_files": [
+            "qmd://wiki/gate.md",
+            "qmd://wiki/apc-1.md",
+            "qmd://wiki/reverse-proxy.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/syncthing.md",
+            "qmd://wiki/pebble.md",
+            "qmd://wiki/aria.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/hermes.md"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q27",
+      "query": "What does the wiki search service need, directly and indirectly, to answer keyword queries?",
+      "type": "topical",
+      "backends": {
+        "bm25": {
+          "precision_at_k": 0,
+          "recall": 0,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0,
+          "mrr": 0,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [],
+          "unmatched_expected_files": [
+            "wiki-search.md",
+            "hermes.md",
+            "atlas.md",
+            "tank.md"
+          ],
+          "total_expected": 4,
+          "latency_ms": 1,
+          "top_files": []
+        },
+        "vector": {
+          "precision_at_k": 0.3333333333333333,
+          "recall": 0.5,
+          "recall_at_1": 0.25,
+          "recall_at_3": 0.25,
+          "recall_at_5": 0.5,
+          "mrr": 1,
+          "f1": 0.4,
+          "hits_at_k": 1,
+          "matched_files": [
+            "wiki-search.md",
+            "hermes.md"
+          ],
+          "unmatched_expected_files": [
+            "atlas.md",
+            "tank.md"
+          ],
+          "total_expected": 4,
+          "latency_ms": 92,
+          "top_files": [
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/qmd-search.md",
+            "qmd://wiki/reverse-proxy.md",
+            "qmd://wiki/hermes.md",
+            "qmd://wiki/ollama-endpoint.md",
+            "qmd://wiki/claude-code-settings-permissions.md",
+            "qmd://wiki/titan.md",
+            "qmd://wiki/plex.md",
+            "qmd://wiki/claude-code-skills-subagents.md",
+            "qmd://wiki/claude-code-sandboxing.md"
+          ]
+        },
+        "hybrid": {
+          "precision_at_k": 0.3333333333333333,
+          "recall": 0.5,
+          "recall_at_1": 0.25,
+          "recall_at_3": 0.25,
+          "recall_at_5": 0.5,
+          "mrr": 1,
+          "f1": 0.4,
+          "hits_at_k": 1,
+          "matched_files": [
+            "wiki-search.md",
+            "hermes.md"
+          ],
+          "unmatched_expected_files": [
+            "atlas.md",
+            "tank.md"
+          ],
+          "total_expected": 4,
+          "latency_ms": 7405,
+          "top_files": [
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/qmd-search.md",
+            "qmd://wiki/reverse-proxy.md",
+            "qmd://wiki/hermes.md",
+            "qmd://wiki/ollama-endpoint.md",
+            "qmd://wiki/claude-code-memory.md",
+            "qmd://wiki/claude-code-settings-permissions.md",
+            "qmd://wiki/claude-code-sandboxing.md",
+            "qmd://wiki/titan.md",
+            "qmd://wiki/plex.md"
+          ]
+        },
+        "full": {
+          "precision_at_k": 0.6666666666666666,
+          "recall": 0.75,
+          "recall_at_1": 0.25,
+          "recall_at_3": 0.5,
+          "recall_at_5": 0.5,
+          "mrr": 1,
+          "f1": 0.7058823529411765,
+          "hits_at_k": 2,
+          "matched_files": [
+            "wiki-search.md",
+            "hermes.md",
+            "atlas.md"
+          ],
+          "unmatched_expected_files": [
+            "tank.md"
+          ],
+          "total_expected": 4,
+          "latency_ms": 147883,
+          "top_files": [
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/qmd-search.md",
+            "qmd://wiki/hermes.md",
+            "qmd://wiki/reverse-proxy.md",
+            "qmd://wiki/titan.md",
+            "qmd://wiki/ollama-endpoint.md",
+            "qmd://wiki/claude-code-memory.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/claude-code-settings-permissions.md",
+            "qmd://wiki/claude-code-sandboxing.md"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q28",
+      "query": "If atlas shuts down, which lab hosts, pools and services stop with it?",
+      "type": "topical",
+      "backends": {
+        "bm25": {
+          "precision_at_k": 0,
+          "recall": 0,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0,
+          "mrr": 0,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [],
+          "unmatched_expected_files": [
+            "atlas.md",
+            "tank.md",
+            "hermes.md",
+            "wiki-search.md",
+            "plex.md",
+            "reverse-proxy.md",
+            "syncthing.md",
+            "tailscale.md",
+            "rclone-backup.md"
+          ],
+          "total_expected": 9,
+          "latency_ms": 0,
+          "top_files": []
+        },
+        "vector": {
+          "precision_at_k": 0.6666666666666666,
+          "recall": 0.8888888888888888,
+          "recall_at_1": 0.1111111111111111,
+          "recall_at_3": 0.2222222222222222,
+          "recall_at_5": 0.4444444444444444,
+          "mrr": 1,
+          "f1": 0.761904761904762,
+          "hits_at_k": 2,
+          "matched_files": [
+            "atlas.md",
+            "tank.md",
+            "hermes.md",
+            "plex.md",
+            "reverse-proxy.md",
+            "syncthing.md",
+            "tailscale.md",
+            "rclone-backup.md"
+          ],
+          "unmatched_expected_files": [
+            "wiki-search.md"
+          ],
+          "total_expected": 9,
+          "latency_ms": 98,
+          "top_files": [
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/apc-1.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/plex.md",
+            "qmd://wiki/reverse-proxy.md",
+            "qmd://wiki/hermes.md",
+            "qmd://wiki/ollama-endpoint.md",
+            "qmd://wiki/syncthing.md"
+          ]
+        },
+        "hybrid": {
+          "precision_at_k": 1,
+          "recall": 0.8888888888888888,
+          "recall_at_1": 0.1111111111111111,
+          "recall_at_3": 0.3333333333333333,
+          "recall_at_5": 0.4444444444444444,
+          "mrr": 1,
+          "f1": 0.9411764705882353,
+          "hits_at_k": 3,
+          "matched_files": [
+            "atlas.md",
+            "tank.md",
+            "hermes.md",
+            "plex.md",
+            "reverse-proxy.md",
+            "syncthing.md",
+            "tailscale.md",
+            "rclone-backup.md"
+          ],
+          "unmatched_expected_files": [
+            "wiki-search.md"
+          ],
+          "total_expected": 9,
+          "latency_ms": 8205,
+          "top_files": [
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/hermes.md",
+            "qmd://wiki/apc-1.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/plex.md",
+            "qmd://wiki/reverse-proxy.md",
+            "qmd://wiki/syncthing.md",
+            "qmd://wiki/ollama-endpoint.md"
+          ]
+        },
+        "full": {
+          "precision_at_k": 1,
+          "recall": 0.7777777777777778,
+          "recall_at_1": 0.1111111111111111,
+          "recall_at_3": 0.3333333333333333,
+          "recall_at_5": 0.3333333333333333,
+          "mrr": 1,
+          "f1": 0.8750000000000001,
+          "hits_at_k": 3,
+          "matched_files": [
+            "atlas.md",
+            "tank.md",
+            "hermes.md",
+            "wiki-search.md",
+            "plex.md",
+            "tailscale.md",
+            "rclone-backup.md"
+          ],
+          "unmatched_expected_files": [
+            "reverse-proxy.md",
+            "syncthing.md"
+          ],
+          "total_expected": 9,
+          "latency_ms": 104531,
+          "top_files": [
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/pebble.md",
+            "qmd://wiki/apc-1.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/hermes.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/plex.md",
+            "qmd://wiki/aria.md"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q29",
+      "query": "If the pool tank became unavailable while atlas kept running, which lab services would stop working, directly or through another host?",
+      "type": "topical",
+      "backends": {
+        "bm25": {
+          "precision_at_k": 0,
+          "recall": 0,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0,
+          "mrr": 0,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [],
+          "unmatched_expected_files": [
+            "tank.md",
+            "hermes.md",
+            "wiki-search.md",
+            "plex.md",
+            "syncthing.md",
+            "rclone-backup.md"
+          ],
+          "total_expected": 6,
+          "latency_ms": 1,
+          "top_files": []
+        },
+        "vector": {
+          "precision_at_k": 0.3333333333333333,
+          "recall": 0.8333333333333334,
+          "recall_at_1": 0,
+          "recall_at_3": 0.16666666666666666,
+          "recall_at_5": 0.5,
+          "mrr": 0.5,
+          "f1": 0.47619047619047616,
+          "hits_at_k": 1,
+          "matched_files": [
+            "tank.md",
+            "hermes.md",
+            "plex.md",
+            "syncthing.md",
+            "rclone-backup.md"
+          ],
+          "unmatched_expected_files": [
+            "wiki-search.md"
+          ],
+          "total_expected": 6,
+          "latency_ms": 128,
+          "top_files": [
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/apc-1.md",
+            "qmd://wiki/plex.md",
+            "qmd://wiki/syncthing.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/reverse-proxy.md",
+            "qmd://wiki/hermes.md",
+            "qmd://wiki/ollama-endpoint.md"
+          ]
+        },
+        "hybrid": {
+          "precision_at_k": 0.3333333333333333,
+          "recall": 0.8333333333333334,
+          "recall_at_1": 0,
+          "recall_at_3": 0.16666666666666666,
+          "recall_at_5": 0.3333333333333333,
+          "mrr": 0.3333333333333333,
+          "f1": 0.47619047619047616,
+          "hits_at_k": 1,
+          "matched_files": [
+            "tank.md",
+            "hermes.md",
+            "plex.md",
+            "syncthing.md",
+            "rclone-backup.md"
+          ],
+          "unmatched_expected_files": [
+            "wiki-search.md"
+          ],
+          "total_expected": 6,
+          "latency_ms": 53084,
+          "top_files": [
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/gate.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/plex.md",
+            "qmd://wiki/apc-1.md",
+            "qmd://wiki/syncthing.md",
+            "qmd://wiki/rclone-backup.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/reverse-proxy.md",
+            "qmd://wiki/hermes.md"
+          ]
+        },
+        "full": {
+          "precision_at_k": 0,
+          "recall": 0.6666666666666666,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0.16666666666666666,
+          "mrr": 0.25,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [
+            "tank.md",
+            "wiki-search.md",
+            "plex.md",
+            "syncthing.md"
+          ],
+          "unmatched_expected_files": [
+            "hermes.md",
+            "rclone-backup.md"
+          ],
+          "total_expected": 6,
+          "latency_ms": 160256,
+          "top_files": [
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/pebble.md",
+            "qmd://wiki/gate.md",
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/aria.md",
+            "qmd://wiki/plex.md",
+            "qmd://wiki/titan.md",
+            "qmd://wiki/apc-1.md",
+            "qmd://wiki/syncthing.md",
+            "qmd://wiki/tank.md"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q30",
+      "query": "What breaks or degrades in the lab if hermes is down?",
+      "type": "topical",
+      "backends": {
+        "bm25": {
+          "precision_at_k": 0,
+          "recall": 0,
+          "recall_at_1": 0,
+          "recall_at_3": 0,
+          "recall_at_5": 0,
+          "mrr": 0,
+          "f1": 0,
+          "hits_at_k": 0,
+          "matched_files": [],
+          "unmatched_expected_files": [
+            "hermes.md",
+            "wiki-search.md"
+          ],
+          "total_expected": 2,
+          "latency_ms": 1,
+          "top_files": []
+        },
+        "vector": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 0.5,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 2,
+          "matched_files": [
+            "hermes.md",
+            "wiki-search.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 2,
+          "latency_ms": 79,
+          "top_files": [
+            "qmd://wiki/hermes.md",
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/apc-1.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/pebble.md",
+            "qmd://wiki/titan.md",
+            "qmd://wiki/ollama-endpoint.md",
+            "qmd://wiki/syncthing.md"
+          ]
+        },
+        "hybrid": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 0.5,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 2,
+          "matched_files": [
+            "hermes.md",
+            "wiki-search.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 2,
+          "latency_ms": 60791,
+          "top_files": [
+            "qmd://wiki/hermes.md",
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/titan.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/ollama-endpoint.md",
+            "qmd://wiki/pebble.md",
+            "qmd://wiki/claude-code-hooks.md",
+            "qmd://wiki/unraid-tailscale.md",
+            "qmd://wiki/apc-1.md"
+          ]
+        },
+        "full": {
+          "precision_at_k": 1,
+          "recall": 1,
+          "recall_at_1": 0.5,
+          "recall_at_3": 1,
+          "recall_at_5": 1,
+          "mrr": 1,
+          "f1": 1,
+          "hits_at_k": 2,
+          "matched_files": [
+            "hermes.md",
+            "wiki-search.md"
+          ],
+          "unmatched_expected_files": [],
+          "total_expected": 2,
+          "latency_ms": 150402,
+          "top_files": [
+            "qmd://wiki/hermes.md",
+            "qmd://wiki/wiki-search.md",
+            "qmd://wiki/atlas.md",
+            "qmd://wiki/tank.md",
+            "qmd://wiki/pebble.md",
+            "qmd://wiki/titan.md",
+            "qmd://wiki/tailscale.md",
+            "qmd://wiki/apc-1.md",
+            "qmd://wiki/reverse-proxy.md",
+            "qmd://wiki/ollama-endpoint.md"
+          ]
+        }
+      }
+    }
+  ],
+  "summary": {
+    "bm25": {
+      "avg_precision": 0.037037037037037035,
+      "avg_recall": 0.037037037037037035,
+      "avg_recall_at_1": 0.037037037037037035,
+      "avg_recall_at_3": 0.037037037037037035,
+      "avg_recall_at_5": 0.037037037037037035,
+      "avg_mrr": 0.037037037037037035,
+      "avg_f1": 0.037037037037037035,
+      "avg_latency_ms": 1.7777777777777777
+    },
+    "vector": {
+      "avg_precision": 0.8518518518518519,
+      "avg_recall": 0.9588477366255144,
+      "avg_recall_at_1": 0.6495296884185772,
+      "avg_recall_at_3": 0.7972075249853028,
+      "avg_recall_at_5": 0.8397413286302174,
+      "avg_mrr": 0.9382716049382717,
+      "avg_f1": 0.8882422104644326,
+      "avg_latency_ms": 393.44444444444446
+    },
+    "hybrid": {
+      "avg_precision": 0.8271604938271605,
+      "avg_recall": 0.9465020576131686,
+      "avg_recall_at_1": 0.5507642563198119,
+      "avg_recall_at_3": 0.7642857142857143,
+      "avg_recall_at_5": 0.7965314520870075,
+      "avg_mrr": 0.8518518518518517,
+      "avg_f1": 0.8537296400041497,
+      "avg_latency_ms": 22792.703703703704
+    },
+    "full": {
+      "avg_precision": 0.8641975308641977,
+      "avg_recall": 0.970164609053498,
+      "avg_recall_at_1": 0.5507642563198119,
+      "avg_recall_at_3": 0.809347442680776,
+      "avg_recall_at_5": 0.8479717813051146,
+      "avg_mrr": 0.8549382716049384,
+      "avg_f1": 0.8918845315904141,
+      "avg_latency_ms": 140157.77777777778
+    }
+  }
+}
